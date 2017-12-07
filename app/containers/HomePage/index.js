@@ -11,11 +11,11 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 import Map from 'components/Map';
+import Header from 'components/Header'
 import TileList from 'components/TileList';
 import ClickableTile from 'components/ClickableTile';
-
+import Carousel from 'components/Carousel';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -43,8 +43,20 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
 
     return (
       <div className="container">
+        <Header />
+
         <div className="row">
-          <FormattedMessage {...messages.header} />
+          <div className="col"></div>
+          <div className="col-md-8">
+              <Carousel />
+          </div>
+          <div className="col"></div>
+        </div>
+
+
+        <div className="row">
+          Breadcrumbs here... TODO make component
+
 
           {/*<Map />*/}
 
