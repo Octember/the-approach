@@ -10,12 +10,12 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import Map from 'components/Map';
 import Header from 'components/Header'
 import TileList from 'components/TileList';
 import ClickableTile from 'components/ClickableTile';
 import Carousel from 'components/Carousel';
+import TopLevelContainer from 'components/TopLevelContainer'
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -42,8 +42,9 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     ];
 
     return (
-      <div className="container">
+      <TopLevelContainer>
         <Header />
+        Breadcrumbs here... TODO make component
 
         <div className="row">
           <div className="col"></div>
@@ -55,7 +56,6 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
 
 
         <div className="row">
-          Breadcrumbs here... TODO make component
 
 
           {/*<Map />*/}
@@ -64,7 +64,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
 
           <TileList component={ClickableTile} items={data} />
         </div>
-      </div>
+      </TopLevelContainer>
     );
   }
 }

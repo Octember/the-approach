@@ -6,7 +6,6 @@ import CarouselCaption from './CarouselCaption';
 import CarouselImage from './CarouselImage';
 
 function CarouselEntry(props) {
-  console.log(props)
   let className = props.index == 0 ? "carousel-item active" : "carousel-item"
 
   return (
