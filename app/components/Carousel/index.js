@@ -9,7 +9,7 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 import CarouselImage from './CarouselImage';
-import StyledCarouselCaption from './CarouselCaption';
+import CarouselCaption from './CarouselCaption';
 
 function Carousel() {
   return (
@@ -21,7 +21,7 @@ function Carousel() {
             src="https://c402277.ssl.cf1.rackcdn.com/photos/2325/images/hero_small/mountains-hero.jpg?1345838509"
             alt="First slide"
           />
-          <StyledCarouselCaption title="testing 123" subtitle="subtitle test"/>
+          <CarouselCaption title="zdzfsdfs" subtitle="sdssssss" />
         </div>
         <div className="carousel-item">
           <CarouselImage
@@ -29,7 +29,7 @@ function Carousel() {
             src="http://www.backgroundbandit.com/wallpapers/31/700.jpg"
             alt="First slide"
           />
-          <StyledCarouselCaption title="testing 123" subtitle="subtitle test"/>
+          <CarouselCaption title="title" subtitle="subtitle" />
         </div>
       </div>
       <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
