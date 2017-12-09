@@ -68,7 +68,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         </PageSection>
 
 
-        <PageSection title="All Routes">
+        <PageSection title="All Routes" noBorder={true}>
           {
             routeData.map((data, i) =>
               <RouteCard {...data} index={i} key={`item-${data.id}`} />

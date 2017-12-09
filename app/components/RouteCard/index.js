@@ -6,18 +6,17 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactStars from 'react-stars'
-
+import ReactStars from 'react-stars';
 
 function RouteCard(props) {
   return (
-    <div className="row pb-4">
+    <div className="row py-2 border border-secondary border-left-0 border-right-0 border-top-0">
       <div className="col-xs-4">
         <h4 className="text-left pl-2">{props.routeName}</h4>
       </div>
       <div className="col" />
-      <div className="col-xs-4">
-        <p className="text-left px-1 mb-0">
+      <div className="col-xs-5 pr-4 text-left">
+        <p className="px-1 mb-0">
           {props.routeStats.grade} - {props.routeStats.type} - {props.routeStats.length}
         </p>
         <ReactStars
@@ -26,6 +25,7 @@ function RouteCard(props) {
           size={25}
           edit={false}
         />
+        {/* todo: num reviews */}
       </div>
     </div>
   );

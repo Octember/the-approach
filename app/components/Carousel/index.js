@@ -14,7 +14,7 @@ function Carousel(props) {
     <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
       <div className="carousel-inner" role="listbox">
         {
-          props.carouselEntries.map( (carouselEntry, i) =>
+          props.carouselEntries.map((carouselEntry, i) =>
             <CarouselEntry {...carouselEntry} index={i} key={`item-${i}`} />
           )
         }
@@ -45,12 +45,12 @@ Carousel.defaultProps = {
     {
       title: 'Picnic Lunch Wall',
       subtitle: 'subtitle 1',
-      imageUrl: 'https://c402277.ssl.cf1.rackcdn.com/photos/2325/images/hero_small/mountains-hero.jpg?1345838509'
+      imageUrl: 'https://c402277.ssl.cf1.rackcdn.com/photos/2325/images/hero_small/mountains-hero.jpg?1345838509',
     },
     {
       title: 'title 2',
       subtitle: 'subtitle 2',
-      imageUrl: 'http://www.backgroundbandit.com/wallpapers/31/700.jpg'
+      imageUrl: 'http://www.backgroundbandit.com/wallpapers/31/700.jpg',
     },
   ],
 };

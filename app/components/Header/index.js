@@ -10,7 +10,7 @@ import {} from 'react-intl';
 
 const StyledNav = styled.nav `
   width: 100%;
-`
+`;
 
 function Header() {
   return (
