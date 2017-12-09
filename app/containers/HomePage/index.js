@@ -11,8 +11,6 @@
 
 import React from 'react';
 import Header from 'components/Header';
-import TileList from 'components/TileList';
-import ClickableTile from 'components/ClickableTile';
 import Carousel from 'components/Carousel';
 import PageSection from 'components/PageSection';
 
