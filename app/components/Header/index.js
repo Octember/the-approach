@@ -6,7 +6,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import {  } from 'react-intl';
+import {} from 'react-intl';
 
 const StyledNav = styled.nav `
   width: 100%;

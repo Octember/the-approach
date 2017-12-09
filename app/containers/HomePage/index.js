@@ -13,28 +13,33 @@ import React from 'react';
 import Header from 'components/Header';
 import Carousel from 'components/Carousel';
 import PageSection from 'components/PageSection';
+import RouteCard from 'components/RouteCard';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   render() {
-    const data = [
+    const routeData = [
       {
-        id: 1,
-        title: 'First tile',
-        image: 'https://www.mountainlodgesofperu.com/2017/files/sll-contenido-columna-2017.png',
-        link: 'test idk',
+        id: 32131231,
+        routeName: 'Route 1',
+        routeStats: {
+          grade: '5.9',
+          type: 'sport', // could do custom validators here
+          length: '100\'',
+          rating: 3.6,
+          countRatings: 11,
+        },
       },
       {
-        id: 2,
-        title: 'Second tile',
-        link: 'test idk',
-        image: 'https://cdn-files.apstatic.com/climb/106597038_medium_1494123647.jpg',
-      },
-      {
-        id: 3,
-        title: 'third tile',
-        link: 'test idk',
-        image: 'https://cdn-files.apstatic.com/climb/106597038_medium_1494123647.jpg',
+        id: 131111,
+        routeName: 'Route 2',
+        routeStats: {
+          grade: '5.10a',
+          type: 'lead', // could do custom validators here
+          length: '75\'',
+          rating: 5.0,
+          countRatings: 14,
+        },
       },
     ];
 
@@ -64,7 +69,11 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
 
 
         <PageSection title="All Routes">
-
+          {
+            routeData.map((data, i) =>
+              <RouteCard {...data} index={i} key={`item-${data.id}`} />
+            )
+          }
         </PageSection>
 
       </div>
