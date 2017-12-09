@@ -43,7 +43,7 @@ Carousel.propTypes = {
 Carousel.defaultProps = {
   carouselEntries: [
     {
-      title: 'title 1',
+      title: 'Picnic Lunch Wall',
       subtitle: 'subtitle 1',
       imageUrl: 'https://c402277.ssl.cf1.rackcdn.com/photos/2325/images/hero_small/mountains-hero.jpg?1345838509'
     },

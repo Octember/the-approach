@@ -55,15 +55,20 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           <div className="col" />
         </div>
 
+        <PageSection title="Beta">
 
-        <PageSection>
-
-          <TileList component={ClickableTile} items={data} />
+          <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur</p>
         </PageSection>
 
-        <PageSection>
-          <h3> test section </h3>
+        <PageSection title="Approach">
+          <p> go to the route</p>
         </PageSection>
+
+
+        <PageSection title="All Routes">
+
+        </PageSection>
+
       </div>
     );
   }
