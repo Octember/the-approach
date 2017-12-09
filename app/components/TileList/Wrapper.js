@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  overflow-x:scroll;
-  overflow-y:hidden;
+  overflow: auto;
   width: 100%;
   padding: 0 15px;
 `;

@@ -5,15 +5,19 @@
 */
 
 import React from 'react';
-
+import styled from 'styled-components';
 import {  } from 'react-intl';
+
+const StyledNav = styled.nav `
+  width: 100%;
+`
 
 function Header() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <StyledNav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <a className="navbar-brand" href="#">Navbar</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon" />
       </button>
 
       <div className="collapse navbar-collapse" id="navbarColor02">
@@ -32,7 +36,7 @@ function Header() {
           </li>
         </ul>
       </div>
-    </nav>
+    </StyledNav>
   );
 }
 

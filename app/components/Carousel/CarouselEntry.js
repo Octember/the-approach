@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -6,7 +5,7 @@ import CarouselCaption from './CarouselCaption';
 import CarouselImage from './CarouselImage';
 
 function CarouselEntry(props) {
-  let className = props.index == 0 ? "carousel-item active" : "carousel-item"
+  const className = props.index === 0 ? 'carousel-item active' : 'carousel-item'
 
   return (
     <div className={className}>
@@ -22,9 +21,9 @@ function CarouselEntry(props) {
 
 CarouselEntry.propTypes = {
   index: PropTypes.number.isRequired,
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
-  imageUrl: PropTypes.string
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired
 };
 
 export default CarouselEntry;

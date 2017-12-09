@@ -10,61 +10,61 @@
  */
 
 import React from 'react';
-import Map from 'components/Map';
-import Header from 'components/Header'
+import Header from 'components/Header';
 import TileList from 'components/TileList';
 import ClickableTile from 'components/ClickableTile';
 import Carousel from 'components/Carousel';
-import TopLevelContainer from 'components/TopLevelContainer'
+import PageSection from 'components/PageSection';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   render() {
-    let data = [
+    const data = [
       {
         id: 1,
         title: 'First tile',
         image: 'https://www.mountainlodgesofperu.com/2017/files/sll-contenido-columna-2017.png',
-        link: 'test idk'
+        link: 'test idk',
       },
       {
         id: 2,
         title: 'Second tile',
         link: 'test idk',
-        image: 'https://cdn-files.apstatic.com/climb/106597038_medium_1494123647.jpg'
+        image: 'https://cdn-files.apstatic.com/climb/106597038_medium_1494123647.jpg',
       },
       {
         id: 3,
         title: 'third tile',
         link: 'test idk',
-        image: 'https://cdn-files.apstatic.com/climb/106597038_medium_1494123647.jpg'
-      }
+        image: 'https://cdn-files.apstatic.com/climb/106597038_medium_1494123647.jpg',
+      },
     ];
 
     return (
-      <TopLevelContainer>
-        <Header />
+      <div className="container">
+        <div className="row">
+          <Header />
+        </div>
         Breadcrumbs here... TODO make component
 
         <div className="row">
-          <div className="col"></div>
+          <div className="col" />
           <div className="col-md-8">
-              <Carousel />
+            <Carousel />
           </div>
-          <div className="col"></div>
+          <div className="col" />
         </div>
 
 
-        <div className="row">
-
-
-          {/*<Map />*/}
+        <PageSection>
 
           <TileList component={ClickableTile} items={data} />
+        </PageSection>
 
-          <TileList component={ClickableTile} items={data} />
-        </div>
-      </TopLevelContainer>
+        <PageSection>
+          <h3> test section </h3>
+        </PageSection>
+      </div>
     );
   }
 }
