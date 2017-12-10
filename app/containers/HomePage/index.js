@@ -54,7 +54,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
 
         <div className="row">
           <div className="col" />
-          <div className="col-md-8">
+          <div className="col-md-8 px-0">
             <Carousel />
           </div>
           <div className="col" />
@@ -71,7 +71,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           <p> go to the route</p>
         </PageSection>
 
-        <PageSection title="Classic Routes">
+        <PageSection title="Classic Routes" noMargin={true}>
           <CardSlider />
         </PageSection>
 

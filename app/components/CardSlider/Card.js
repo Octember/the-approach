@@ -4,8 +4,8 @@ import Stars from 'components/Stars';
 
 function Card(props) {
   return (
-    <div className="mx-1">
-      <img src={props.imageUrl} alt={props.title} className="img-fluid" />
+    <div className="mr-2">
+      <img src={props.imageUrl} alt={props.title} className="img-fluid rounded" />
       <p className="mb-1">{props.routeStats.grade} - {props.routeStats.type} - {props.routeStats.length}</p>
       <h3 className="mb-0">{props.title}</h3>
       <Stars
