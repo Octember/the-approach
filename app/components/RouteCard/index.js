@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactStars from 'react-stars';
+import Stars from 'components/Stars';
 
 function RouteCard(props) {
   return (
@@ -19,11 +19,9 @@ function RouteCard(props) {
         <p className="px-1 mb-0">
           {props.routeStats.grade} - {props.routeStats.type} - {props.routeStats.length}
         </p>
-        <ReactStars
-          count={5}
+        <Stars
           value={props.routeStats.rating}
-          size={25}
-          edit={false}
+          editable={false}
         />
         {/* todo: num reviews */}
       </div>
