@@ -21,6 +21,8 @@ import App from 'containers/App';
 
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
+import FontFaceObserver from 'fontfaceobserver';
+
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
@@ -44,6 +46,12 @@ import { translationMessages } from './i18n';
 
 // Import CSS reset and Global Styles
 import './global-styles';
+var font = new FontFaceObserver('Raleway');
+font.load().then(() => {
+  console.log('Family A is available');
+}, function (e) {
+  console.log(e);
+});
 
 // Create redux store with history
 const initialState = {};
