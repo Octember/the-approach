@@ -12,10 +12,10 @@
 import React from 'react';
 
 import Header from 'components/Header';
-import Carousel from 'components/Carousel';
-import PageSection from 'components/PageSection';
-import RouteCard from 'components/RouteCard';
-import CardSlider from 'components/CardSlider';
+
+
+import Breadcrumbs from 'components/Breadcrumbs'
+import LocationTitle from 'components/LocationTitle'
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -50,38 +50,9 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         <div className="row">
           <Header />
         </div>
-        Breadcrumbs here... TODO make component
+        <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]} />
 
-        <div className="row">
-          <div className="col" />
-          <div className="col-md-8 px-0">
-            <Carousel />
-          </div>
-          <div className="col" />
-        </div>
-
-        <PageSection title="Beta">
-
-          <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over
-            2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,
-            consectetur</p>
-        </PageSection>
-
-        <PageSection title="Approach">
-          <p> go to the route</p>
-        </PageSection>
-
-        <PageSection title="Classic Routes" noMargin={true}>
-          <CardSlider />
-        </PageSection>
-
-        <PageSection title="All Routes" noBorder={true}>
-          {
-            routeData.map((data, i) =>
-              <RouteCard {...data} index={i} key={`item-${data.id}`} />
-            )
-          }
-        </PageSection>
+        <LocationTitle title="Eamon Glacier"/>
 
       </div>
     );

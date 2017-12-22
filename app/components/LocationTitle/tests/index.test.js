@@ -1,9 +1,9 @@
 // import React from 'react';
 // import { shallow } from 'enzyme';
 
-// import Carousel from '../index';
+// import LocationTitle from '../index';
 
-describe('<Carousel />', () => {
+describe('<LocationTitle />', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });

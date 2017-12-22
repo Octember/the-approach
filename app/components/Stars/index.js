@@ -13,8 +13,9 @@ function Stars(props) {
     <ReactStars
       count={5}
       value={props.value}
-      size={25}
+      size={14}
       edit={props.editable}
+      className={props.className}
     />
   );
 }
@@ -22,6 +23,7 @@ function Stars(props) {
 Stars.propTypes = {
   value: PropTypes.number.isRequired,
   editable: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Stars;

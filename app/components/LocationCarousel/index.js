@@ -6,12 +6,24 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import CarouselEntry from './CarouselEntry';
 
-function Carousel(props) {
+function LocationCarousel(props) {
   return (
-    <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
+    <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+      <ol className="carousel-indicators">
+        {
+          props.carouselEntries.map((carouselEntry, i) => {
+            const className = i === 0 ? 'active' : '';
+
+            return (
+              <li data-target="#carouselExampleIndicators" data-slide-to={i} className={className} key={i} />
+            );
+          })
+        }
+      </ol>
       <div className="carousel-inner" role="listbox">
         {
           props.carouselEntries.map((carouselEntry, i) =>
@@ -19,19 +31,11 @@ function Carousel(props) {
           )
         }
       </div>
-      <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span className="carousel-control-prev-icon" aria-hidden="true" />
-        <span className="sr-only">Previous</span>
-      </a>
-      <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span className="carousel-control-next-icon" aria-hidden="true" />
-        <span className="sr-only">Next</span>
-      </a>
     </div>
   );
 }
 
-Carousel.propTypes = {
+LocationCarousel.propTypes = {
   carouselEntries: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
@@ -40,7 +44,7 @@ Carousel.propTypes = {
 };
 
 // Default props. Probably delete this once we have a real API
-Carousel.defaultProps = {
+LocationCarousel.defaultProps = {
   carouselEntries: [
     {
       title: 'Picnic Lunch Wall',
@@ -56,4 +60,4 @@ Carousel.defaultProps = {
 };
 
 
-export default Carousel;
+export default LocationCarousel;
