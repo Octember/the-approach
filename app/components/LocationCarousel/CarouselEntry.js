@@ -10,7 +10,7 @@ const CarouselImage = styled.img`
 
 const CarouselSpacer = styled.div `
   width: 100%;
-  height: 100px;
+  height: 50px;
   background-color: black;
 `;
 

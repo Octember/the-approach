@@ -13,7 +13,7 @@ import CarouselEntry from './CarouselEntry';
 function LocationCarousel(props) {
   return (
     <div id="locationCarousel" className="carousel slide" data-ride="carousel">
-      <ol className="carousel-indicators">
+      <ol className="carousel-indicators mb-1 mx-2 justify-content-start">
         {
           props.carouselEntries.map((carouselEntry, i) => {
             const className = i === 0 ? 'active' : '';
