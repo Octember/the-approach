@@ -26,7 +26,7 @@ function Breadcrumbs(props) {
             props.breadcrumbData.map((linkData, index) => (
               <BreadcrumbLi className="breadcrumb-item active" key={index}>
                 {/*<a href={linkData.link}>*/}
-                  {linkData.text}
+                <small>{linkData.text}</small>
                 {/*</a>*/}
               </BreadcrumbLi>
             ))
