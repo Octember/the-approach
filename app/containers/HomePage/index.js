@@ -51,9 +51,9 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           <Header />
         </div>
         <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]} />
-
-        <LocationTitle title="Eamon Glacier"/>
-
+        <div className="row">
+          <LocationTitle title="Eamon Glacier" />
+        </div>
       </div>
     );
   }

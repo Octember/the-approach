@@ -18,16 +18,15 @@ const StyledTitle = styled.h1 `
 
 function LocationTitle(props) {
   return (
-    <div className="row">
-      <StyledTitle className="pl-3 my-0">
-        {props.title}
-        <Stars className="d-inline-block pl-2" value={5.0} editable={false} />
-      </StyledTitle>
-    </div>
+    <StyledTitle className={props.className}>
+      {props.title}
+      <Stars className="d-inline-block pl-2" value={5.0} editable={false} />
+    </StyledTitle>
   );
 }
 
 LocationTitle.propTypes = {
+  className: PropTypes.string,
   title: PropTypes.string.isRequired,
 };
 

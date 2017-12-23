@@ -38,7 +38,7 @@ function LocationCarousel(props) {
 LocationCarousel.propTypes = {
   carouselEntries: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
+    metadata: PropTypes.arrayOf(PropTypes.string).isRequired,
     imageUrl: PropTypes.string.isRequired,
   })).isRequired,
 };
@@ -47,14 +47,20 @@ LocationCarousel.propTypes = {
 LocationCarousel.defaultProps = {
   carouselEntries: [
     {
-      title: 'Picnic Lunch Wall',
-      subtitle: 'subtitle 1',
-      imageUrl: 'https://c402277.ssl.cf1.rackcdn.com/photos/2325/images/hero_small/mountains-hero.jpg?1345838509',
+      title: 'Emmon-Winthrop Glacier',
+      metadata: [
+        'Alpine Grade II-IIII',
+        'Elevation 14,410',
+        '0.5 mile approach',
+      ],
+      imageUrl: 'http://www.backgroundbandit.com/wallpapers/31/700.jpg',
     },
     {
-      title: 'title 2',
-      subtitle: 'subtitle 2',
-      imageUrl: 'http://www.backgroundbandit.com/wallpapers/31/700.jpg',
+      title: 'Noah is cool',
+      metadata: [
+        'subtitle 2',
+      ],
+      imageUrl: 'https://c402277.ssl.cf1.rackcdn.com/photos/2325/images/hero_small/mountains-hero.jpg?1345838509',
     },
   ],
 };
