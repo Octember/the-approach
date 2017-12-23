@@ -6,10 +6,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Helmet } from 'react-helmet';
-import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
+import {connect} from 'react-redux';
+import {Helmet} from 'react-helmet';
+import {createStructuredSelector} from 'reselect';
+import {compose} from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -23,6 +23,13 @@ import LocationCarousel from 'components/LocationCarousel';
 import PageSection from 'components/PageSection';
 import RouteCard from 'components/RouteCard';
 import CardSlider from 'components/CardSlider';
+
+import styled from 'styled-components';
+
+const StyledCTAButton = styled.button `
+  width: 100%;
+  height: 45px;
+`;
 
 
 export class RoutePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -56,17 +63,17 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
       <div>
         <Helmet>
           <title>RoutePage</title>
-          <meta name="description" content="Description of RoutePage" />
+          <meta name="description" content="Description of RoutePage"/>
         </Helmet>
         <div className="container">
           <div className="row">
-            <div className="col" />
+            <div className="col"/>
             <div className="col-md-8 px-0">
               <div className="container">
                 <div className="row">
                   <Header />
                 </div>
-                <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]} />
+                <Breadcrumbs breadcrumbData={[{link: 'google.com', text: 'Denali National Park'}]}/>
 
               </div>
 
@@ -77,9 +84,24 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
 
           <PageSection title="Beta">
 
-            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it
+              over
               2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,
               consectetur</p>
+          </PageSection>
+
+          <PageSection title="">
+            <div className="container">
+              <div className="row">
+                <div className="col text-center">
+                  <h4>$1343</h4>
+                  <p>{`${4} day trip`}</p>
+                </div>
+                <div className="col">
+                  <StyledCTAButton type="button" className="btn btn-primary">Primary</StyledCTAButton>
+                </div>
+              </div>
+            </div>
           </PageSection>
 
           <PageSection title="Approach">
@@ -88,13 +110,13 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
 
           {/* The slider breaks the width. Let's use another slider */}
           {/*<PageSection title="Classic Routes" noMargin={true}>*/}
-            {/*<CardSlider />*/}
+          {/*<CardSlider />*/}
           {/*</PageSection>*/}
 
           <PageSection title="All Routes" noBorder={true}>
             {
               routeData.map((data, i) =>
-                <RouteCard {...data} index={i} key={`item-${data.id}`} />
+                <RouteCard {...data} index={i} key={`item-${data.id}`}/>
               )
             }
           </PageSection>
@@ -120,8 +142,8 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'routePage', reducer });
-const withSaga = injectSaga({ key: 'routePage', saga });
+const withReducer = injectReducer({key: 'routePage', reducer});
+const withSaga = injectSaga({key: 'routePage', saga});
 
 export default compose(
   withReducer,
