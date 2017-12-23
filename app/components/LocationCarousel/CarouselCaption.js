@@ -2,25 +2,32 @@ import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import LocationTitle from 'components/LocationTitle';
+
 const StyledCarouselCaptionDiv = styled.div`
   left: 0px;
   right: 0px;
   bottom: 0px;
   width: 100%;
-  height: 200px;
 `;
 
 const CarouselCaption = (props) => (
-  <StyledCarouselCaptionDiv className="carousel-caption text-left pl-2">
-    <h3 className="font-weight-bold">{props.title}</h3>
-    <p>{props.subtitle}</p>
+  <StyledCarouselCaptionDiv className="carousel-caption text-left px-3">
+    <LocationTitle title={props.title} className="mb-0" />
+    {
+      props.metadata.map((subtitle, i) =>
+        <p key={`item-${i}`} className="mb-1">
+          <small>{subtitle}</small>
+        </p>
+      )
+    }
   </StyledCarouselCaptionDiv>
 );
 
 
 CarouselCaption.propTypes = {
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
+  metadata: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default CarouselCaption;

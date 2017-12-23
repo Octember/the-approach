@@ -43,7 +43,7 @@ function CarouselEntry(props) {
       </RelativeDiv>
 
       <CarouselSpacer />
-      <CarouselCaption title={props.title} subtitle={props.subtitle} />
+      <CarouselCaption title={props.title} metadata={props.metadata} />
     </div>
   );
 }
@@ -51,7 +51,7 @@ function CarouselEntry(props) {
 CarouselEntry.propTypes = {
   index: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
+  metadata: PropTypes.arrayOf(PropTypes.string),
   imageUrl: PropTypes.string.isRequired,
 };
 
