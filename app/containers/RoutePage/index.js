@@ -22,7 +22,6 @@ import Breadcrumbs from 'components/Breadcrumbs'
 import LocationCarousel from 'components/LocationCarousel';
 import PageSection from 'components/PageSection';
 import RouteCard from 'components/RouteCard';
-import CardSlider from 'components/CardSlider';
 import BorderBottomDiv from 'components/Utils';
 
 export class RoutePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -81,7 +80,7 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
           </div>
 
           <PageSection title="Beta">
-            <BorderBottomDiv>
+            <BorderBottomDiv className="ml-1">
               <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it
                 over
                 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,
@@ -110,24 +109,19 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
           </PageSection>
 
           <PageSection title="Approach">
-            <BorderBottomDiv>
+            <BorderBottomDiv className="ml-1">
               <p> go to the route</p>
             </BorderBottomDiv>
           </PageSection>
 
-          {/* The slider breaks the width. Let's use another slider */}
-          {/*<PageSection title="Classic Routes" noMargin={true}>*/}
-          {/*<CardSlider />*/}
-          {/*</PageSection>*/}
-
           <PageSection title="All Routes">
-            <BorderBottomDiv>
-              {
-                routeData.map((data, i) =>
-                  <RouteCard {...data} index={i} key={`item-${data.id}`}/>
-                )
-              }
-            </BorderBottomDiv>
+            {
+              routeData.map((data, i) =>
+                <BorderBottomDiv className="ml-1" key={`item-${data.id}`}>
+                  <RouteCard {...data} index={i} />
+                </BorderBottomDiv>
+              )
+            }
           </PageSection>
         </div>
       </div>

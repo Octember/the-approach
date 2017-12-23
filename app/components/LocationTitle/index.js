@@ -20,7 +20,7 @@ function LocationTitle(props) {
   return (
     <StyledTitle className={props.className}>
       {props.title}
-      <Stars className="d-inline-block pl-2" value={5.0} editable={false} />
+      { props.rating ? <Stars className="d-inline-block pl-2" value={5.0} editable={false} /> : <div />}
     </StyledTitle>
   );
 }
@@ -28,6 +28,7 @@ function LocationTitle(props) {
 LocationTitle.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
+  rating: PropTypes.number,
 };
 
 export default LocationTitle;

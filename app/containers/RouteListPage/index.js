@@ -17,10 +17,35 @@ import makeSelectRouteListPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
+import Header from 'components/Header'
+import Breadcrumbs from 'components/Breadcrumbs'
+import LocationCarousel from 'components/LocationCarousel';
+import PageSection from 'components/PageSection';
+import RouteCard from 'components/RouteCard';
+import BorderBottomDiv from 'components/Utils';
+
 export class RouteListPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
+        <Helmet>
+          <title>RoutePage</title>
+          <meta name="description" content="Description of RoutePage"/>
+        </Helmet>
+
+        <div className="container">
+          <div className="row">
+            <div className="col" />
+            <div className="col-md-8 px-0">
+              <div className="container">
+                <BorderBottomDiv>
+                <Header />
+                </BorderBottomDiv>
+              </div>
+            </div>
+            <div className="col" />
+          </div>
+        </div>
       </div>
     );
   }

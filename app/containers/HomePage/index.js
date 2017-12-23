@@ -10,51 +10,33 @@
  */
 
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
-import Header from 'components/Header';
 
-
-import Breadcrumbs from 'components/Breadcrumbs'
-import LocationTitle from 'components/LocationTitle'
+import RoutePage from 'containers/RoutePage/Loadable';
+import RouteListPage from 'containers/RouteListPage/Loadable';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   render() {
-    const routeData = [
-      {
-        id: 32131231,
-        routeName: 'Route 1',
-        routeStats: {
-          grade: '5.9',
-          type: 'sport',
-          length: '100\'',
-          rating: 3.6,
-          countRatings: 11,
-        },
-      },
-      {
-        id: 131111,
-        routeName: 'Route 2',
-        routeStats: {
-          grade: '5.10a',
-          type: 'lead',
-          length: '75\'',
-          rating: 5.0,
-          countRatings: 14,
-        },
-      },
-    ];
-
     return (
-      <div className="container">
-        <div className="row">
-          <Header />
+      <Router>
+        <div>
+          <ul>
+            <li><Link to="/route">Route</Link></li>
+            <li><Link to="/routelist">route list</Link></li>
+          </ul>
+
+          <hr/>
+
+          <Route exact path="/route" component={RoutePage}/>
+          <Route path="/routelist" component={RouteListPage}/>
         </div>
-        <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]} />
-        <div className="row">
-          <LocationTitle title="Eamon Glacier" />
-        </div>
-      </div>
+      </Router>
     );
   }
 }

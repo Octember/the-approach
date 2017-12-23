@@ -10,7 +10,7 @@ import Stars from 'components/Stars';
 
 function RouteCard(props) {
   return (
-    <div className="row py-2 border border-secondary border-left-0 border-right-0 border-top-0">
+    <div className="row py-2">
       <div className="col-xs-4">
         <h4 className="text-left pl-2">{props.routeName}</h4>
       </div>
