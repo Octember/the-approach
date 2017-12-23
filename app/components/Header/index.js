@@ -22,7 +22,7 @@ function Header() {
     <div className="row">
       <StyledNav className="navbar navbar-toggleable-xs navbar-light bg-fafafa pb-0">
 
-        <StyledNavButton className="navbar-toggler navbar-toggler-left pl-0" type="button" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <StyledNavButton className="navbar-toggler navbar-toggler-left px-0" type="button" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
         </StyledNavButton>
         <a className="navbar-brand mr-auto ml-2" href="#"> theApproach</a>
