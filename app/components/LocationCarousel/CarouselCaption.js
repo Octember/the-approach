@@ -7,8 +7,7 @@ const StyledCarouselCaptionDiv = styled.div`
   right: 0px;
   bottom: 0px;
   width: 100%;
-  background-color: gray;
-  opacity: 0.9;
+  height: 200px;
 `;
 
 const CarouselCaption = (props) => (

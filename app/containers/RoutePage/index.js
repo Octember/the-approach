@@ -24,14 +24,6 @@ import PageSection from 'components/PageSection';
 import RouteCard from 'components/RouteCard';
 import CardSlider from 'components/CardSlider';
 
-import styled from 'styled-components';
-
-const StyledCTAButton = styled.button `
-  width: 100%;
-  height: 45px;
-`;
-
-
 export class RoutePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
@@ -93,13 +85,16 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
           <PageSection title="">
             <div className="container">
               <div className="row">
-                <div className="col text-center">
+
+                <div className="col-1" />
+                <div className="col-5">
                   <h4>$1343</h4>
-                  <p>{`${4} day trip`}</p>
+                  <p>{`${'4 day'} trip`}</p>
                 </div>
-                <div className="col">
-                  <StyledCTAButton type="button" className="btn btn-primary">Primary</StyledCTAButton>
+                <div className="col-5">
+                  <button type="button" className="btn btn-primary btn-block">Schedule</button>
                 </div>
+                <div className="col-1" />
               </div>
             </div>
           </PageSection>
