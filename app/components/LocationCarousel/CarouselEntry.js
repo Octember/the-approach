@@ -14,14 +14,9 @@ const CarouselSpacer = styled.div `
   background-color: black;
 `;
 
-const RelativeDiv = styled.div `
-  position: relative;
-`;
-
 const CarouselOverlayFadeDiv = styled.div `
   width: 100%;
   height: 100%;
-  position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
@@ -33,14 +28,14 @@ function CarouselEntry(props) {
 
   return (
     <div className={className}>
-      <RelativeDiv>
+      <div className="position-relative">
         <CarouselImage
           className="d-block img-fluid"
           src={props.imageUrl}
           alt="First slide"
         />
-        <CarouselOverlayFadeDiv />
-      </RelativeDiv>
+        <CarouselOverlayFadeDiv className="position-absolute" />
+      </div>
 
       <CarouselSpacer />
       <CarouselCaption title={props.title} metadata={props.metadata} />
