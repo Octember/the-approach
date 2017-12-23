@@ -71,16 +71,14 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
             <div className="col" />
           </div>
 
-          <PageSection>
-            {/* Custom page section here for custom shape */}
-            <div className="row">
-              <div className="col" />
-              <div className="col-md-8 px-0">
-                <LocationCarousel />
-              </div>
-              <div className="col" />
+          {/* Custom page section here for custom shape */}
+          <div className="row">
+            <div className="col" />
+            <div className="col-md-8 px-0">
+              <LocationCarousel />
             </div>
-          </PageSection>
+            <div className="col" />
+          </div>
 
           <PageSection title="Beta">
             <BorderBottomDiv>
@@ -124,11 +122,11 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
 
           <PageSection title="All Routes">
             <BorderBottomDiv>
-            {
-              routeData.map((data, i) =>
-                <RouteCard {...data} index={i} key={`item-${data.id}`}/>
-              )
-            }
+              {
+                routeData.map((data, i) =>
+                  <RouteCard {...data} index={i} key={`item-${data.id}`}/>
+                )
+              }
             </BorderBottomDiv>
           </PageSection>
         </div>
