@@ -8,9 +8,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function PageSection(props) {
-  const borderClass = props.noBorder ? '' : 'border border-secondary border-left-0 border-right-0 border-top-0';
-  const marginClass = props.noMargin ? '' : 'ml-1';
-
   return (
     <div className="container px-0">
       <div className="row py-2">
@@ -18,10 +15,7 @@ function PageSection(props) {
 
         <div className="col-md-8">
           <h2 className="font-weight-bold">{props.title}</h2>
-
-          <div className={`${marginClass} ${borderClass}`}>
-            {props.children}
-          </div>
+          {props.children}
         </div>
 
         <div className="col" />
@@ -31,9 +25,7 @@ function PageSection(props) {
 }
 
 PageSection.propTypes = {
-  title: PropTypes.string.isRequired,
-  noBorder: PropTypes.bool,
-  noMargin: PropTypes.bool,
+  title: PropTypes.string,
   children: PropTypes.node,
 };
 

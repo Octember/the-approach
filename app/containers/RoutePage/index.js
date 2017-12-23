@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Helmet} from 'react-helmet';
+import Helmet from 'react-helmet';
 import {createStructuredSelector} from 'reselect';
 import {compose} from 'redux';
 
@@ -23,6 +23,7 @@ import LocationCarousel from 'components/LocationCarousel';
 import PageSection from 'components/PageSection';
 import RouteCard from 'components/RouteCard';
 import CardSlider from 'components/CardSlider';
+import BorderBottomDiv from 'components/Utils';
 
 export class RoutePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -57,50 +58,63 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
           <title>RoutePage</title>
           <meta name="description" content="Description of RoutePage"/>
         </Helmet>
+
         <div className="container">
           <div className="row">
-            <div className="col"/>
+            <div className="col" />
             <div className="col-md-8 px-0">
               <div className="container">
-                <div className="row">
-                  <Header />
-                </div>
+                <Header />
                 <Breadcrumbs breadcrumbData={[{link: 'google.com', text: 'Denali National Park'}]}/>
-
               </div>
-
-              <LocationCarousel />
             </div>
             <div className="col" />
           </div>
 
-          <PageSection title="Beta">
-
-            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it
-              over
-              2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,
-              consectetur</p>
-          </PageSection>
-
-          <PageSection title="">
-            <div className="container">
-              <div className="row">
-
-                <div className="col-1" />
-                <div className="col-5">
-                  <h4>$1343</h4>
-                  <p>{`${'4 day'} trip`}</p>
-                </div>
-                <div className="col-5">
-                  <button type="button" className="btn btn-primary btn-block">Schedule</button>
-                </div>
-                <div className="col-1" />
+          <PageSection>
+            {/* Custom page section here for custom shape */}
+            <div className="row">
+              <div className="col" />
+              <div className="col-md-8 px-0">
+                <LocationCarousel />
               </div>
+              <div className="col" />
             </div>
           </PageSection>
 
+          <PageSection title="Beta">
+            <BorderBottomDiv>
+              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it
+                over
+                2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,
+                consectetur</p>
+            </BorderBottomDiv>
+          </PageSection>
+
+          <PageSection>
+            <BorderBottomDiv>
+              {/* CTA component */}
+              <div className="container">
+                <div className="row">
+
+                  <div className="col-1" />
+                  <div className="col-5">
+                    <h4>$1343</h4>
+                    <p>{`${'4 day'} trip`}</p>
+                  </div>
+                  <div className="col-5">
+                    <button type="button" className="btn btn-primary btn-block">Schedule</button>
+                  </div>
+                  <div className="col-1" />
+                </div>
+              </div>
+            </BorderBottomDiv>
+          </PageSection>
+
           <PageSection title="Approach">
-            <p> go to the route</p>
+            <BorderBottomDiv>
+              <p> go to the route</p>
+            </BorderBottomDiv>
           </PageSection>
 
           {/* The slider breaks the width. Let's use another slider */}
@@ -108,12 +122,14 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
           {/*<CardSlider />*/}
           {/*</PageSection>*/}
 
-          <PageSection title="All Routes" noBorder={true}>
+          <PageSection title="All Routes">
+            <BorderBottomDiv>
             {
               routeData.map((data, i) =>
                 <RouteCard {...data} index={i} key={`item-${data.id}`}/>
               )
             }
+            </BorderBottomDiv>
           </PageSection>
         </div>
       </div>

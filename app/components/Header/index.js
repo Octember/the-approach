@@ -1,8 +1,8 @@
 /**
-*
-* Header
-*
-*/
+ *
+ * Header
+ *
+ */
 
 import React from 'react';
 import styled from 'styled-components';
@@ -19,18 +19,18 @@ const StyledNavButton = styled.button `
 
 function Header() {
   return (
-    <StyledNav className="navbar navbar-toggleable-xs navbar-light bg-fafafa pb-0">
+    <div className="row">
+      <StyledNav className="navbar navbar-toggleable-xs navbar-light bg-fafafa pb-0">
 
-      <StyledNavButton className="navbar-toggler navbar-toggler-left btn-link" type="button" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon" />
-      </StyledNavButton>
-      <a className="navbar-brand mr-auto ml-2" href="#"> theApproach</a>
-    </StyledNav>
+        <StyledNavButton className="navbar-toggler navbar-toggler-left pl-0" type="button" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon" />
+        </StyledNavButton>
+        <a className="navbar-brand mr-auto ml-2" href="#"> theApproach</a>
+      </StyledNav>
+    </div>
   );
 }
 
-Header.propTypes = {
-
-};
+Header.propTypes = {};
 
 export default Header;
