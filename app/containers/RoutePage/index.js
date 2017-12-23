@@ -59,15 +59,17 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
           <meta name="description" content="Description of RoutePage" />
         </Helmet>
         <div className="container">
-
-          <div className="row">
-            <Header />
-          </div>
-          <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]} />
-
           <div className="row">
             <div className="col" />
             <div className="col-md-8 px-0">
+              <div className="container">
+                <div className="row">
+                  <Header />
+                </div>
+                <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]} />
+
+              </div>
+
               <LocationCarousel />
             </div>
             <div className="col" />
@@ -84,9 +86,10 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
             <p> go to the route</p>
           </PageSection>
 
-          <PageSection title="Classic Routes" noMargin={true}>
-            <CardSlider />
-          </PageSection>
+          {/* The slider breaks the width. Let's use another slider */}
+          {/*<PageSection title="Classic Routes" noMargin={true}>*/}
+            {/*<CardSlider />*/}
+          {/*</PageSection>*/}
 
           <PageSection title="All Routes" noBorder={true}>
             {

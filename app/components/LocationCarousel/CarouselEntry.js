@@ -3,24 +3,23 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import CarouselCaption from './CarouselCaption';
-import CarouselImage from './CarouselImage';
 
-const CarouselEntryContainer = styled.div `
-
+const CarouselImage = styled.img`
+  width: 100%;
 `;
 
 function CarouselEntry(props) {
   const className = props.index === 0 ? 'carousel-item active' : 'carousel-item';
 
   return (
-    <CarouselEntryContainer className={className}>
+    <div className={className}>
       <CarouselImage
         className="d-block img-fluid"
         src={props.imageUrl}
         alt="First slide"
       />
       <CarouselCaption title={props.title} subtitle={props.subtitle} />
-    </CarouselEntryContainer>
+    </div>
   );
 }
 

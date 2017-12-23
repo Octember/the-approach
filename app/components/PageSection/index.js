@@ -12,18 +12,20 @@ function PageSection(props) {
   const marginClass = props.noMargin ? '' : 'ml-2';
 
   return (
-    <div className="row py-2">
-      <div className="col" />
+    <div className="container px-0">
+      <div className="row py-2">
+        <div className="col" />
 
-      <div className="col-md-8">
-        <h2>{props.title}</h2>
+        <div className="col-md-8">
+          <h2>{props.title}</h2>
 
-        <div className={`${marginClass} ${borderClass}`}>
-          {props.children}
+          <div className={`${marginClass} ${borderClass}`}>
+            {props.children}
+          </div>
         </div>
-      </div>
 
-      <div className="col" />
+        <div className="col" />
+      </div>
     </div>
   );
 }

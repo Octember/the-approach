@@ -12,14 +12,14 @@ import CarouselEntry from './CarouselEntry';
 
 function LocationCarousel(props) {
   return (
-    <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+    <div id="locationCarousel" className="carousel slide" data-ride="carousel">
       <ol className="carousel-indicators">
         {
           props.carouselEntries.map((carouselEntry, i) => {
             const className = i === 0 ? 'active' : '';
 
             return (
-              <li data-target="#carouselExampleIndicators" data-slide-to={i} className={className} key={i} />
+              <li data-target="#locationCarousel" data-slide-to={i} className={className} key={i} />
             );
           })
         }
@@ -39,7 +39,7 @@ LocationCarousel.propTypes = {
   carouselEntries: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
-    imageUrl: PropTypes.string.isRequired
+    imageUrl: PropTypes.string.isRequired,
   })).isRequired,
 };
 
