@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
 import RouteReviewPage from 'containers/RouteReviewPage/Loadable';
@@ -25,8 +25,17 @@ import OfferListPage from 'containers/OfferListPage/Loadable';
 export default function App() {
   return (
     <div>
+      <div>
+        <ul>
+          <li><Link to="/route">Route</Link></li>
+          <li><Link to="/routelist">route list</Link></li>
+          <li><Link to="/offerlist">offer list </Link></li>
+        </ul>
+
+        <hr />
+      </div>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" component={RoutePage} />
         <Route path="/form" component={RouteReviewPage} />
         <Route path="/route" component={RoutePage} />
         <Route path="/routelist" component={RouteListPage} />

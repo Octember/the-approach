@@ -6,10 +6,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Helmet} from 'react-helmet';
-import {createStructuredSelector} from 'reselect';
-import {compose} from 'redux';
+import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -42,28 +42,28 @@ export class OfferListPage extends React.Component { // eslint-disable-line reac
       <div>
         <Helmet>
           <title>OfferListPage</title>
-          <meta name="description" content="Description of OfferListPage"/>
+          <meta name="description" content="Description of OfferListPage" />
         </Helmet>
 
         <div className="container">
           <div className="row">
-            <div className="col"/>
+            <div className="col" />
             <div className="col-md-8 px-0">
               <div className="container">
-                <Header/>
+                <Header />
                 <Breadcrumbs
                   breadcrumbData={[
-                    {link: 'google.com', text: 'Mt. Rainier National park'},
-                    {link: 'google.com', text: 'chicken butt'},
+                    { link: 'google.com', text: 'Mt. Rainier National park' },
+                    { link: 'google.com', text: 'chicken butt' },
                   ]}
                 />
-                <LocationTitle className="mt-0 mb-2" title="Eamon-Winthrop Glacier" rating={5.0}/>
+                <LocationTitle className="mt-0 mb-2" title="Eamon-Winthrop Glacier" rating={5.0} />
               </div>
               <BorderBottomDiv>
-                <GuideHero/>
+                <GuideHero />
               </BorderBottomDiv>
             </div>
-            <div className="col"/>
+            <div className="col" />
           </div>
 
           {
@@ -90,8 +90,7 @@ export class OfferListPage extends React.Component { // eslint-disable-line reac
                   </BorderBottomDiv>
                 </PageSection>
               </div>
-              )
-            )
+            ))
           }
 
         </div>
@@ -99,8 +98,6 @@ export class OfferListPage extends React.Component { // eslint-disable-line reac
     );
   }
 }
-
-//https://www.outdoorproject.com/sites/default/files/styles/odp_header_adaptive/public/features/1-21.jpg?itok=YEd1AijH
 
 OfferListPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -118,8 +115,8 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({key: 'offerListPage', reducer});
-const withSaga = injectSaga({key: 'offerListPage', saga});
+const withReducer = injectReducer({ key: 'offerListPage', reducer });
+const withSaga = injectSaga({ key: 'offerListPage', saga });
 
 export default compose(
   withReducer,

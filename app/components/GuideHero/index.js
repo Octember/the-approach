@@ -19,7 +19,7 @@ const RelativePostionDiv = styled.div `
 
 const HeroBackgroundImageContainer = styled.div `
   overflow: hidden;
-  max-height: 160px;
+  max-height: 200px;
 `;
 
 const HeroBackgroundImage = styled.img `
