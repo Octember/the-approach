@@ -64,16 +64,8 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
             <div className="col-md-8 px-0">
               <div className="container">
                 <Header />
-                <Breadcrumbs breadcrumbData={[{link: 'google.com', text: 'Denali National Park'}]}/>
+                <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]} />
               </div>
-            </div>
-            <div className="col" />
-          </div>
-
-          {/* Custom page section here for custom shape */}
-          <div className="row">
-            <div className="col" />
-            <div className="col-md-8 px-0">
               <LocationCarousel />
             </div>
             <div className="col" />

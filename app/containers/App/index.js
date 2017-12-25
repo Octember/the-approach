@@ -19,6 +19,8 @@ import RouteReviewPage from 'containers/RouteReviewPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import RoutePage from 'containers/RoutePage/Loadable';
 import RouteListPage from 'containers/RouteListPage/Loadable';
+import OfferListPage from 'containers/OfferListPage/Loadable';
+
 
 export default function App() {
   return (
@@ -28,6 +30,7 @@ export default function App() {
         <Route path="/form" component={RouteReviewPage} />
         <Route path="/route" component={RoutePage} />
         <Route path="/routelist" component={RouteListPage} />
+        <Route path="/offerlist" component={OfferListPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

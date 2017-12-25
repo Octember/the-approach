@@ -18,12 +18,9 @@ import reducer from './reducer';
 import saga from './saga';
 
 import Header from 'components/Header'
-import Breadcrumbs from 'components/Breadcrumbs'
-import LocationCarousel from 'components/LocationCarousel';
 import PageSection from 'components/PageSection';
 import RouteCardLarge from 'components/routecards/RouteCardLarge';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
-import PageTitle from 'components/shared/PageTitle'
 
 export class RouteListPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {

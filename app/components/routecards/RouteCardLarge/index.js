@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Stars from 'components/Stars';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 
 const RouteImageContainer = styled.div `
@@ -19,17 +19,16 @@ const RouteImage = styled.img `
   object-fit: cover;
 `;
 
-// const StyledLink = styled.Link `
-//   color: inherit;
-//   text-decoration: none;
-// `;
-
 function RouteCardLarge(props) {
   return (
-    <Link to="/route" className="text-black" style={{
-      color: "inherit",
-      textDecoration: "none",
-    }} >
+    <Link
+      to="/route"
+      className="text-black"
+      style={{
+        color: 'inherit',
+        textDecoration: 'none',
+      }}
+    >
       <div className="container py-1">
         <div className="row">
           <div className="col-12 px-0">

@@ -19,6 +19,8 @@ import {
 
 import RoutePage from 'containers/RoutePage/Loadable';
 import RouteListPage from 'containers/RouteListPage/Loadable';
+import OfferListPage from 'containers/OfferListPage/Loadable';
+
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -29,12 +31,16 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           <ul>
             <li><Link to="/route">Route</Link></li>
             <li><Link to="/routelist">route list</Link></li>
+            <li><Link to="/offerlist">offer list </Link></li>
+
           </ul>
 
-          <hr/>
+          <hr />
 
           <Route exact path="/route" component={RoutePage}/>
           <Route path="/routelist" component={RouteListPage}/>
+          <Route path="/offerlist" component={OfferListPage} />
+
         </div>
       </Router>
     );
