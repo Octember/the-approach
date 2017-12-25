@@ -8,7 +8,6 @@ const StyledCarouselCaptionDiv = styled.div`
   left: 0px;
   right: 0px;
   bottom: 0px;
-  width: 100%;
 `;
 
 const StyledMetadata = styled.small `
@@ -16,7 +15,7 @@ const StyledMetadata = styled.small `
 `;
 
 const CarouselCaption = (props) => (
-  <StyledCarouselCaptionDiv className="carousel-caption text-left px-3">
+  <StyledCarouselCaptionDiv className="carousel-caption text-left px-3 w-100">
     <LocationTitle title={props.title} rating={5.0} className="mb-0" />
     {
       props.metadata.map((subtitle, i) =>

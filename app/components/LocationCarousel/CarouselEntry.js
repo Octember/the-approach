@@ -4,19 +4,13 @@ import styled from 'styled-components';
 
 import CarouselCaption from './CarouselCaption';
 
-const CarouselImage = styled.img`
-  width: 100%;
-`;
 
 const CarouselSpacer = styled.div `
-  width: 100%;
   height: 50px;
   background-color: black;
 `;
 
 const CarouselOverlayFadeDiv = styled.div `
-  width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
   bottom: 0;
@@ -29,15 +23,15 @@ function CarouselEntry(props) {
   return (
     <div className={className}>
       <div className="position-relative">
-        <CarouselImage
-          className="d-block img-fluid"
+        <img
+          className="d-block img-fluid w-100"
           src={props.imageUrl}
           alt="First slide"
         />
-        <CarouselOverlayFadeDiv className="position-absolute" />
+        <CarouselOverlayFadeDiv className="position-absolute w-100 h-100" />
       </div>
 
-      <CarouselSpacer />
+      <CarouselSpacer className="w-100" />
       <CarouselCaption title={props.title} metadata={props.metadata} />
     </div>
   );
