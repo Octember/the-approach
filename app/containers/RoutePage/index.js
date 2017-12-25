@@ -21,8 +21,8 @@ import Header from 'components/Header'
 import Breadcrumbs from 'components/Breadcrumbs'
 import LocationCarousel from 'components/LocationCarousel';
 import PageSection from 'components/PageSection';
-import RouteCard from 'components/RouteCard';
-import BorderBottomDiv from 'components/Utils';
+import RouteCardSmall from 'components/routecards/RouteCardSmall';
+import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 
 export class RoutePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -118,7 +118,7 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
             {
               routeData.map((data, i) =>
                 <BorderBottomDiv className="ml-1" key={`item-${data.id}`}>
-                  <RouteCard {...data} index={i} />
+                  <RouteCardSmall {...data} index={i} />
                 </BorderBottomDiv>
               )
             }

@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Stars from 'components/Stars';
 
-function RouteCard(props) {
+function RouteCardSmall(props) {
   return (
     <div className="row py-2">
       <div className="col-xs-4">
@@ -29,7 +29,7 @@ function RouteCard(props) {
   );
 }
 
-RouteCard.propTypes = {
+RouteCardSmall.propTypes = {
   routeName: PropTypes.string.isRequired,
   routeStats: PropTypes.shape({
     grade: PropTypes.string,
@@ -40,4 +40,4 @@ RouteCard.propTypes = {
   }),
 };
 
-export default RouteCard;
+export default RouteCardSmall;

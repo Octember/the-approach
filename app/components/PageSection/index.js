@@ -14,7 +14,7 @@ function PageSection(props) {
         <div className="col" />
 
         <div className="col-md-8">
-          <h2 className="font-weight-bold">{props.title}</h2>
+          <h4 className="font-weight-bold">{props.title}</h4>
           {props.children}
         </div>
 
