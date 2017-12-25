@@ -8,9 +8,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Stars from 'components/Stars';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom'
+
 
 const RouteImageContainer = styled.div `
-  height: 160px;
   overflow: hidden;
 `;
 
@@ -18,17 +19,20 @@ const RouteImage = styled.img `
   object-fit: cover;
 `;
 
-const UnstyledLink = styled.a `
-  color: inherit;
-  text-decoration: none;
-`;
+// const StyledLink = styled.Link `
+//   color: inherit;
+//   text-decoration: none;
+// `;
 
 function RouteCardLarge(props) {
   return (
-    <UnstyledLink href="/route" className="text-black">
+    <Link to="/route" className="text-black" style={{
+      color: "inherit",
+      textDecoration: "none",
+    }} >
       <div className="container py-1">
         <div className="row">
-          <div className="col-xs-12">
+          <div className="col-12 px-0">
             <RouteImageContainer>
               <RouteImage className="d-block img-fluid" src={props.imageUrl} alt="First slide" />
             </RouteImageContainer>
@@ -59,14 +63,11 @@ function RouteCardLarge(props) {
                 value={props.routeStats.rating}
                 editable={false}
               />
-
             </div>
-
-            {/*</div>*/}
           </div>
         </div>
       </div>
-    </UnstyledLink>
+    </Link>
   );
 }
 

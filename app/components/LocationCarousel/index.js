@@ -62,6 +62,11 @@ LocationCarousel.defaultProps = {
       ],
       imageUrl: 'https://c402277.ssl.cf1.rackcdn.com/photos/2325/images/hero_small/mountains-hero.jpg?1345838509',
     },
+    {
+      title: 'test',
+      metadata: [],
+      imageUrl: 'http://media.apps.chicagotribune.com/maptiles/chicago-mask/11/523/759.png',
+    }
   ],
 };
 
