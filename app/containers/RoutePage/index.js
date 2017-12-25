@@ -23,6 +23,7 @@ import LocationCarousel from 'components/LocationCarousel';
 import PageSection from 'components/PageSection';
 import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
+import ScheduleTripBox from 'components/ScheduleTripBox';
 
 export class RoutePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -82,21 +83,7 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
 
           <PageSection>
             <BorderBottomDiv>
-              {/* CTA component */}
-              <div className="container">
-                <div className="row">
-
-                  <div className="col-1" />
-                  <div className="col-5">
-                    <h4>$1343</h4>
-                    <p>{`${'4 day'} trip`}</p>
-                  </div>
-                  <div className="col-5">
-                    <button type="button" className="btn btn-primary btn-block">Schedule</button>
-                  </div>
-                  <div className="col-1" />
-                </div>
-              </div>
+              <ScheduleTripBox price="$1111" duration="3 day trip" />
             </BorderBottomDiv>
           </PageSection>
 
