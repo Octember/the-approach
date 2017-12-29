@@ -10,7 +10,9 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  routeData: {},
+  routeData: {
+    images: []
+  },
 });
 
 function routePageReducer(state = initialState, action) {

@@ -35,7 +35,7 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
   }
 
   render() {
-    const carouselEntries = [
+    const c = [
       {
         title: 'Emmon-Winthrop Glacier',
         metadata: [
@@ -43,16 +43,32 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
           'Elevation 14,410',
           '0.5 mile approach',
         ],
-        imageUrl: 'http://www.backgroundbandit.com/wallpapers/31/700.jpg',
+        url: 'http://www.backgroundbandit.com/wallpapers/31/700.jpg',
       },
       {
         title: 'Noah is cool',
         metadata: [
           'subtitle 2',
         ],
-        imageUrl: 'https://c402277.ssl.cf1.rackcdn.com/photos/2325/images/hero_small/mountains-hero.jpg?1345838509',
+        url: 'https://c402277.ssl.cf1.rackcdn.com/photos/2325/images/hero_small/mountains-hero.jpg?1345838509',
       },
     ];
+
+    const carouselEntries = this.props.images.map((image) => {
+      const x = {
+        id: image.id,
+        title: 'Emmon-Winthrop Glacier',
+        metadata: [
+          'Alpine Grade II-IIII',
+          'Elevation 14,410',
+          '0.5 mile approach',
+        ],
+        url: image.url,
+      };
+
+      return x;
+    });
+
 
     const relatedRouteData = [
       {

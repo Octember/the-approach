@@ -25,7 +25,7 @@ function CarouselEntry(props) {
         {/*<div */}
         <img
           className="d-block img-fluid w-100"
-          src={props.imageUrl}
+          src={props.url}
           alt="First slide"
         />
         <CarouselOverlayFadeDiv className="position-absolute w-100 h-100" />
@@ -41,7 +41,7 @@ CarouselEntry.propTypes = {
   index: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   metadata: PropTypes.arrayOf(PropTypes.string),
-  imageUrl: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default CarouselEntry;

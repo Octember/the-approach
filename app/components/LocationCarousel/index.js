@@ -39,7 +39,7 @@ LocationCarousel.propTypes = {
   carouselEntries: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     metadata: PropTypes.arrayOf(PropTypes.string).isRequired,
-    imageUrl: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
   })).isRequired,
 };
 
