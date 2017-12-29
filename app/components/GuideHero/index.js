@@ -65,23 +65,25 @@ function GuideHero() {
         </GuideLogoContainer>
       </RelativePostionDiv>
 
-      <div className="row">
-        <h4 className="mx-auto mb-1">
-          RMI Expeditions
-        </h4>
-      </div>
-      <div className="row">
-        <small className="mx-auto mb-1">
-          Winthrop, WA
-        </small>
-      </div>
+      <div className="container">
+        <div className="row">
+          <h4 className="mx-auto mb-1">
+            RMI Expeditions
+          </h4>
+        </div>
+        <div className="row">
+          <small className="mx-auto mb-1">
+            Winthrop, WA
+          </small>
+        </div>
 
-      <div className="row mb-2">
-        <Stars
-          className="mx-auto"
-          value={4.3}
-          editable={false}
-        />
+        <div className="row mb-2">
+          <Stars
+            className="mx-auto"
+            value={4.3}
+            editable={false}
+          />
+        </div>
       </div>
     </div>
   );

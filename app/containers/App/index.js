@@ -20,6 +20,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import RoutePage from 'containers/RoutePage/Loadable';
 import RouteListPage from 'containers/RouteListPage/Loadable';
 import OfferListPage from 'containers/OfferListPage/Loadable';
+import OfferDetailPage from 'containers/OfferDetailPage/Loadable';
 
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
           <li><Link to="/route">Route</Link></li>
           <li><Link to="/routelist">route list</Link></li>
           <li><Link to="/offerlist">offer list </Link></li>
+          <li><Link to="/offer">offer </Link></li>
         </ul>
 
         <hr />
@@ -40,6 +42,7 @@ export default function App() {
         <Route path="/route" component={RoutePage} />
         <Route path="/routelist" component={RouteListPage} />
         <Route path="/offerlist" component={OfferListPage} />
+        <Route path="/offer" component={OfferDetailPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

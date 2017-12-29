@@ -1,0 +1,25 @@
+
+Schema
+
+Route
+  id
+  Location id
+  zone id
+  beta - text
+  desciption - text (for meta tag?)
+
+  Multiple images.......... ask anton if a list is cool in a DB
+
+
+
+Review
+  id
+  route id
+
+
+
+
+
+
+Guide
+

@@ -1,4 +1,5 @@
 import { injectGlobal } from 'styled-components';
+import 'react-dates/lib/css/_datepicker.css';
 
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
