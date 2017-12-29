@@ -154,7 +154,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  routepage: makeSelectRoutePage(),
   // images: selectImagesFromRoute(),
 });
 
