@@ -39,7 +39,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={RoutePage} />
         <Route path="/form" component={RouteReviewPage} />
-        <Route path="/route" component={RoutePage} />
+        <Route path="/route/:routeId" component={RoutePage} />
         <Route path="/routelist" component={RouteListPage} />
         <Route path="/offerlist" component={OfferListPage} />
         <Route path="/offer" component={OfferDetailPage} />

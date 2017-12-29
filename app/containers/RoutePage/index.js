@@ -25,10 +25,41 @@ import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 
-export class RoutePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class RoutePage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
 
   render() {
-    const routeData = [
+    console.log(`Route id: ${this.props.match.params.routeId}`);
+    const images = [
+      {
+
+      }
+    ]
+
+    const carouselEntries = [
+      {
+        title: 'Emmon-Winthrop Glacier',
+        metadata: [
+          'Alpine Grade II-IIII',
+          'Elevation 14,410',
+          '0.5 mile approach',
+        ],
+        imageUrl: 'http://www.backgroundbandit.com/wallpapers/31/700.jpg',
+      },
+      {
+        title: 'Noah is cool',
+        metadata: [
+          'subtitle 2',
+        ],
+        imageUrl: 'https://c402277.ssl.cf1.rackcdn.com/photos/2325/images/hero_small/mountains-hero.jpg?1345838509',
+      },
+      {
+        title: 'test',
+        metadata: [],
+        imageUrl: 'http://media.apps.chicagotribune.com/maptiles/chicago-mask/11/523/759.png',
+      },
+    ];
+
+    const relatedRouteData = [
       {
         id: 32131231,
         routeName: 'Route 1',
@@ -56,7 +87,7 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
       <div>
         <Helmet>
           <title>RoutePage</title>
-          <meta name="description" content="Description of RoutePage"/>
+          <meta name="description" content="Description of RoutePage" />
         </Helmet>
 
         <div className="container">
@@ -95,7 +126,7 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
 
           <PageSection title="All Routes">
             {
-              routeData.map((data, i) =>
+              relatedRouteData.map((data, i) =>
                 <BorderBottomDiv className="ml-1" key={`item-${data.id}`}>
                   <RouteCardSmall {...data} index={i} />
                 </BorderBottomDiv>
