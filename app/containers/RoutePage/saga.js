@@ -21,6 +21,7 @@ export function* loadRouteData() {
   try {
     // Call our request helper (see 'utils/request')
     const data = yield call(request, requestURL);
+    console.log("Saga response:");
     console.log(data);
     yield put(routeDataLoaded(data, routeId));
   } catch (err) {

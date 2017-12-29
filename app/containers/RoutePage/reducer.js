@@ -9,7 +9,9 @@ import {
   LOAD_ROUTE_DATA, LOAD_ROUTE_DATA_SUCCESS, LOAD_ROUTE_DATA_ERROR, STATE_LOADING
 } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  routeData: {},
+});
 
 function routePageReducer(state = initialState, action) {
   console.log(`Route reducer: ${action.type}`);

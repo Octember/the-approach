@@ -13,7 +13,7 @@ import {compose} from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { makeSelectRoutePage } from './selectors';
+import { selectImagesFromRoute } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { loadRoutePage } from './actions';
@@ -51,11 +51,6 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
           'subtitle 2',
         ],
         imageUrl: 'https://c402277.ssl.cf1.rackcdn.com/photos/2325/images/hero_small/mountains-hero.jpg?1345838509',
-      },
-      {
-        title: 'test',
-        metadata: [],
-        imageUrl: 'http://media.apps.chicagotribune.com/maptiles/chicago-mask/11/523/759.png',
       },
     ];
 
@@ -98,7 +93,7 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
                 <Header />
                 <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]} />
               </div>
-              <LocationCarousel />
+              <LocationCarousel carouselEntries={carouselEntries}/>
             </div>
             <div className="col" />
           </div>
@@ -141,7 +136,7 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
 
 RoutePage.propTypes = {
   requestRoutePage: PropTypes.func,
-  routepage: PropTypes.any
+  images: PropTypes.array
 };
 
 
@@ -154,7 +149,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  // images: selectImagesFromRoute(),
+  images: selectImagesFromRoute(),
 });
 
 

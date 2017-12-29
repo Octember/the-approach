@@ -6,11 +6,6 @@ import { STATE_ROUTE_DATA } from './constants';
  */
 const selectRoutePageDomain = (state) => state.get('routePage');
 
-const selectRouteDataDomain = () => createSelector(
-  selectRoutePageDomain,
-  (routeState) => routeState.get(STATE_ROUTE_DATA)
-);
-
 /**
  * Other specific selectors
  */
@@ -21,8 +16,22 @@ const selectRoutePageId = () => createSelector(
 );
 
 const selectImagesFromRoute = () => createSelector(
-  selectRouteDataDomain,
-  (routeData) => routeData.get('images')
+  selectRoutePageDomain,
+  (routeData) => {
+    // console.log(routeData.toJS())
+    //
+    // console.log(routeData.toJS().routeData)
+    //
+    console.log("images: ")
+    // if (routeData.toJS().routeData) {
+    console.log(routeData.toJS().routeData.images)
+    // }
+
+
+    // console.log(routeData.get(STATE_ROUTE_DATA).get('images'))
+    // return routeData.get(STATE_ROUTE_DATA).images;
+    return routeData.toJS().routeData.images
+  }
 )
 
 /**
