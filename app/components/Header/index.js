@@ -9,7 +9,6 @@ import styled from 'styled-components';
 import {} from 'react-intl';
 import { Link } from 'react-router-dom';
 
-
 // TODO this is very hacky. beware
 const StyledNavButton = styled.button `
   border-color: rgba(0,0,0,0) !important; 

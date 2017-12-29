@@ -13,9 +13,10 @@ import {compose} from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectRoutePage from './selectors';
+import { makeSelectRoutePage } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { loadRoutePage } from './actions';
 
 import Header from 'components/Header'
 import Breadcrumbs from 'components/Breadcrumbs'
@@ -27,14 +28,13 @@ import ScheduleTripBox from 'components/ScheduleTripBox';
 
 export class RoutePage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
 
-  render() {
+  componentDidMount() {
     console.log(`Route id: ${this.props.match.params.routeId}`);
-    const images = [
-      {
 
-      }
-    ]
+    this.props.requestRoutePage(this.props.match.params.routeId);
+  }
 
+  render() {
     const carouselEntries = [
       {
         title: 'Emmon-Winthrop Glacier',
@@ -140,21 +140,26 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
 }
 
 RoutePage.propTypes = {
-  dispatch: PropTypes.func, //.isRequired
+  requestRoutePage: PropTypes.func,
+  routepage: PropTypes.any
 };
 
-const mapStateToProps = createStructuredSelector({
-  routepage: makeSelectRoutePage(),
-});
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    requestRoutePage: (routeId) => {
+      dispatch(loadRoutePage(routeId));
+    },
   };
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const mapStateToProps = createStructuredSelector({
+  routepage: makeSelectRoutePage(),
+  // images: selectImagesFromRoute(),
+});
 
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({key: 'routePage', reducer});
 const withSaga = injectSaga({key: 'routePage', saga});
 
