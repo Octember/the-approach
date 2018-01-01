@@ -10,9 +10,14 @@ import styled from 'styled-components';
 
 import CarouselEntry from './CarouselEntry';
 
+const CarouselWrapper = styled.div `
+  height: 350px;
+`;
+
+
 function LocationCarousel(props) {
   return (
-    <div id="locationCarousel" className="carousel slide" data-ride="carousel">
+    <CarouselWrapper id="locationCarousel" className="carousel slide" data-ride="carousel">
       <ol className="carousel-indicators mb-1 mx-2 justify-content-start">
         {
           props.carouselEntries.map((carouselEntry, i) => {
@@ -31,7 +36,7 @@ function LocationCarousel(props) {
           )
         }
       </div>
-    </div>
+    </CarouselWrapper>
   );
 }
 
