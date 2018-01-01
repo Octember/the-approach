@@ -16,7 +16,7 @@ export function* loadRouteData() {
 
   console.log(`url: http://localhost:8888/route_page/${routeId}`);
 
-  const requestURL = `http://localhost:8888/route_page/${routeId}`;
+  const requestURL = `http://approach-server-1687250913.us-east-2.elb.amazonaws.com/route_page/${routeId}`;
 
   try {
     // Call our request helper (see 'utils/request')

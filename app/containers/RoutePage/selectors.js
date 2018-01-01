@@ -19,17 +19,15 @@ const selectImagesFromRoute = () => createSelector(
   (routeData) => routeData.toJS().routeData.images
 );
 
-/**
- * Default selector used by RoutePage
- */
-
-const makeSelectRoutePage = () => createSelector(
+const selectRouteData = () => createSelector(
   selectRoutePageDomain,
-  (substate) => substate.toJS()
+  (routeData) => routeData.toJS().routeData.route
 );
+
 
 export {
   selectRoutePageDomain,
   selectRoutePageId,
+  selectRouteData,
   selectImagesFromRoute,
 };

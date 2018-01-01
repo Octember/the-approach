@@ -26,23 +26,23 @@ import OfferDetailPage from 'containers/OfferDetailPage/Loadable';
 export default function App() {
   return (
     <div>
-      <div>
-        <ul>
-          <li><Link to="/route">Route</Link></li>
-          <li><Link to="/routelist">route list</Link></li>
-          <li><Link to="/offerlist">offer list </Link></li>
-          <li><Link to="/offer">offer </Link></li>
-        </ul>
+      {/*<div>*/}
+        {/*<ul>*/}
+          {/*<li><Link to="/route">Route</Link></li>*/}
+          {/*<li><Link to="/routelist">route list</Link></li>*/}
+          {/*<li><Link to="/offerlist">offer list </Link></li>*/}
+          {/*<li><Link to="/offer">offer </Link></li>*/}
+        {/*</ul>*/}
 
-        <hr />
-      </div>
+        {/*<hr />*/}
+      {/*</div>*/}
       <Switch>
         <Route exact path="/" component={RoutePage} />
-        <Route path="/form" component={RouteReviewPage} />
-        <Route path="/route/:routeId" component={RoutePage} />
-        <Route path="/routelist" component={RouteListPage} />
-        <Route path="/offerlist" component={OfferListPage} />
-        <Route path="/offer" component={OfferDetailPage} />
+        <Route exact path="/form" component={RouteReviewPage} />
+        <Route exact path="/route/:routeId" component={RoutePage} />
+        <Route exact path="/routelist" component={RouteListPage} />
+        <Route exact path="/offerlist" component={OfferListPage} />
+        <Route exact path="/offer" component={OfferDetailPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

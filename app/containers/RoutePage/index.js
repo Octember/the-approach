@@ -13,7 +13,7 @@ import {compose} from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { selectImagesFromRoute } from './selectors';
+import { selectImagesFromRoute, selectRouteData } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { loadRoutePage } from './actions';
@@ -35,29 +35,10 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
   }
 
   render() {
-    const c = [
-      {
-        title: 'Emmon-Winthrop Glacier',
-        metadata: [
-          'Alpine Grade II-IIII',
-          'Elevation 14,410',
-          '0.5 mile approach',
-        ],
-        url: 'http://www.backgroundbandit.com/wallpapers/31/700.jpg',
-      },
-      {
-        title: 'Noah is cool',
-        metadata: [
-          'subtitle 2',
-        ],
-        url: 'https://c402277.ssl.cf1.rackcdn.com/photos/2325/images/hero_small/mountains-hero.jpg?1345838509',
-      },
-    ];
-
     const carouselEntries = this.props.images.map((image) => {
       const x = {
-        id: image.id,
-        title: 'Emmon-Winthrop Glacier',
+        id: image.id.value,
+        title: this.props.route.title,
         metadata: [
           'Alpine Grade II-IIII',
           'Elevation 14,410',
@@ -166,6 +147,7 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = createStructuredSelector({
   images: selectImagesFromRoute(),
+  route: selectRouteData()
 });
 
 

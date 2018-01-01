@@ -16,7 +16,7 @@ const StyledMetadata = styled.small `
 
 const CarouselCaption = (props) => (
   <StyledCarouselCaptionDiv className="carousel-caption text-left px-3 w-100">
-    <LocationTitle title={props.title} rating={5.0} className="mb-0" />
+    <LocationTitle title={props.title} rating={5.0} className="mb-0 mr-4" />
     {
       props.metadata.map((subtitle, i) =>
         <p key={`item-${i}`} className="mb-1">

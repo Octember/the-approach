@@ -19,7 +19,7 @@ function LocationCarousel(props) {
             const className = i === 0 ? 'active' : '';
 
             return (
-              <li data-target="#locationCarousel" data-slide-to={i} className={className} key={i} />
+              <li data-target="#locationCarousel" data-slide-to={i} className={className} key={carouselEntry.id} />
             );
           })
         }
@@ -27,7 +27,7 @@ function LocationCarousel(props) {
       <div className="carousel-inner" role="listbox">
         {
           props.carouselEntries.map((carouselEntry, i) =>
-            <CarouselEntry {...carouselEntry} index={i} key={`item-${i}`} />
+            <CarouselEntry {...carouselEntry} index={i} key={carouselEntry.id} />
           )
         }
       </div>

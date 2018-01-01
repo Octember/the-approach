@@ -4,6 +4,10 @@ import styled from 'styled-components';
 
 import CarouselCaption from './CarouselCaption';
 
+const CarouselImage = styled.img `
+  height: 300px;
+`;
+
 const CarouselSpacer = styled.div `
   height: 50px;
   background-color: black;
@@ -23,8 +27,8 @@ function CarouselEntry(props) {
     <div className={className}>
       <div className="position-relative">
         {/*<div */}
-        <img
-          className="d-block img-fluid w-100"
+        <CarouselImage
+          className="w-100"
           src={props.url}
           alt="First slide"
         />
