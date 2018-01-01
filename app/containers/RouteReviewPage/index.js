@@ -16,13 +16,35 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectRouteReviewPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
+
+import Header from 'components/Header'
+import Breadcrumbs from 'components/Breadcrumbs'
+import LocationCarousel from 'components/LocationCarousel';
+import PageSection from 'components/PageSection';
+import RouteCardSmall from 'components/routecards/RouteCardSmall';
+import BorderBottomDiv from 'components/shared/BorderBottomDiv';
+import ScheduleTripBox from 'components/ScheduleTripBox';
 
 export class RouteReviewPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
-        <FormattedMessage {...messages.header} />
+        <div className="container">
+          <div className="row">
+            <div className="col" />
+            <div className="col-md-8 px-0">
+              <div className="container">
+                <Header />
+                <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]} />
+              </div>
+            </div>
+            <div className="col" />
+          </div>
+
+          <div className="row">
+            testststst
+          </div>
+        </div>
       </div>
     );
   }
