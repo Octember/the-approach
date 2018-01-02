@@ -17,8 +17,8 @@ import { Switch, Route, Link } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import RouteReviewPage from 'containers/RouteReviewPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import RoutePage from 'containers/RoutePage/Loadable';
-import RouteListPage from 'containers/RouteListPage/Loadable';
+import LocationPage from 'containers/LocationPage/Loadable';
+import LocationListPage from 'containers/LocationListPage/Loadable';
 import OfferListPage from 'containers/OfferListPage/Loadable';
 import OfferDetailPage from 'containers/OfferDetailPage/Loadable';
 
@@ -37,10 +37,10 @@ export default function App() {
         {/*<hr />*/}
       {/*</div>*/}
       <Switch>
-        <Route exact path="/" component={RoutePage} />
+        <Route exact path="/" component={LocationPage} />
         <Route exact path="/form" component={RouteReviewPage} />
-        <Route exact path="/route/:routeId" component={RoutePage} />
-        <Route exact path="/routelist" component={RouteListPage} />
+        <Route exact path="/location/:locationId" component={LocationPage} />
+        <Route exact path="/locationlist" component={LocationListPage} />
         <Route exact path="/offerlist" component={OfferListPage} />
         <Route exact path="/offer" component={OfferDetailPage} />
         <Route component={NotFoundPage} />

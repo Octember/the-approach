@@ -1,22 +1,22 @@
 /**
  *
- * RoutePage
+ * LocationPage
  *
  */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import {createStructuredSelector} from 'reselect';
-import {compose} from 'redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { selectImagesFromRoute, selectRouteData } from './selectors';
+import { selectImagesFromLocation, selectLocationData } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { loadRoutePage } from './actions';
+import { loadLocationPage } from './actions';
 
 import Header from 'components/Header'
 import Breadcrumbs from 'components/Breadcrumbs'
@@ -26,19 +26,19 @@ import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 
-export class RoutePage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
+export class LocationPage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
 
   componentDidMount() {
-    console.log(`Route id: ${this.props.match.params.routeId}`);
+    console.log(`location id: ${this.props.match.params.locationId}`);
 
-    this.props.requestRoutePage(this.props.match.params.routeId);
+    this.props.requestLocationPage(this.props.match.params.locationId);
   }
 
   render() {
     const carouselEntries = this.props.images.map((image) => {
       const x = {
         id: image.id.value,
-        title: this.props.route.title,
+        title: this.props.location.title,
         metadata: [
           'Alpine Grade II-IIII',
           'Elevation 14,410',
@@ -78,21 +78,21 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
     return (
       <div>
         <Helmet>
-          <title>RoutePage</title>
-          <meta name="description" content="Description of RoutePage" />
+          <title>LocationPage</title>
+          <meta name="description" content="Description of LocationPage"/>
         </Helmet>
 
         <div className="container">
           <div className="row">
-            <div className="col" />
+            <div className="col"/>
             <div className="col-md-8 px-0">
               <div className="container">
-                <Header />
-                <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]} />
+                <Header/>
+                <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]}/>
               </div>
               <LocationCarousel carouselEntries={carouselEntries}/>
             </div>
-            <div className="col" />
+            <div className="col"/>
           </div>
 
           <PageSection title="Beta">
@@ -106,7 +106,7 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
 
           <PageSection>
             <BorderBottomDiv>
-              <ScheduleTripBox price="$1111" duration="3 day trip" />
+              <ScheduleTripBox price="$1111" duration="3 day trip"/>
             </BorderBottomDiv>
           </PageSection>
 
@@ -120,7 +120,7 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
             {
               relatedRouteData.map((data, i) =>
                 <BorderBottomDiv className="ml-1" key={`item-${data.id}`}>
-                  <RouteCardSmall {...data} index={i} />
+                  <RouteCardSmall {...data} index={i}/>
                 </BorderBottomDiv>
               )
             }
@@ -131,32 +131,32 @@ export class RoutePage extends React.Component { // eslint-disable-line react/pr
   }
 }
 
-RoutePage.propTypes = {
-  requestRoutePage: PropTypes.func,
+LocationPage.propTypes = {
+  requestLocationPage: PropTypes.func,
   images: PropTypes.array
 };
 
 
 function mapDispatchToProps(dispatch) {
   return {
-    requestRoutePage: (routeId) => {
-      dispatch(loadRoutePage(routeId));
+    requestLocationPage: (locationId) => {
+      dispatch(loadLocationPage(locationId));
     },
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  images: selectImagesFromRoute(),
-  route: selectRouteData()
+  images: selectImagesFromLocation(),
+  location: selectLocationData(),
 });
 
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withReducer = injectReducer({key: 'routePage', reducer});
-const withSaga = injectSaga({key: 'routePage', saga});
+const withReducer = injectReducer({ key: 'locationPage', reducer });
+const withSaga = injectSaga({ key: 'locationPage', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(RoutePage);
+)(LocationPage);
