@@ -1,6 +1,6 @@
 /*
  *
- * RoutePage reducer
+ * LocationPage reducer
  *
  */
 
@@ -15,16 +15,16 @@ const initialState = fromJS({
   },
 });
 
-function routePageReducer(state = initialState, action) {
+function locationPageReducer(state = initialState, action) {
   console.log(`Route reducer: ${action.type}`);
   switch (action.type) {
     case LOAD_ROUTE_DATA:
       return state
-        .set('routeId', action.routeId)
+        .set('locationId', action.locationId)
         .set(STATE_LOADING, true);
     case LOAD_ROUTE_DATA_SUCCESS:
       return state
-        .set('routeId', action.routeId)
+        .set('locationId', action.locationId)
         .set('routeData', action.routeData)
         .set(STATE_LOADING, false);
     case LOAD_ROUTE_DATA_ERROR:
@@ -36,4 +36,4 @@ function routePageReducer(state = initialState, action) {
   }
 }
 
-export default routePageReducer;
+export default locationPageReducer;

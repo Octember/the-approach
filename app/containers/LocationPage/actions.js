@@ -1,6 +1,6 @@
 /*
  *
- * RoutePage actions
+ * LocationPage actions
  *
  */
 
@@ -10,23 +10,23 @@ import {
   LOAD_ROUTE_DATA_ERROR
 } from './constants';
 
-export function loadRoutePage(routeId) {
-  console.log("Load route page action with route id " + routeId)
+export function loadLocationPage(locationId) {
+  console.log("Load route page action with location id " + locationId)
   return {
     type: LOAD_ROUTE_DATA,
-    routeId,
+    locationId,
   };
 }
 
-export function routeDataLoaded(routeData, routeId) {
+export function locationDataLoaded(routeData, locationId) {
   return {
     type: LOAD_ROUTE_DATA_SUCCESS,
     routeData,
-    routeId,
+    locationId,
   };
 }
 
-export function routeDataLoadingError(error) {
+export function locationDataLoadingError(error) {
   return {
     type: LOAD_ROUTE_DATA_ERROR,
     error,

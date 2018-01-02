@@ -22,9 +22,9 @@ import PageSection from 'components/PageSection';
 import RouteCardLarge from 'components/routecards/RouteCardLarge';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 
-export class RouteListPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class LocationListPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const routeData = [{
+    const locationData = [{
       id: 32131231,
       imageUrl: 'http://www.mountainguides.com/photos/rainier/kautz/kautz19.jpg',
       routeName: 'Kautz Glacier',
@@ -84,7 +84,7 @@ export class RouteListPage extends React.Component { // eslint-disable-line reac
   }
 }
 
-RouteListPage.propTypes = {
+LocationListPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
@@ -107,4 +107,4 @@ export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(RouteListPage);
+)(LocationListPage);
