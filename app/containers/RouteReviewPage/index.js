@@ -24,9 +24,17 @@ import PageSection from 'components/PageSection';
 import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
+import Stars from 'components/Stars';
 
 export class RouteReviewPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
+
+    //this is just for the blue button, will have to change for upload or submitting
+    const offer = {
+      price: '$1300',
+      duration: '4 day trip',
+    };
+
     return (
       <div>
         <div className="container">
@@ -35,15 +43,65 @@ export class RouteReviewPage extends React.PureComponent { // eslint-disable-lin
             <div className="col-md-8 px-0">
               <div className="container">
                 <Header />
-                <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]} />
+
+                {/*Write report*/}
+                <PageSection title="Write a Trip Report">
+                  <BorderBottomDiv className="pb-2">  
+                  </BorderBottomDiv>
+                </PageSection>
+
+                {/*Location section, need to downsize & add new container w/ locations*/}
+                <PageSection title="Location">
+                  <BorderBottomDiv className="pb-2">  
+                  </BorderBottomDiv>
+                </PageSection>
+
+                {/*Rating */}
+                <PageSection title="Rating">
+                  <Stars className="d-inline-block pl-2" value={0.0} editable={true} /> 
+                  <BorderBottomDiv className="pb-2">  
+                  </BorderBottomDiv>
+                </PageSection>
+
+                {/*Report */}
+                <PageSection title="Report">
+                  <input type="text" class="form-control" placeholder="Write youre experience here" aria-describedby="basic-addon2">
+                  </input>
+                  <BorderBottomDiv className="pb-2">  
+                  </BorderBottomDiv>
+                </PageSection>
+
+                {/*Beta*/}
+                <PageSection title="Beta"> 
+                  <br>
+                  </br>
+                  <br>
+                  </br>
+                   <br>
+                  </br>
+                  <br>
+                  </br>
+                  <BorderBottomDiv className="pb-2">  
+
+                  </BorderBottomDiv>
+                </PageSection>
+
+                {/*Add Photo/Video */}
+                <PageSection title="Add Photo/Video">
+                  <BorderBottomDiv className="pb-2">  
+                  </BorderBottomDiv>
+                </PageSection>
+
+                <button type="button" className="btn btn-primary btn-block">Submit</button>
+        
               </div>
+              
+              
             </div>
             <div className="col" />
           </div>
 
-          <div className="row">
-            testststst
-          </div>
+          
         </div>
       </div>
     );
