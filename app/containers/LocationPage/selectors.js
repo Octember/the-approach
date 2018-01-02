@@ -16,12 +16,12 @@ const selectLocationPageId = () => createSelector(
 
 const selectImagesFromLocation = () => createSelector(
   selectLocationPageDomain,
-  (routeData) => routeData.toJS().routeData.images
+  (locationData) => locationData.toJS().locationData.images
 );
 
 const selectLocationData = () => createSelector(
   selectLocationPageDomain,
-  (routeData) => routeData.toJS().routeData.route
+  (locationData) => locationData.toJS().locationData.location
 );
 
 

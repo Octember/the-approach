@@ -18,10 +18,10 @@ export function loadLocationPage(locationId) {
   };
 }
 
-export function locationDataLoaded(routeData, locationId) {
+export function locationDataLoaded(locationData, locationId) {
   return {
     type: LOAD_ROUTE_DATA_SUCCESS,
-    routeData,
+    locationData,
     locationId,
   };
 }

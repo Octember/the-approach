@@ -14,9 +14,11 @@ export function* loadRouteData() {
   // Select username from store
   const locationId = yield select(selectLocationPageId());
 
-  console.log(`url: http://localhost:8888/route_page/${locationId}`);
+  console.log(`url: http://localhost:8888/location_page/${locationId}`);
 
-  const requestURL = `http://approach-server-1687250913.us-east-2.elb.amazonaws.com/route_page/${locationId}`;
+  const requestURL = `http://approach-server-1687250913.us-east-2.elb.amazonaws.com/location_page/${locationId}`;
+
+  //http://
 
   try {
     // Call our request helper (see 'utils/request')
@@ -32,7 +34,7 @@ export function* loadRouteData() {
 /**
  * Root saga manages watcher lifecycle
  */
-export default function* routeData() {
+export default function* locationData() {
   // Watches for LOAD_ROUTE_DATA actions and calls loadRouteData when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution

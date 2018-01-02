@@ -10,7 +10,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  routeData: {
+  locationData: {
     images: []
   },
 });
@@ -25,7 +25,7 @@ function locationPageReducer(state = initialState, action) {
     case LOAD_ROUTE_DATA_SUCCESS:
       return state
         .set('locationId', action.locationId)
-        .set('routeData', action.routeData)
+        .set('locationData', action.locationData)
         .set(STATE_LOADING, false);
     case LOAD_ROUTE_DATA_ERROR:
       return state

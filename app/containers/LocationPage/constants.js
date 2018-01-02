@@ -11,4 +11,4 @@ export const LOAD_ROUTE_DATA_ERROR = 'app/LocationPage/LOAD_ROUTE_ERROR';
 export const STATE_LOADING = 'loading';
 
 
-export const STATE_ROUTE_DATA = 'routeData';
+export const STATE_ROUTE_DATA = 'locationData';
