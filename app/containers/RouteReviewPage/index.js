@@ -24,7 +24,6 @@ import PageSection from 'components/PageSection';
 import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
-import BlueBox from 'components/BlueBox';
 import Stars from 'components/Stars';
 
 export class RouteReviewPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -66,13 +65,24 @@ export class RouteReviewPage extends React.PureComponent { // eslint-disable-lin
 
                 {/*Report */}
                 <PageSection title="Report">
+                  <input type="text" class="form-control" placeholder="Write youre experience here" aria-describedby="basic-addon2">
+                  </input>
                   <BorderBottomDiv className="pb-2">  
                   </BorderBottomDiv>
                 </PageSection>
 
                 {/*Beta*/}
-                <PageSection title="Beta">
+                <PageSection title="Beta"> 
+                  <br>
+                  </br>
+                  <br>
+                  </br>
+                   <br>
+                  </br>
+                  <br>
+                  </br>
                   <BorderBottomDiv className="pb-2">  
+
                   </BorderBottomDiv>
                 </PageSection>
 
@@ -82,7 +92,8 @@ export class RouteReviewPage extends React.PureComponent { // eslint-disable-lin
                   </BorderBottomDiv>
                 </PageSection>
 
-                <BlueBox  />
+                <button type="button" className="btn btn-primary btn-block">Submit</button>
+        
               </div>
               
               
