@@ -14,14 +14,12 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 
-import HomePage from 'containers/HomePage/Loadable';
 import RouteReviewPage from 'containers/RouteReviewPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import LocationPage from 'containers/LocationPage/Loadable';
 import LocationListPage from 'containers/LocationListPage/Loadable';
 import OfferListPage from 'containers/OfferListPage/Loadable';
 import OfferDetailPage from 'containers/OfferDetailPage/Loadable';
-
 
 export default function App() {
   return (
