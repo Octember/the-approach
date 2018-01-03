@@ -14,38 +14,29 @@ const StyledNavButton = styled.button `
   border-color: rgba(0,0,0,0) !important; 
 `;
 
-function fakeHeader() {
-  return (
-    <div className="row">
-      <nav className="navbar navbar-toggleable-xs navbar-light bg-fafafa pb-0 w-100">
-
-        <StyledNavButton className="navbar-toggler navbar-toggler-right px-0" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon" />
-        </StyledNavButton>
-        <Link className="navbar-brand mr-auto ml-2" to="/"> theApproach</Link>
-      </nav>
-    </div>
-  );
-}
-
 function Header() {
   return(
     <div className="pos-f-t">
     <div className="collapse" id="navbarToggleExternalContent">
       <div className="bg-inverse text-white">
-        <Link className="text-muted" to ="/">Home</Link>
-        <br>
-        </br>
-        <Link className="text-muted" to ="locationlist">Location List </Link>
-        <br>
-        </br>
-        <Link className="text-muted" to ="location/:1">Location 1 </Link>
-        <br>
-        </br>
-        <Link className="text-muted" to ="offerlist">Offerlist</Link>
-        <br>
-        </br>
-        <Link className="text-muted" to ="form">Submit Review </Link>
+       <ul className="nav flex-column">
+          <li className ="nav-item">
+            <a className ="nav-link active" href='/'>Home</a>
+          </li>
+          <li className ="nav-item">
+            <a className ="nav-link active" href='locationlist'>Location List</a>
+          </li>
+          <li className ="nav-item">
+            <a className ="nav-link active" href='location/:1'>Location 1</a>
+          </li>
+          <li className ="nav-item">
+            <a className ="nav-link active" href='offerlist'>Offer List</a>
+          </li>
+          <li className ="nav-item">
+            <a className ="nav-link active" href='form'>Submit Review</a>
+          </li>
+      </ul>
+        
       </div>
     </div>
     <nav className="navbar navbar-toggleable-xs navbar-light bg-fafafa pb-0 w-100">
@@ -57,6 +48,7 @@ function Header() {
   </div>
   );
 }
+
 
 Header.propTypes = {};
 
