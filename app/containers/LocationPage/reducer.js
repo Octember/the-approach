@@ -11,7 +11,8 @@ import {
 
 const initialState = fromJS({
   locationData: {
-    images: []
+    images: [],
+    sub_locations: [],
   },
 });
 

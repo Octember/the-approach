@@ -24,10 +24,16 @@ const selectLocationData = () => createSelector(
   (locationData) => locationData.toJS().locationData.location
 );
 
+const selectSubLocationData = () => createSelector(
+  selectLocationPageDomain,
+  (locationData) => locationData.toJS().locationData.sub_locations
+);
+
 
 export {
   selectLocationPageDomain,
   selectLocationPageId,
   selectLocationData,
   selectImagesFromLocation,
+  selectSubLocationData,
 };

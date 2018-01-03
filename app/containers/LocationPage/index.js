@@ -13,7 +13,7 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { selectImagesFromLocation, selectLocationData } from './selectors';
+import { selectImagesFromLocation, selectLocationData, selectSubLocationData} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { loadLocationPage } from './actions';
@@ -125,6 +125,16 @@ export class LocationPage extends React.Component { // eslint-disable-line react
               )
             }
           </PageSection>
+
+          <PageSection title="Sub Locations">
+            {
+              this.props.subLocations.map((data, i) =>
+                <BorderBottomDiv className="ml-1" key={`item-${data.location.id}`}>
+                  {data.location.title}
+                </BorderBottomDiv>
+              )
+            }
+          </PageSection>
         </div>
       </div>
     );
@@ -133,7 +143,8 @@ export class LocationPage extends React.Component { // eslint-disable-line react
 
 LocationPage.propTypes = {
   requestLocationPage: PropTypes.func,
-  images: PropTypes.array
+  images: PropTypes.array,
+  subLocations: PropTypes.array,
 };
 
 
@@ -148,6 +159,7 @@ function mapDispatchToProps(dispatch) {
 const mapStateToProps = createStructuredSelector({
   images: selectImagesFromLocation(),
   location: selectLocationData(),
+  subLocations: selectSubLocationData(),
 });
 
 
