@@ -21,19 +21,16 @@ function Header() {
       <div className="bg-inverse text-white">
        <ul className="nav flex-column">
           <li className ="nav-item">
-            <a className ="nav-link active" href='/'>Home</a>
+            <Link className ="nav-link active" to='/'>Home</Link>
           </li>
           <li className ="nav-item">
-            <a className ="nav-link active" href='locationlist'>Location List</a>
+            <Link className ="nav-link active" to='locationlist'>Location List</Link>
           </li>
           <li className ="nav-item">
-            <a className ="nav-link active" href='location/:1'>Location 1</a>
+            <Link className ="nav-link active" to='offerlist'>Offer List</Link>
           </li>
           <li className ="nav-item">
-            <a className ="nav-link active" href='offerlist'>Offer List</a>
-          </li>
-          <li className ="nav-item">
-            <a className ="nav-link active" href='form'>Submit Review</a>
+            <Link className ="nav-link active" to='form'>Submit Review</Link>
           </li>
       </ul>
         
