@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import CarouselCaption from './CarouselCaption';
-
 const CarouselImage = styled.img `
   height: 300px;  
 `;
@@ -35,15 +33,12 @@ function CarouselEntry(props) {
       </div>
 
       <CarouselSpacer className="w-100" />
-      <CarouselCaption title={props.title} metadata={props.metadata} />
     </div>
   );
 }
 
 CarouselEntry.propTypes = {
   index: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  metadata: PropTypes.arrayOf(PropTypes.string),
   url: PropTypes.string.isRequired,
 };
 
