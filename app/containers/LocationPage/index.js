@@ -35,20 +35,11 @@ export class LocationPage extends React.Component { // eslint-disable-line react
   }
 
   render() {
-    const carouselEntries = this.props.images.map((image) => {
-      const x = {
-        id: image.id.value,
-        title: this.props.location.title,
-        metadata: [
-          'Alpine Grade II-IIII',
-          'Elevation 14,410',
-          '0.5 mile approach',
-        ],
-        url: image.url,
-      };
-
-      return x;
-    });
+    const metadata = [
+      'Alpine Grade II-IIII',
+      'Elevation 14,410',
+      '0.5 mile approach',
+    ];
 
 
     const relatedRouteData = [
@@ -90,7 +81,7 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                 <Header/>
                 <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]}/>
               </div>
-              <LocationCarousel carouselEntries={carouselEntries}/>
+              <LocationCarousel title={this.props.location.title} metadata={metadata} images={this.props.images}/>
             </div>
             <div className="col"/>
           </div>

@@ -5,14 +5,15 @@
  */
 
 import { fromJS } from 'immutable';
-import {
-  LOAD_ROUTE_DATA, LOAD_ROUTE_DATA_SUCCESS, LOAD_ROUTE_DATA_ERROR, STATE_LOADING
-} from './constants';
+import { LOAD_ROUTE_DATA, LOAD_ROUTE_DATA_SUCCESS, LOAD_ROUTE_DATA_ERROR, STATE_LOADING } from './constants';
 
 const initialState = fromJS({
   locationData: {
     images: [],
     sub_locations: [],
+    location: {
+      title: '',
+    },
   },
 });
 
