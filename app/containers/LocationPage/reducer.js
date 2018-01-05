@@ -10,7 +10,7 @@ import { LOAD_ROUTE_DATA, LOAD_ROUTE_DATA_SUCCESS, LOAD_ROUTE_DATA_ERROR, STATE_
 const initialState = fromJS({
   locationData: {
     images: [],
-    sub_locations: [],
+    subLocations: [],
     location: {
       title: '',
     },

@@ -26,7 +26,8 @@ const selectLocationData = () => createSelector(
 
 const selectSubLocationData = () => createSelector(
   selectLocationPageDomain,
-  (locationData) => locationData.toJS().locationData.sub_locations
+  (locationData) => locationData.toJS().locationData.subLocations
+
 );
 
 
