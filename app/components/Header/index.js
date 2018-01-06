@@ -36,7 +36,7 @@ function Header() {
 
         </div>
       </div>
-      <nav className="navbar navbar-toggleable-xs navbar-light bg-fafafa px-0 py-0 w-100">
+      <nav className="navbar navbar-toggleable-xs navbar-light bg-white px-0 py-0 w-100">
         <StyledNavButton className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
                          aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
