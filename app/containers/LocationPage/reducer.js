@@ -14,6 +14,7 @@ const initialState = fromJS({
     location: {
       title: '',
     },
+    reviews: [],
   },
 });
 

@@ -13,7 +13,7 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { selectImagesFromLocation, selectLocationData, selectSubLocationData} from './selectors';
+import { selectImagesFromLocation, selectLocationData, selectSubLocationData, selectReviews} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { loadLocationPage } from './actions';
@@ -29,9 +29,11 @@ import ScheduleTripBox from 'components/ScheduleTripBox';
 export class LocationPage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
 
   componentDidMount() {
-    console.log(`location id: ${this.props.match.params.locationId}`);
+    const locationId = this.props.match.params.locationId ? this.props.match.params.locationId : 1
 
-    this.props.requestLocationPage(this.props.match.params.locationId);
+    console.log(`location id: ${locationId}`);
+
+    this.props.requestLocationPage(locationId);
   }
 
   render() {
@@ -79,8 +81,8 @@ export class LocationPage extends React.Component { // eslint-disable-line react
             <div className="col-md-8 px-0">
               <div className="container">
                 <Header/>
-                <Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]}/>
               </div>
+              {/*<Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]}/>*/}
               <LocationCarousel title={this.props.location.title} metadata={metadata} images={this.props.images}/>
             </div>
             <div className="col"/>
@@ -119,11 +121,21 @@ export class LocationPage extends React.Component { // eslint-disable-line react
 
           <PageSection title="Sub Locations">
             {
-              this.props.subLocations.map((data, i) =>
+              this.props.subLocations.map((data) => (
                 <BorderBottomDiv className="ml-1" key={`item-${data.location.id}`}>
                   {data.location.title}
                 </BorderBottomDiv>
-              )
+              ))
+            }
+          </PageSection>
+
+          <PageSection title="Reviews">
+            {
+              this.props.reviews.map((data) => (
+                <BorderBottomDiv className="ml-1" key={`item-${data.review.id}`}>
+                  {data.review.title}
+                </BorderBottomDiv>
+              ))
             }
           </PageSection>
         </div>
@@ -136,6 +148,7 @@ LocationPage.propTypes = {
   requestLocationPage: PropTypes.func,
   images: PropTypes.array,
   subLocations: PropTypes.array,
+  reviews: PropTypes.array
 };
 
 
@@ -151,6 +164,7 @@ const mapStateToProps = createStructuredSelector({
   images: selectImagesFromLocation(),
   location: selectLocationData(),
   subLocations: selectSubLocationData(),
+  reviews: selectReviews(),
 });
 
 
