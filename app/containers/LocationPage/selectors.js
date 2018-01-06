@@ -27,9 +27,12 @@ const selectLocationData = () => createSelector(
 const selectSubLocationData = () => createSelector(
   selectLocationPageDomain,
   (locationData) => locationData.toJS().locationData.subLocations
-
 );
 
+const selectReviews = () => createSelector(
+  selectLocationPageDomain,
+  (locationData) => locationData.toJS().locationData.reviews
+);
 
 export {
   selectLocationPageDomain,
@@ -37,4 +40,5 @@ export {
   selectLocationData,
   selectImagesFromLocation,
   selectSubLocationData,
+  selectReviews,
 };
