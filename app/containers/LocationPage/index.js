@@ -82,7 +82,7 @@ export class LocationPage extends React.Component { // eslint-disable-line react
           <Header />
 
           <div className="row">
-            <div className="col-lg-8 px-0">
+            <div className="col-lg-7 px-0">
               <div className="d-lg-none">
                 <LocationCarouselWithHeading title={this.props.location.title} metadata={metadata} images={this.props.images} rating={5} />
               </div>
@@ -143,7 +143,7 @@ export class LocationPage extends React.Component { // eslint-disable-line react
               </PageSection>
             </div>
 
-            <div className="col-lg-4 d-none d-lg-block">
+            <div className="col-lg-5 d-none d-lg-block">
               <LocationCarousel title={this.props.location.title} metadata={metadata} images={this.props.images} />
             </div>
           </div>
