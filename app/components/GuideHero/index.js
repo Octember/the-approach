@@ -31,7 +31,7 @@ const GuideLogoContainer = styled.div `
   bottom: -${GUIDE_SPACER_WIDTH / 2}px;
   width: ${GUIDE_SPACER_WIDTH}px;
   height: ${GUIDE_SPACER_WIDTH}px;
-  background-color: #fafafa;
+  background-color: white;
   left: 0; 
   right: 0; 
   margin-left: auto; 

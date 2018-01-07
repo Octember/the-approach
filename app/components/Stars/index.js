@@ -13,7 +13,7 @@ function Stars(props) {
     <ReactStars
       count={5}
       value={props.value}
-      size={14}
+      size={16}
       edit={props.editable}
       className={props.className}
     />

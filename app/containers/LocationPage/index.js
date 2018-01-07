@@ -25,6 +25,7 @@ import PageSection from 'components/PageSection';
 import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
+import TripReportCard from 'components/TripReportCard';
 
 export class LocationPage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
 
@@ -109,16 +110,6 @@ export class LocationPage extends React.Component { // eslint-disable-line react
             </BorderBottomDiv>
           </PageSection>
 
-          <PageSection title="All Routes">
-            {
-              relatedRouteData.map((data, i) =>
-                <BorderBottomDiv className="ml-1" key={`item-${data.id}`}>
-                  <RouteCardSmall {...data} index={i}/>
-                </BorderBottomDiv>
-              )
-            }
-          </PageSection>
-
           <PageSection title="Sub Locations">
             {
               this.props.subLocations.map((data) => (
@@ -129,11 +120,31 @@ export class LocationPage extends React.Component { // eslint-disable-line react
             }
           </PageSection>
 
-          <PageSection title="Reviews">
+          <PageSection>
+            <div className="row">
+              <div className="col-6">
+                <h4 className="font-weight-bold">Trip Reports</h4>
+              </div>
+              <div className="col" />
+              <div className="col-4">
+                <button type="button" className="btn btn-primary btn-block">Do it</button>
+              </div>
+            </div>
+
             {
-              this.props.reviews.map((data) => (
-                <BorderBottomDiv className="ml-1" key={`item-${data.review.id}`}>
-                  {data.review.title}
+              this.props.reviews.map((reviewData) => (
+                <BorderBottomDiv className="ml-1" key={`item-${reviewData.review.id}`}>
+                  <TripReportCard {...reviewData} />
+                </BorderBottomDiv>
+              ))
+            }
+          </PageSection>
+
+          <PageSection title="All Routes">
+            {
+              relatedRouteData.map((data, i) => (
+                <BorderBottomDiv className="ml-1" key={`item-${data.id}`}>
+                  <RouteCardSmall {...data} index={i} />
                 </BorderBottomDiv>
               ))
             }
