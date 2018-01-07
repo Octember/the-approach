@@ -12,8 +12,8 @@ import StyledSmall from 'components/shared/StyledSmall';
 
 import moment from 'moment';
 const UserImage = styled.img`
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   object-fit: fill;
 `;
 
@@ -42,15 +42,14 @@ function TripReportCard(props) {
 
       <div className="row">
         <div className="col">
+          <h6 className="font-weight-bold mt-1">{props.review.title}</h6>
           <p>
             <StyledSmall>
               {props.review.reviewText}
             </StyledSmall>
           </p>
         </div>
-
       </div>
-
     </div>
   );
 }

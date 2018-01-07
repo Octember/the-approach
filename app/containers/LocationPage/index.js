@@ -81,7 +81,7 @@ export class LocationPage extends React.Component { // eslint-disable-line react
 
           <div className="row">
             <div className="col-lg-8 px-0">
-              <LocationCarousel title={this.props.location.title} metadata={metadata} images={this.props.images}/>
+              <LocationCarousel title={this.props.location.title} metadata={metadata} images={this.props.images} />
 
               <PageSection title="Beta">
                 <BorderBottomDiv className="ml-1">
@@ -95,7 +95,7 @@ export class LocationPage extends React.Component { // eslint-disable-line react
 
               <PageSection>
                 <BorderBottomDiv>
-                  <ScheduleTripBox price="$1111" duration="3 day trip"/>
+                  <ScheduleTripBox price="$1111" duration="3 day trip" />
                 </BorderBottomDiv>
               </PageSection>
 
@@ -103,16 +103,6 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                 <BorderBottomDiv className="ml-1">
                   <p> go to the route</p>
                 </BorderBottomDiv>
-              </PageSection>
-
-              <PageSection title="All Routes">
-                {
-                  relatedRouteData.map((data, i) =>
-                    <BorderBottomDiv className="ml-1" key={`item-${data.id}`}>
-                      <RouteCardSmall {...data} index={i}/>
-                    </BorderBottomDiv>
-                  )
-                }
               </PageSection>
 
               <PageSection title="Sub Locations">
@@ -129,7 +119,17 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                 {
                   this.props.reviews.map((data) => (
                     <BorderBottomDiv className="ml-1" key={`item-${data.review.id}`}>
-                      {data.review.title}
+                      <TripReportCard {...data} />
+                    </BorderBottomDiv>
+                  ))
+                }
+              </PageSection>
+
+              <PageSection title="All Routes">
+                {
+                  relatedRouteData.map((data, i) => (
+                    <BorderBottomDiv className="ml-1" key={`item-${data.id}`}>
+                      <RouteCardSmall {...data} index={i} />
                     </BorderBottomDiv>
                   ))
                 }
