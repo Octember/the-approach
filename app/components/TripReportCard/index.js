@@ -8,6 +8,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Stars from 'components/Stars';
+import StyledSmall from 'components/shared/StyledSmall';
 
 import moment from 'moment';
 const UserImage = styled.img`
@@ -15,11 +16,6 @@ const UserImage = styled.img`
   height: 60px;
   object-fit: fill;
 `;
-
-const StyledSmall = styled.small `
-  font-weight: 300;
-`;
-
 
 function TripReportCard(props) {
   const date = moment(props.review.created).format('MMM. Do, YYYY');

@@ -11,7 +11,6 @@ const StyledCarouselCaptionDiv = styled.div`
   bottom: 0px;
 `;
 
-
 const CarouselCaption = (props) => (
   <StyledCarouselCaptionDiv className="carousel-caption">
     <div className="text-left px-3 w-100">
