@@ -13,19 +13,21 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { selectImagesFromLocation, selectLocationData, selectSubLocationData, selectReviews } from './selectors';
-import reducer from './reducer';
-import saga from './saga';
-import { loadLocationPage } from './actions';
 
-import Header from 'components/Header'
-import {LocationCarousel, LocationCarouselWithHeading} from 'components/LocationCarousel';
+import Header from 'components/Header';
+import { LocationCarousel, LocationCarouselWithHeading } from 'components/LocationCarousel';
 import PageSection from 'components/PageSection';
 import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 import TripReportCard from 'components/TripReportCard';
 import LocationHeader from 'components/LocationHeader';
+import { selectImagesFromLocation, selectLocationData, selectSubLocationData, selectReviews } from './selectors';
+import reducer from './reducer';
+import saga from './saga';
+import { loadLocationPage } from './actions';
+import StyledSmall from 'components/shared/StyledSmall'
+
 
 export class LocationPage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
 
@@ -82,19 +84,19 @@ export class LocationPage extends React.Component { // eslint-disable-line react
           <div className="row">
             <div className="col-lg-8 px-0">
               <div className="d-lg-none">
-                <LocationCarouselWithHeading title={this.props.location.title} metadata={metadata} images={this.props.images} />
+                <LocationCarouselWithHeading title={this.props.location.title} metadata={metadata} images={this.props.images} rating={5} />
               </div>
               <div className="d-none d-lg-block">
                 <LocationHeader title={this.props.location.title} metadata={metadata} />
               </div>
 
-              <PageSection title="Beta">
-                <BorderBottomDiv className="ml-1">
-                  <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making
-                    it
-                    over
-                    2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,
-                    consectetur</p>
+              <PageSection title="Description">
+                <BorderBottomDiv>
+                  <p>
+                    <StyledSmall>
+                    A 10,000 foot glacier climb on the slightly less popular east side of Mount Rainier (originally known as Tahoma). The hike to camp passes through Glacier Basin, site of mining activity up through the 1930's. The route, including the climb up the Inter Glacier, can get icy by late July, increasing the difficulty.
+                    </StyledSmall>
+                  </p>
                 </BorderBottomDiv>
               </PageSection>
 
@@ -105,7 +107,7 @@ export class LocationPage extends React.Component { // eslint-disable-line react
               </PageSection>
 
               <PageSection title="Approach">
-                <BorderBottomDiv className="ml-1">
+                <BorderBottomDiv>
                   <p> go to the route</p>
                 </BorderBottomDiv>
               </PageSection>
@@ -113,17 +115,17 @@ export class LocationPage extends React.Component { // eslint-disable-line react
               <PageSection title="Sub Locations">
                 {
                   this.props.subLocations.map((data) => (
-                    <BorderBottomDiv className="ml-1" key={`item-${data.location.id}`}>
+                    <BorderBottomDiv key={`item-${data.location.id}`}>
                       {data.location.title}
                     </BorderBottomDiv>
                   ))
                 }
               </PageSection>
 
-              <PageSection title="Reviews">
+              <PageSection title="Trip Reports">
                 {
                   this.props.reviews.map((data) => (
-                    <BorderBottomDiv className="ml-1" key={`item-${data.review.id}`}>
+                    <BorderBottomDiv key={`item-${data.review.id}`}>
                       <TripReportCard {...data} />
                     </BorderBottomDiv>
                   ))
@@ -133,7 +135,7 @@ export class LocationPage extends React.Component { // eslint-disable-line react
               <PageSection title="All Routes">
                 {
                   relatedRouteData.map((data, i) => (
-                    <BorderBottomDiv className="ml-1" key={`item-${data.id}`}>
+                    <BorderBottomDiv key={`item-${data.id}`}>
                       <RouteCardSmall {...data} index={i} />
                     </BorderBottomDiv>
                   ))

@@ -11,10 +11,10 @@ import PageTitle from 'components/shared/PageTitle';
 import StyledSmall from 'components/shared/StyledSmall';
 
 const LocationHeader = (props) => (
-  <div className="text-left px-3 w-100">
+  <div className="text-left px-2 w-100">
     <PageTitle className="mb-0 mr-4">
       {props.title}
-      { props.rating ? <Stars className="d-inline-block pl-2" value={5.0} editable={false} /> : <div />}
+      { props.rating ? <Stars className="d-inline-block pl-2" value={props.rating} editable={false} /> : <div />}
     </PageTitle>
     <div className="ml-4">
       {
@@ -28,14 +28,9 @@ const LocationHeader = (props) => (
   </div>
 );
 
-
 LocationHeader.propTypes = {
   title: PropTypes.string.isRequired,
   metadata: PropTypes.arrayOf(PropTypes.string),
-};
-
-LocationHeader.propTypes = {
-  title: PropTypes.string.isRequired,
   rating: PropTypes.number,
 };
 
