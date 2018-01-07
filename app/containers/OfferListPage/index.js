@@ -19,7 +19,7 @@ import saga from './saga';
 
 import Header from 'components/Header'
 import Breadcrumbs from 'components/Breadcrumbs'
-import LocationTitle from 'components/LocationTitle';
+// import LocationTitle from 'components/LocationTitle';
 import GuideHero from 'components/GuideHero';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 import PageSection from "../../components/PageSection";
@@ -57,7 +57,7 @@ export class OfferListPage extends React.Component { // eslint-disable-line reac
                     { link: 'google.com', text: 'chicken butt' },
                   ]}
                 />
-                <LocationTitle className="mt-0 mb-2" title="Eamon-Winthrop Glacier" rating={5.0} />
+                {/*<LocationTitle className="mt-0 mb-2" title="Eamon-Winthrop Glacier" rating={5.0} />*/}
               </div>
               <BorderBottomDiv>
                 <GuideHero />

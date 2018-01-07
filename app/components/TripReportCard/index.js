@@ -8,18 +8,14 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Stars from 'components/Stars';
+import StyledSmall from 'components/shared/StyledSmall';
 
 import moment from 'moment';
 const UserImage = styled.img`
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   object-fit: fill;
 `;
-
-const StyledSmall = styled.small `
-  font-weight: 300;
-`;
-
 
 function TripReportCard(props) {
   const date = moment(props.review.created).format('MMM. Do, YYYY');
@@ -46,15 +42,14 @@ function TripReportCard(props) {
 
       <div className="row">
         <div className="col">
+          <h6 className="font-weight-bold mt-1">{props.review.title}</h6>
           <p>
             <StyledSmall>
               {props.review.reviewText}
             </StyledSmall>
           </p>
         </div>
-
       </div>
-
     </div>
   );
 }

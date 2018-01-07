@@ -13,19 +13,19 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { selectImagesFromLocation, selectLocationData, selectSubLocationData, selectReviews} from './selectors';
+import { selectImagesFromLocation, selectLocationData, selectSubLocationData, selectReviews } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { loadLocationPage } from './actions';
 
 import Header from 'components/Header'
-import Breadcrumbs from 'components/Breadcrumbs'
-import LocationCarousel from 'components/LocationCarousel';
+import {LocationCarousel, LocationCarouselWithHeading} from 'components/LocationCarousel';
 import PageSection from 'components/PageSection';
 import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 import TripReportCard from 'components/TripReportCard';
+import LocationHeader from 'components/LocationHeader';
 
 export class LocationPage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
 
@@ -77,78 +77,74 @@ export class LocationPage extends React.Component { // eslint-disable-line react
         </Helmet>
 
         <div className="container">
+          <Header />
+
           <div className="row">
-            <div className="col"/>
-            <div className="col-md-8 px-0">
-              <div className="container">
-                <Header/>
+            <div className="col-lg-8 px-0">
+              <div className="d-lg-none">
+                <LocationCarouselWithHeading title={this.props.location.title} metadata={metadata} images={this.props.images} />
               </div>
-              {/*<Breadcrumbs breadcrumbData={[{ link: 'google.com', text: 'Denali National Park' }]}/>*/}
-              <LocationCarousel title={this.props.location.title} metadata={metadata} images={this.props.images}/>
+              <div className="d-none d-lg-block">
+                <LocationHeader title={this.props.location.title} metadata={metadata} />
+              </div>
+
+              <PageSection title="Beta">
+                <BorderBottomDiv className="ml-1">
+                  <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making
+                    it
+                    over
+                    2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,
+                    consectetur</p>
+                </BorderBottomDiv>
+              </PageSection>
+
+              <PageSection>
+                <BorderBottomDiv>
+                  <ScheduleTripBox price="$1111" duration="3 day trip" />
+                </BorderBottomDiv>
+              </PageSection>
+
+              <PageSection title="Approach">
+                <BorderBottomDiv className="ml-1">
+                  <p> go to the route</p>
+                </BorderBottomDiv>
+              </PageSection>
+
+              <PageSection title="Sub Locations">
+                {
+                  this.props.subLocations.map((data) => (
+                    <BorderBottomDiv className="ml-1" key={`item-${data.location.id}`}>
+                      {data.location.title}
+                    </BorderBottomDiv>
+                  ))
+                }
+              </PageSection>
+
+              <PageSection title="Reviews">
+                {
+                  this.props.reviews.map((data) => (
+                    <BorderBottomDiv className="ml-1" key={`item-${data.review.id}`}>
+                      <TripReportCard {...data} />
+                    </BorderBottomDiv>
+                  ))
+                }
+              </PageSection>
+
+              <PageSection title="All Routes">
+                {
+                  relatedRouteData.map((data, i) => (
+                    <BorderBottomDiv className="ml-1" key={`item-${data.id}`}>
+                      <RouteCardSmall {...data} index={i} />
+                    </BorderBottomDiv>
+                  ))
+                }
+              </PageSection>
             </div>
-            <div className="col"/>
+
+            <div className="col-lg-4 d-none d-lg-block">
+              <LocationCarousel title={this.props.location.title} metadata={metadata} images={this.props.images} />
+            </div>
           </div>
-
-          <PageSection title="Beta">
-            <BorderBottomDiv className="ml-1">
-              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it
-                over
-                2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,
-                consectetur</p>
-            </BorderBottomDiv>
-          </PageSection>
-
-          <PageSection>
-            <BorderBottomDiv>
-              <ScheduleTripBox price="$1111" duration="3 day trip"/>
-            </BorderBottomDiv>
-          </PageSection>
-
-          <PageSection title="Approach">
-            <BorderBottomDiv className="ml-1">
-              <p> go to the route</p>
-            </BorderBottomDiv>
-          </PageSection>
-
-          <PageSection title="Sub Locations">
-            {
-              this.props.subLocations.map((data) => (
-                <BorderBottomDiv className="ml-1" key={`item-${data.location.id}`}>
-                  {data.location.title}
-                </BorderBottomDiv>
-              ))
-            }
-          </PageSection>
-
-          <PageSection>
-            <div className="row">
-              <div className="col-6">
-                <h4 className="font-weight-bold">Trip Reports</h4>
-              </div>
-              <div className="col" />
-              <div className="col-4">
-                <button type="button" className="btn btn-primary btn-block">Do it</button>
-              </div>
-            </div>
-
-            {
-              this.props.reviews.map((reviewData) => (
-                <BorderBottomDiv className="ml-1" key={`item-${reviewData.review.id}`}>
-                  <TripReportCard {...reviewData} />
-                </BorderBottomDiv>
-              ))
-            }
-          </PageSection>
-
-          <PageSection title="All Routes">
-            {
-              relatedRouteData.map((data, i) => (
-                <BorderBottomDiv className="ml-1" key={`item-${data.id}`}>
-                  <RouteCardSmall {...data} index={i} />
-                </BorderBottomDiv>
-              ))
-            }
-          </PageSection>
         </div>
       </div>
     );
