@@ -9,18 +9,25 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import CarouselEntry from './CarouselEntry';
-import CarouselCaption from './CarouselCaption'
+import LocationHeader from 'components/LocationHeader';
 
 const CarouselWrapper = styled.div `
   height: 350px;
 `;
 
+const StyledCarouselCaptionDiv = styled.div`
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+`;
 
 function LocationCarousel(props) {
   return (
     <div className="position-relative">
-      <div className="position-absolute w-100 h-100">
-        <CarouselCaption title={props.title} metadata={props.metadata} />
+      <div className="position-absolute w-100 h-100 ">
+        <StyledCarouselCaptionDiv className="carousel-caption">
+          <LocationHeader title={props.title} metadata={props.metadata} />
+        </StyledCarouselCaptionDiv>
       </div>
 
       <CarouselWrapper id="locationCarousel" className="carousel slide" data-ride="carousel">
