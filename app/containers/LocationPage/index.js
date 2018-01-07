@@ -19,13 +19,13 @@ import saga from './saga';
 import { loadLocationPage } from './actions';
 
 import Header from 'components/Header'
-import Breadcrumbs from 'components/Breadcrumbs'
-import LocationCarousel from 'components/LocationCarousel';
+import {LocationCarousel, LocationCarouselWithHeading} from 'components/LocationCarousel';
 import PageSection from 'components/PageSection';
 import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 import TripReportCard from 'components/TripReportCard';
+import LocationHeader from 'components/LocationHeader';
 
 export class LocationPage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
 
@@ -82,7 +82,10 @@ export class LocationPage extends React.Component { // eslint-disable-line react
           <div className="row">
             <div className="col-lg-8 px-0">
               <div className="d-lg-none">
-                <LocationCarousel title={this.props.location.title} metadata={metadata} images={this.props.images} />
+                <LocationCarouselWithHeading title={this.props.location.title} metadata={metadata} images={this.props.images} />
+              </div>
+              <div className="d-none d-lg-block">
+                <LocationHeader title={this.props.location.title} metadata={metadata} />
               </div>
 
               <PageSection title="Beta">

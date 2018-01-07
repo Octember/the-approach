@@ -16,13 +16,15 @@ const LocationHeader = (props) => (
       {props.title}
       { props.rating ? <Stars className="d-inline-block pl-2" value={5.0} editable={false} /> : <div />}
     </PageTitle>
-    {
-      props.metadata.map((subtitle, i) =>
-        <p key={`item-${i}`} className="mb-1">
-          <StyledSmall>{subtitle}</StyledSmall>
-        </p>
-      )
-    }
+    <div className="ml-4">
+      {
+        props.metadata.map((subtitle, i) =>
+          <p key={`item-${i}`} className="mb-1">
+            <StyledSmall>{subtitle}</StyledSmall>
+          </p>
+        )
+      }
+    </div>
   </div>
 );
 
