@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const CarouselImage = styled.img `
-  height: 300px;  
+  height: 300px;
+  object-fit: cover;
 `;
 
 const CarouselSpacer = styled.div `
