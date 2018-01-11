@@ -21,6 +21,7 @@ import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 import TripReportCard from 'components/TripReportCard';
+import LocationSubTitle from 'components/LocationSubTitle';
 import LocationHeader from 'components/LocationHeader';
 import { selectImagesFromLocation, selectLocationData, selectSubLocationData, selectReviews } from './selectors';
 import reducer from './reducer';
@@ -112,14 +113,14 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                 </BorderBottomDiv>
               </PageSection>
 
-              <PageSection title="Sub Locations">
-                {
+              <PageSection title="Sub Location">
+              {
                   this.props.subLocations.map((data) => (
                     <BorderBottomDiv key={`item-${data.location.id}`}>
-                      {data.location.title}
+                      <LocationSubTitle {...data} />
                     </BorderBottomDiv>
                   ))
-                }
+              }
               </PageSection>
 
               <PageSection title="Trip Reports">
