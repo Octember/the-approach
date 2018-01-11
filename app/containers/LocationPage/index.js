@@ -22,6 +22,7 @@ import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 import TripReportCard from 'components/TripReportCard';
+import LocationSubTitle from 'components/LocationSubTitle';
 import LocationHeader from 'components/LocationHeader';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { selectImagesFromLocation, selectLocationData, selectSubLocationData, selectReviews } from './selectors';
@@ -140,17 +141,15 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                   </BorderBottomDiv>
                 </PageSection>
 
-                {/* TODO: sublocations
-                  <PageSection title="Sub Locations">
-                    {
-                      this.props.subLocations.map((data) => (
-                        <BorderBottomDiv key={`item-${data.location.id}`}>
-                          {data.location.title}
-                        </BorderBottomDiv>
-                      ))
-                    }
-                  </PageSection>
-                */}
+                <PageSection title="Sub Location">
+                  {
+                    this.props.subLocations.map((data) => (
+                      <BorderBottomDiv key={`item-${data.location.id}`}>
+                        <LocationSubTitle {...data} />
+                      </BorderBottomDiv>
+                    ))
+                  }
+                </PageSection>
 
                 <PageSection>
                   <div className="d-flex justify-content-between">
