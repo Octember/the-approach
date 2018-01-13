@@ -100,66 +100,73 @@ export class LocationPage extends React.Component { // eslint-disable-line react
               </div>
 
               <div className="px-2">
-              <PageSection title="Description">
-                <BorderBottomDiv>
-                  <p className="ml-3">
-                    <StyledSmall>
-                      A 10,000 foot glacier climb on the slightly less popular east side of Mount Rainier (originally known as Tahoma). The hike to camp passes through Glacier Basin, site of mining activity up through the 1930's. The route, including the climb up the Inter Glacier, can get icy by late July, increasing the difficulty.
-                    </StyledSmall>
-                  </p>
-                </BorderBottomDiv>
-              </PageSection>
+                <PageSection title="Description">
+                  <BorderBottomDiv>
+                    <p className="ml-3">
+                      <StyledSmall>
+                        A 10,000 foot glacier climb on the slightly less popular east side of Mount Rainier (originally known as Tahoma). The hike to camp passes through Glacier Basin, site of mining activity up through the 1930's. The route, including the climb up the Inter Glacier, can get icy by late July, increasing the difficulty.
+                      </StyledSmall>
+                    </p>
+                  </BorderBottomDiv>
+                </PageSection>
 
-              <PageSection title="Beta">
-                <BorderBottomDiv >
-                  <div className="ml-3">
+                <PageSection title="Beta">
+                  <BorderBottomDiv >
+                    <div className="ml-3">
+                      {
+                        metadata.map((subtitle, i) =>
+                          <p key={`item-${i}`} className="mb-1">
+                            <StyledSmall>{subtitle}</StyledSmall>
+                          </p>
+                        )
+                      }
+                    </div>
+                  </BorderBottomDiv>
+                </PageSection>
+
+                <PageSection title="Approach">
+                  <BorderBottomDiv>
+                    <img
+                      className="d-block img-fluid w-100 my-2"
+                      src="http://www.gitta.info/TopoCart/en/image/act_slope_diagram.gif"
+                    />
+                  </BorderBottomDiv>
+                </PageSection>
+
+                {/* TODO: sublocations
+                  <PageSection title="Sub Locations">
                     {
-                      metadata.map((subtitle, i) =>
-                        <p key={`item-${i}`} className="mb-1">
-                          <StyledSmall>{subtitle}</StyledSmall>
-                        </p>
-                      )
+                      this.props.subLocations.map((data) => (
+                        <BorderBottomDiv key={`item-${data.location.id}`}>
+                          {data.location.title}
+                        </BorderBottomDiv>
+                      ))
                     }
-                  </div>
-                </BorderBottomDiv>
-              </PageSection>
+                  </PageSection>
+                */}
 
-              <PageSection title="Approach">
-                <BorderBottomDiv>
-                  <p> go to the route</p>
-                </BorderBottomDiv>
-              </PageSection>
+                <PageSection title="Trip Reports">
+                  {
+                    this.props.reviews.map((data) => (
+                      <BorderBottomDiv key={`item-${data.review.id}`}>
+                        <TripReportCard {...data} />
+                      </BorderBottomDiv>
+                    ))
+                  }
+                </PageSection>
 
-              <PageSection title="Sub Locations">
-                {
-                  this.props.subLocations.map((data) => (
-                    <BorderBottomDiv key={`item-${data.location.id}`}>
-                      {data.location.title}
-                    </BorderBottomDiv>
-                  ))
-                }
-              </PageSection>
-
-              <PageSection title="Trip Reports">
-                {
-                  this.props.reviews.map((data) => (
-                    <BorderBottomDiv key={`item-${data.review.id}`}>
-                      <TripReportCard {...data} />
-                    </BorderBottomDiv>
-                  ))
-                }
-              </PageSection>
-
-              {/*<PageSection title="All Routes">*/}
-                {/*{*/}
-                  {/*relatedRouteData.map((data, i) => (*/}
-                    {/*<BorderBottomDiv key={`item-${data.id}`}>*/}
-                      {/*<RouteCardSmall {...data} index={i} />*/}
-                    {/*</BorderBottomDiv>*/}
-                  {/*))*/}
-                {/*}*/}
-              {/*</PageSection>*/}
-            </div>
+                {/*
+                <PageSection title="All Routes">
+                  {
+                    relatedRouteData.map((data, i) => (
+                      <BorderBottomDiv key={`item-${data.id}`}>
+                        <RouteCardSmall {...data} index={i} />
+                      </BorderBottomDiv>
+                    ))
+                  }
+                </PageSection>
+                */}
+              </div>
             </div>
 
             <div className="col-lg-5 d-none d-lg-block">
