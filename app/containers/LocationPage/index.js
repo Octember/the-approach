@@ -26,7 +26,7 @@ import { selectImagesFromLocation, selectLocationData, selectSubLocationData, se
 import reducer from './reducer';
 import saga from './saga';
 import { loadLocationPage } from './actions';
-import StyledSmall from 'components/shared/StyledSmall'
+import StyledSmall from 'components/shared/StyledSmall';
 
 
 export class LocationPage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
@@ -45,7 +45,6 @@ export class LocationPage extends React.Component { // eslint-disable-line react
       'Elevation 14,410',
       '0.5 mile approach',
     ];
-
 
     const relatedRouteData = [
       {
@@ -83,26 +82,39 @@ export class LocationPage extends React.Component { // eslint-disable-line react
 
           <div className="row">
             <div className="col-lg-7 px-0">
+
               <div className="d-lg-none">
+                {/* Mobile/tablet view */}
                 <LocationCarouselWithHeading title={this.props.location.title} metadata={metadata} images={this.props.images} rating={5} />
+
+                <ScheduleTripBox/>
               </div>
+
               <div className="d-none d-lg-block">
                 <LocationHeader title={this.props.location.title} metadata={metadata} />
               </div>
 
               <PageSection title="Description">
                 <BorderBottomDiv>
-                  <p>
+                  <p className="ml-3">
                     <StyledSmall>
-                    A 10,000 foot glacier climb on the slightly less popular east side of Mount Rainier (originally known as Tahoma). The hike to camp passes through Glacier Basin, site of mining activity up through the 1930's. The route, including the climb up the Inter Glacier, can get icy by late July, increasing the difficulty.
+                      A 10,000 foot glacier climb on the slightly less popular east side of Mount Rainier (originally known as Tahoma). The hike to camp passes through Glacier Basin, site of mining activity up through the 1930's. The route, including the climb up the Inter Glacier, can get icy by late July, increasing the difficulty.
                     </StyledSmall>
                   </p>
                 </BorderBottomDiv>
               </PageSection>
 
-              <PageSection>
-                <BorderBottomDiv>
-                  <ScheduleTripBox price="$1111" duration="3 day trip" />
+              <PageSection title="Beta">
+                <BorderBottomDiv >
+                  <div className="ml-3">
+                    {
+                      metadata.map((subtitle, i) =>
+                        <p key={`item-${i}`} className="mb-1">
+                          <StyledSmall>{subtitle}</StyledSmall>
+                        </p>
+                      )
+                    }
+                  </div>
                 </BorderBottomDiv>
               </PageSection>
 
