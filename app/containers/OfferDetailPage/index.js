@@ -54,7 +54,6 @@ export class OfferDetailPage extends React.Component { // eslint-disable-line re
           <meta name="description" content="Description of OfferDetailPage" />
         </Helmet>
 
-
         <div className="container">
           <div className="row">
             <div className="col" />

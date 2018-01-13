@@ -22,12 +22,12 @@ import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 import TripReportCard from 'components/TripReportCard';
 import LocationHeader from 'components/LocationHeader';
+import Breadcrumbs from 'components/Breadcrumbs';
 import { selectImagesFromLocation, selectLocationData, selectSubLocationData, selectReviews } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { loadLocationPage } from './actions';
 import StyledSmall from 'components/shared/StyledSmall';
-
 
 export class LocationPage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
 
@@ -85,14 +85,21 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                 {/* Mobile/tablet view */}
                 <LocationCarouselWithHeading title={this.props.location.title} metadata={metadata} images={this.props.images} rating={5} />
 
-                <ScheduleTripBox className="m-2"/>
+                <ScheduleTripBox className="m-2" />
               </div>
 
               <div className="d-none d-lg-block">
                 {/* Desktop view */}
-                <LocationHeader title={this.props.location.title} metadata={metadata} />
+                <Breadcrumbs className=""
+                  breadcrumbData={[
+                    { link: 'google.com', text: 'Mt. Rainier National park' },
+                    { link: 'google.com', text: 'chicken butt' },
+                  ]}
+                />
+                <LocationHeader className="" title={this.props.location.title} metadata={metadata} />
               </div>
 
+              <div className="px-2">
               <PageSection title="Description">
                 <BorderBottomDiv>
                   <p className="ml-3">
@@ -143,19 +150,22 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                 }
               </PageSection>
 
-              <PageSection title="All Routes">
-                {
-                  relatedRouteData.map((data, i) => (
-                    <BorderBottomDiv key={`item-${data.id}`}>
-                      <RouteCardSmall {...data} index={i} />
-                    </BorderBottomDiv>
-                  ))
-                }
-              </PageSection>
+              {/*<PageSection title="All Routes">*/}
+                {/*{*/}
+                  {/*relatedRouteData.map((data, i) => (*/}
+                    {/*<BorderBottomDiv key={`item-${data.id}`}>*/}
+                      {/*<RouteCardSmall {...data} index={i} />*/}
+                    {/*</BorderBottomDiv>*/}
+                  {/*))*/}
+                {/*}*/}
+              {/*</PageSection>*/}
+            </div>
             </div>
 
             <div className="col-lg-5 d-none d-lg-block">
               <LocationCarousel title={this.props.location.title} metadata={metadata} images={this.props.images} />
+
+              <ScheduleTripBox className="m-2" />
             </div>
           </div>
         </div>

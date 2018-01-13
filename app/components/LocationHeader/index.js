@@ -10,7 +10,7 @@ import Stars from 'components/Stars';
 import PageTitle from 'components/shared/PageTitle';
 
 const LocationHeader = (props) => (
-  <div className="text-left px-2 w-100">
+  <div className={`text-left w-100 ${props.className}`}>
     <PageTitle className="mb-0 mr-4">
       {props.title}
       { props.rating ? <Stars className="d-inline-block pl-2" value={props.rating} editable={false} /> : <div />}
@@ -21,6 +21,7 @@ const LocationHeader = (props) => (
 LocationHeader.propTypes = {
   title: PropTypes.string.isRequired,
   rating: PropTypes.number,
+  className: PropTypes.string,
 };
 
 export default LocationHeader;
