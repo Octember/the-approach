@@ -24,16 +24,18 @@ function Header() {
               <Link className="nav-link active" to='/'>Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link active" to='locationlist'>Location List</Link>
+              <Link className="nav-link active" to='/locationlist'>Location List</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link active" to='offerlist'>Offer List</Link>
+              <Link className="nav-link active" to='/offerlist'>Offer List</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link active" to='form'>Submit Review</Link>
+              <Link className="nav-link" to="/offer">Offer detail</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to='/form'>Submit Review</Link>
             </li>
           </ul>
-
         </div>
       </div>
       <nav className="navbar navbar-toggleable-xs navbar-light bg-white px-0 pb-0 w-100">

@@ -32,9 +32,7 @@ import StyledSmall from 'components/shared/StyledSmall';
 export class LocationPage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
 
   componentDidMount() {
-    const locationId = this.props.match.params.locationId ? this.props.match.params.locationId : 1
-
-    console.log(`location id: ${locationId}`);
+    const locationId = this.props.match.params.locationId ? this.props.match.params.locationId : 1;
 
     this.props.requestLocationPage(locationId);
   }
@@ -87,10 +85,11 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                 {/* Mobile/tablet view */}
                 <LocationCarouselWithHeading title={this.props.location.title} metadata={metadata} images={this.props.images} rating={5} />
 
-                <ScheduleTripBox/>
+                <ScheduleTripBox className="m-2"/>
               </div>
 
               <div className="d-none d-lg-block">
+                {/* Desktop view */}
                 <LocationHeader title={this.props.location.title} metadata={metadata} />
               </div>
 
