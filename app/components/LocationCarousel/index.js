@@ -58,7 +58,7 @@ const LocationCarouselWithHeading = (props) => {
     <div className="position-relative">
       <div className="position-absolute w-100 h-100 ">
         <StyledCarouselCaptionDiv className="carousel-caption pb-4">
-          <LocationHeader title={props.title} metadata={props.metadata} rating={props.rating} />
+          <LocationHeader title={props.title} rating={props.rating} className="mx-2"/>
         </StyledCarouselCaptionDiv>
       </div>
       <LocationCarousel images={props.images} />
@@ -68,7 +68,6 @@ const LocationCarouselWithHeading = (props) => {
 
 LocationCarouselWithHeading.propTypes = {
   title: PropTypes.string.isRequired,
-  metadata: PropTypes.arrayOf(PropTypes.string),
   images: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
