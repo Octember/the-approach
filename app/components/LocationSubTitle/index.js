@@ -30,46 +30,42 @@ const LocationImage = styled.img`
 
 function LocationSubTitleHelper(props) {
   return (
-    <UserImage
+    <img
             className="img-block"
-            src={props.images.url}
+            src={props.image.url}
           />
     );
 }
 
 LocationSubTitleHelper.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.shape({
+  image: PropTypes.shape({
     id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
-  })).isRequired,
+  }).isRequired,
 };
 
 const LocationSubTitle = (props) => {
+  console.log(props.image)
   return (
     <div className="position-relative">
       <div className="position-absolute w-100 h-100 ">
-        <StyledSubTitleCaptionDiv className="SubTitle-caption pb-4">
-          <LocationHeader title={props.title} metadata={props.metadata} rating={props.rating} />
-        </StyledSubTitleCaptionDiv>
+        <div className="pb-4">
+          <LocationHeader title={props.location.title} />
+        </div>
       </div>
-      <LocationSubTitleHelper images={props.images} />
+      <LocationSubTitleHelper image={props.image} />
     </div>
   );
 };
 
 LocationSubTitle.propTypes = {
-  title: PropTypes.string.isRequired,
-  metadata: PropTypes.arrayOf(PropTypes.string),
-  images: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    url: PropTypes.string.isRequired,
-  })).isRequired,
-  rating: PropTypes.number,
+  location: PropTypes.object,
+  image: PropTypes.shape({
+    id: PropTypes.number,
+    url: PropTypes.string,
+  }).isRequired,
 };
 
 
-export {
-  LocationSubTitle,
-  LocationSubTitleWithHeading,
-};
+export default LocationSubTitle;
 
