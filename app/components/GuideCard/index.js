@@ -20,7 +20,7 @@ function GuideCard(props) {
     <div className={`d-flex flex-row ${props.className}`}>
       <GuideCardImage src="https://78.media.tumblr.com/avatar_9276c38f5939_128.png" />
       <div className="d-flex flex-column pl-2">
-        <div>{'Rob Caldwell'}</div>
+        <div>{'Bob Caldwell'}</div>
         <div><small>{'His friends call him Shrek'}</small></div>
       </div>
     </div>

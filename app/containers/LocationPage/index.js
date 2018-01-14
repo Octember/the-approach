@@ -13,9 +13,10 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+import { Link } from 'react-router-dom';
 
 import Header from 'components/Header';
-import { LocationCarousel, LocationCarouselWithHeading } from 'components/LocationCarousel';
+import { LocationCarouselDesktop, LocationCarouselMobile } from 'components/LocationCarousel';
 import PageSection from 'components/PageSection';
 import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
@@ -83,7 +84,7 @@ export class LocationPage extends React.Component { // eslint-disable-line react
 
               <div className="d-lg-none">
                 {/* Mobile/tablet view */}
-                <LocationCarouselWithHeading title={this.props.location.title} metadata={metadata} images={this.props.images} rating={5} />
+                <LocationCarouselMobile title={this.props.location.title} metadata={metadata} images={this.props.images} rating={5} />
 
                 <ScheduleTripBox className="m-2" />
               </div>
@@ -133,6 +134,12 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                   </BorderBottomDiv>
                 </PageSection>
 
+                <PageSection title="Gear List">
+                  <BorderBottomDiv>
+                    Bring climbing shoes or something
+                  </BorderBottomDiv>
+                </PageSection>
+
                 {/* TODO: sublocations
                   <PageSection title="Sub Locations">
                     {
@@ -145,7 +152,13 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                   </PageSection>
                 */}
 
-                <PageSection title="Trip Reports">
+                <PageSection>
+                  <div className="d-flex justify-content-between">
+                    <h4 className="font-weight-bold px-2">Trip Reports</h4>
+                    <Link to="/form">
+                      <button type="button" className="btn btn-secondary mr-2">Write a Review</button>
+                    </Link>
+                  </div>
                   {
                     this.props.reviews.map((data) => (
                       <BorderBottomDiv key={`item-${data.review.id}`}>
@@ -170,7 +183,13 @@ export class LocationPage extends React.Component { // eslint-disable-line react
             </div>
 
             <div className="col-lg-5 d-none d-lg-block">
-              <LocationCarousel title={this.props.location.title} metadata={metadata} images={this.props.images} />
+              {/* Desktop sidebar */}
+              <LocationCarouselDesktop
+                title={this.props.location.title}
+                metadata={metadata}
+                images={this.props.images}
+                desktopView={true}
+              />
 
               <ScheduleTripBox className="m-2" />
             </div>

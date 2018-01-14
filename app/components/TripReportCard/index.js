@@ -21,7 +21,7 @@ function TripReportCard(props) {
   const date = moment(props.review.created).format('MMM. Do, YYYY');
 
   return (
-    <div className="py-1">
+    <div className="py-1 mt-2">
       <div className="d-flex flex-row">
         <UserImage
           className="img-block rounded-circle mx-2"
