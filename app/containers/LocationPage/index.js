@@ -30,6 +30,7 @@ import reducer from './reducer';
 import saga from './saga';
 import { loadLocationPage } from './actions';
 import StyledSmall from 'components/shared/StyledSmall';
+import styled from 'styled-components';
 
 export class LocationPage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
 
@@ -141,14 +142,16 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                   </BorderBottomDiv>
                 </PageSection>
 
-                <PageSection title="Sub Location">
+                <PageSection title="Routes">
                   {
                     this.props.subLocations.map((data) => (
-                      <BorderBottomDiv key={`item-${data.location.id}`}>
-                        <LocationSubTitle {...data} />
-                      </BorderBottomDiv>
-                    ))
+                    <div className = "pb-3">
+                      <LocationSubTitle {...data} />
+                    </div>
+                     ))
                   }
+                <BorderBottomDiv>
+                </BorderBottomDiv>
                 </PageSection>
 
                 <PageSection>
