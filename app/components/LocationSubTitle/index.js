@@ -41,38 +41,16 @@ const CardBorderDiv = styled.div`
     box-shadow: 2px 6px 8px 2px rgba(0, 0, 0, 0.2);
 `;
 
-
-function LocationSubTitleHelper(props) {
-  return (
-    <div>
-    <LocationImage
-            className="img-fluid"
-            src={props.image.url} height = "128"
-          />
-    </div>
-    );
-}
-
-LocationSubTitleHelper.propTypes = {
-  image: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    url: PropTypes.string.isRequired,
-  }).isRequired,
-};
-
 const LocationSubTitle = (props) => {
   console.log(props.image)
   return (
-    <CardBorderDiv>
-    <div className="position-relative">
+    <CardBorderDiv className="position-relative">
       <SubTitleOverlayDiv className="position-absolute px-2 w-100 h-100 ">
 
           <div >
             <SubTitleHeader>
-              <div className = "pt-4">
-              <div className = "pt-2">
-              {props.location.title}
-              </div>
+              <div className = "pt-2 mt-4">
+                {props.location.title}
               </div>
             </SubTitleHeader>
           </div>
@@ -95,10 +73,11 @@ const LocationSubTitle = (props) => {
 
       </SubTitleOverlayDiv>
 
-      <LocationSubTitleHelper image={props.image} />
-      
-    </div>
-    </CardBorderDiv>
+        <LocationImage
+          className="img-fluid"
+            src={props.image.url} height = "128"
+        />
+      </CardBorderDiv>
   );
 };
 
