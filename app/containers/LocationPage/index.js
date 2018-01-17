@@ -22,6 +22,7 @@ import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 import TripReportCard from 'components/TripReportCard';
+import LocationSubTitle from 'components/LocationSubTitle';
 import LocationHeader from 'components/LocationHeader';
 import Breadcrumbs from 'components/Breadcrumbs';
 import { selectImagesFromLocation, selectLocationData, selectSubLocationData, selectReviews } from './selectors';
@@ -29,6 +30,7 @@ import reducer from './reducer';
 import saga from './saga';
 import { loadLocationPage } from './actions';
 import StyledSmall from 'components/shared/StyledSmall';
+import styled from 'styled-components';
 
 export class LocationPage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
 
@@ -140,17 +142,17 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                   </BorderBottomDiv>
                 </PageSection>
 
-                {/* TODO: sublocations
-                  <PageSection title="Sub Locations">
-                    {
-                      this.props.subLocations.map((data) => (
-                        <BorderBottomDiv key={`item-${data.location.id}`}>
-                          {data.location.title}
-                        </BorderBottomDiv>
-                      ))
-                    }
-                  </PageSection>
-                */}
+                <PageSection title="Routes">
+                  {
+                    this.props.subLocations.map((data) => (
+                    <div className = "pb-3">
+                      <LocationSubTitle {...data} />
+                    </div>
+                     ))
+                  }
+                <BorderBottomDiv>
+                </BorderBottomDiv>
+                </PageSection>
 
                 <PageSection>
                   <div className="d-flex justify-content-between">
