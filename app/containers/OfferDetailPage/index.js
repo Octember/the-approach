@@ -37,11 +37,6 @@ export class OfferDetailPage extends React.Component { // eslint-disable-line re
 
 
   render() {
-    const offer = {
-      price: '$1300',
-      duration: '4 day trip',
-    };
-
     return (
       <div>
         <Helmet>
@@ -55,13 +50,11 @@ export class OfferDetailPage extends React.Component { // eslint-disable-line re
           <div className="row">
             <div className="col-lg-7 px-0">
 
-            <BorderBottomDiv>
-              <GuideHero />
-            </BorderBottomDiv>
+            <GuideHero />
 
             <PageSection>
               <BorderBottomDiv>
-                <ScheduleTripBox {...offer} />
+                <ScheduleTripBox guide={this.props.guide} />
               </BorderBottomDiv>
             </PageSection>
 
@@ -92,7 +85,7 @@ OfferDetailPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  guideData: selectGuideDataForOfferDetail(),
+  guide: selectGuideDataForOfferDetail(),
 
 });
 

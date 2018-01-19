@@ -5,6 +5,7 @@
  */
 
 export const OFFER_DOMAIN = 'offerDetailPage';
+export const OFFER_API_DATA_DOMAIN = 'offerData';
 
 export const LOAD_OFFER_DATA = 'app/OfferPage/LOAD_OFFER';
 export const LOAD_OFFER_DATA_SUCCESS = 'app/OfferPage/LOAD_OFFER_SUCCESS';

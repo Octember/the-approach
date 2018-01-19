@@ -1,13 +1,13 @@
 import { createSelector } from 'reselect';
-import { OFFER_DOMAIN } from './constants';
+import { OFFER_DOMAIN, OFFER_API_DATA_DOMAIN } from './constants';
 
 /**
  * Direct selector to the offerDetailPage state domain
  */
 const selectOfferDetailPageDomain = (state) => {
-  console.log(state.toJS())
   return state.get(OFFER_DOMAIN);
-}
+};
+
 
 /**
  * Other specific selectors
@@ -15,7 +15,17 @@ const selectOfferDetailPageDomain = (state) => {
 
 const selectGuideDataForOfferDetail = () => createSelector(
   selectOfferDetailPageDomain,
-  (offerPageState) => offerPageState.toJS().guideData
+  (offerPageState) => {
+    console.log(offerPageState.toJS())
+
+    const guideData = offerPageState.toJS().offerData.guideData;
+
+    return {
+      image: guideData.image.url,
+      guideName: guideData.guide.name,
+      location: guideData.guide.location,
+    };
+  }
 );
 
 

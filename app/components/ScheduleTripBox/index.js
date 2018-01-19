@@ -19,8 +19,8 @@ function ScheduleTripBox(props) {
   return (
     <TripBoxBorderDiv className={`d-flex flex-column px-4 py-2 ${props.className}`}>
       <h4 className="mb-1">{'Climb with'}</h4>
-      <GuideCard className="mb-2" />
-      <Link to="/offer">
+      <GuideCard {...props.guide} className="mb-2" />
+      <Link to={`${props.offer.url}`}>
         <button type="button" className="btn btn-primary btn-block py-2">Do it</button>
       </Link>
     </TripBoxBorderDiv>
@@ -28,9 +28,24 @@ function ScheduleTripBox(props) {
 }
 
 ScheduleTripBox.propTypes = {
-  price: PropTypes.string,
-  duration: PropTypes.string,
+  guide: PropTypes.shape({
+    image: PropTypes.string,
+    guideName: PropTypes.string,
+    location: PropTypes.string,
+  }),
+  offer: PropTypes.shape({
+    url: PropTypes.string,
+    // price: PropTypes.string,
+    // duration: PropTypes.string,
+  }),
+
   className: PropTypes.string,
+};
+
+ScheduleTripBox.defaultProps = {
+  offer: {
+    url: '/offer/1',
+  },
 };
 
 export default ScheduleTripBox;

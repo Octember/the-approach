@@ -6,11 +6,15 @@
 
 import { fromJS } from 'immutable';
 import {
-  LOAD_OFFER_DATA, LOAD_OFFER_DATA_ERROR, LOAD_OFFER_DATA_SUCCESS, OFFER_DOMAIN, STATE_LOADING
+  LOAD_OFFER_DATA, LOAD_OFFER_DATA_ERROR, LOAD_OFFER_DATA_SUCCESS, OFFER_API_DATA_DOMAIN, STATE_LOADING
 } from './constants';
 
 const initialState = fromJS({
-  offerDetailPage: {
+  offerData: {
+    guideData: {
+      image: {},
+      guide: {},
+    },
   },
 });
 
@@ -24,7 +28,7 @@ function offerDetailPageReducer(state = initialState, action) {
     case LOAD_OFFER_DATA_SUCCESS:
       return state
         .set('offerId', action.offerId)
-        .set(OFFER_DOMAIN, action.offerData)
+        .set(OFFER_API_DATA_DOMAIN, action.offerData)
         .set(STATE_LOADING, false);
     case LOAD_OFFER_DATA_ERROR:
       return state

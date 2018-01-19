@@ -33,6 +33,7 @@ GuideCard.propTypes = {
   image: PropTypes.string,
   guideName: PropTypes.string,
   location: PropTypes.string,
+  className: PropTypes.string,
 };
 
 GuideCard.defaultProps = {
