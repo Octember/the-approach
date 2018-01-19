@@ -40,7 +40,7 @@ export default function App() {
         <Route exact path="/location/:locationId" component={LocationPage} />
         <Route exact path="/locationlist" component={LocationListPage} />
         <Route exact path="/offerlist" component={OfferListPage} />
-        <Route exact path="/offer" component={OfferDetailPage} />
+        <Route exact path="/offer/:offerId" component={OfferDetailPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
