@@ -13,35 +13,30 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectOfferDetailPage from './selectors';
+import {makeSelectOfferDetailPage, selectGuideDataForOfferDetail} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { loadOfferPage } from './actions';
+import { OFFER_DOMAIN } from './constants'
 
 import Header from 'components/Header'
-import Breadcrumbs from 'components/Breadcrumbs'
 import GuideHero from 'components/GuideHero';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 import PageSection from "../../components/PageSection";
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import GuideCard from 'components/GuideCard';
+import { selectImagesFromLocation } from "../LocationPage/selectors";
 
 export class OfferDetailPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  constructor(props) {
-    super(props);
-    this.state = {
-      startDate: null,
-      endDate: null,
-      focused: true,
-    };
+
+  componentDidMount() {
+    const offerId = this.props.match.params.offerId ? this.props.match.params.offerId : 1;
+
+    this.props.requestOfferPage(offerId);
   }
 
 
   render() {
-    const offer = {
-      price: '$1300',
-      duration: '4 day trip',
-    };
-
     return (
       <div>
         <Helmet>
@@ -55,14 +50,11 @@ export class OfferDetailPage extends React.Component { // eslint-disable-line re
           <div className="row">
             <div className="col-lg-7 px-0">
 
-
-            <BorderBottomDiv>
-              <GuideHero />
-            </BorderBottomDiv>
+            <GuideHero />
 
             <PageSection>
               <BorderBottomDiv>
-                <ScheduleTripBox {...offer} />
+                <ScheduleTripBox guide={this.props.guide} />
               </BorderBottomDiv>
             </PageSection>
 
@@ -89,23 +81,26 @@ export class OfferDetailPage extends React.Component { // eslint-disable-line re
 }
 
 OfferDetailPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  requestOfferPage: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  offerdetailpage: makeSelectOfferDetailPage(),
+  guide: selectGuideDataForOfferDetail(),
+
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    requestOfferPage: (offerId) => {
+      dispatch(loadOfferPage(offerId));
+    },
   };
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'offerDetailPage', reducer });
-const withSaga = injectSaga({ key: 'offerDetailPage', saga });
+const withReducer = injectReducer({ key: OFFER_DOMAIN, reducer });
+const withSaga = injectSaga({ key: OFFER_DOMAIN, saga });
 
 export default compose(
   withReducer,
