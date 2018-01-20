@@ -13,7 +13,7 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import {makeSelectTripDetailPage, selectGuideDataForOfferDetail} from './selectors';
+import {makeSelectTripDetailPage, selectGuideDataForOfferDetail,selectTripForOfferDetail} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { loadTripPage } from './actions';
@@ -22,9 +22,11 @@ import { TRIP_DOMAIN } from './constants'
 import Header from 'components/Header'
 import GuideHero from 'components/GuideHero';
 import ScheduleTripBox from 'components/ScheduleTripBox';
+import OfferRouteBox from 'components/OfferRouteBox';
 import PageSection from "../../components/PageSection";
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import GuideCard from 'components/GuideCard';
+import AvailabilityBox from 'components/AvailabilityBox';
 import { selectImagesFromLocation } from "../LocationPage/selectors";
 
 export class TripDetailPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -58,11 +60,29 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
               </BorderBottomDiv>
             </PageSection>
 
+            <PageSection title="Description">
+              <BorderBottomDiv className="pb-2">
+                {this.props.offer.description}
+              </BorderBottomDiv>
+            </PageSection>
+
+            
+            <BorderBottomDiv className="pb-2">
+              <OfferRouteBox className="m-2" />
+            </BorderBottomDiv>
+            
+
             <PageSection title="Itinerary">
               <BorderBottomDiv className="pb-2">
                 {/*<ShowMore>*/}
                   3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                 {/*</ShowMore>*/}
+              </BorderBottomDiv>
+            </PageSection>
+
+            <PageSection title="Availability">
+              <BorderBottomDiv className = "pb-2">
+                <AvailabilityBox/>
               </BorderBottomDiv>
             </PageSection>
 
@@ -82,11 +102,12 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
 
 TripDetailPage.propTypes = {
   requestOfferPage: PropTypes.func,
+
 };
 
 const mapStateToProps = createStructuredSelector({
   guide: selectGuideDataForOfferDetail(),
-
+  offer: selectTripForOfferDetail(),
 });
 
 function mapDispatchToProps(dispatch) {

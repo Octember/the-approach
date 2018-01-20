@@ -34,6 +34,14 @@ const selectOfferId = () => createSelector(
   (offerState) => offerState.toJS().tripId
 );
 
+const selectOfferForOfferDetail = () => createSelector(
+  selectOfferDetailPageDomain,
+  (offerPageState) => {
+    console.log(offerPageState.toJS())
+
+    return offerPageState.toJS().offerData.offer;
+  }
+  );
 
 /**
  * Default selector used by TripDetailPage
@@ -49,4 +57,5 @@ export {
   selectTripDetailPageDomain,
   selectOfferId,
   selectGuideDataForOfferDetail,
+  selectOfferForOfferDetail,
 };
