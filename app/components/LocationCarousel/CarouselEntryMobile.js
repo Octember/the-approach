@@ -19,7 +19,7 @@ const CarouselOverlayFadeDiv = styled.div `
   background-image: linear-gradient(to bottom,rgba(0,0,0, 0) 40%, rgba(0,0,0,1)); 
 `;
 
-function CarouselEntry(props) {
+function CarouselEntryMobile(props) {
   const className = props.index === 0 ? 'carousel-item active' : 'carousel-item';
 
   return (
@@ -38,9 +38,9 @@ function CarouselEntry(props) {
   );
 }
 
-CarouselEntry.propTypes = {
+CarouselEntryMobile.propTypes = {
   index: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired,
 };
 
-export default CarouselEntry;
+export default CarouselEntryMobile;

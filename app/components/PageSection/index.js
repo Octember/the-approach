@@ -8,11 +8,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function PageSection(props) {
-  const title = props.title ? <h4 className="font-weight-bold">{props.title}</h4> : '';
+  const title = props.title ? <h4 className="font-weight-bold px-2">{props.title}</h4> : '';
   return (
-    <div className="px-2 py-2">
+    <div className="py-2">
       {title}
-      <div className="px-1">
+      <div>
         {props.children}
       </div>
     </div>

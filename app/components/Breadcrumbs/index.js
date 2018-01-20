@@ -19,21 +19,19 @@ const BreadcrumbLi = styled.li `
 
 function Breadcrumbs(props) {
   return (
-    <div className="row font-weight-light">
-      <nav aria-label="breadcrumb" role="navigation">
-        <BreadcrumbOl className="breadcrumb py-0 my-0">
-          {
-            props.breadcrumbData.map((linkData, index) => (
-              <BreadcrumbLi className="breadcrumb-item active" key={index}>
-                {/*<a href={linkData.link}>*/}
-                <small>{linkData.text}</small>
-                {/*</a>*/}
-              </BreadcrumbLi>
-            ))
-          }
-        </BreadcrumbOl>
-      </nav>
-    </div>
+    <nav aria-label="breadcrumb" role="navigation" className={props.className}>
+      <BreadcrumbOl className="breadcrumb p-0 my-0 font-weight-light">
+        {
+          props.breadcrumbData.map((linkData, index) => (
+            <BreadcrumbLi className="breadcrumb-item active" key={index}>
+              {/*<a href={linkData.link}>*/}
+              <small>{linkData.text}</small>
+              {/*</a>*/}
+            </BreadcrumbLi>
+          ))
+        }
+      </BreadcrumbOl>
+    </nav>
   );
 }
 
@@ -43,6 +41,7 @@ Breadcrumbs.propTypes = {
     link: PropTypes.string.isRequired,
     selected: PropTypes.bool,
   })).isRequired,
+  className: PropTypes.string,
 };
 
 export default Breadcrumbs;

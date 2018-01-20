@@ -9,10 +9,15 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import LocationHeader from 'components/LocationHeader';
-import CarouselEntry from './CarouselEntry';
+import CarouselEntryMobile from './CarouselEntryMobile';
+import CarouselEntryDesktop from './CarouselEntryDesktop';
 
-const CarouselWrapper = styled.div `
+const CarouselWrapperMobile = styled.div`
   height: 350px;
+`;
+
+const CarouselWrapperDesktop = styled.div`
+  height: 300px;
 `;
 
 const StyledCarouselCaptionDiv = styled.div`
@@ -21,54 +26,78 @@ const StyledCarouselCaptionDiv = styled.div`
   bottom: 0px;
 `;
 
-function LocationCarousel(props) {
+function LocationCarouselDesktop(props) {
   return (
-    <CarouselWrapper id="locationCarousel" className="carousel slide" data-ride="carousel">
+    <CarouselWrapperDesktop id="locationCarouselDesktop" className="carousel slide" data-ride="carousel">
+
+      <div className="carousel-inner" role="listbox">
+        {
+          props.images.map((images, i) =>
+            <CarouselEntryDesktop {...images} index={i} key={images.id} />
+          )
+        }
+      </div>
       <ol className="carousel-indicators mb-1 mx-2 justify-content-start">
         {
           props.images.map((carouselEntry, i) => {
             const className = i === 0 ? 'active' : '';
 
             return (
-              <li data-target="#locationCarousel" data-slide-to={i} className={className} key={carouselEntry.id} />
+              <li data-target="#locationCarouselDesktop" data-slide-to={i} className={className} key={carouselEntry.id} />
             );
           })
         }
       </ol>
-      <div className="carousel-inner" role="listbox">
-        {
-          props.images.map((images, i) =>
-            <CarouselEntry {...images} index={i} key={images.id} />
-          )
-        }
-      </div>
-    </CarouselWrapper>
+    </CarouselWrapperDesktop>
   );
 }
 
-LocationCarousel.propTypes = {
+LocationCarouselDesktop.defaultProps = {
+  desktopView: false,
+};
+
+LocationCarouselDesktop.propTypes = {
   images: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
   })).isRequired,
+  desktopView: PropTypes.bool,
 };
 
-const LocationCarouselWithHeading = (props) => {
+const LocationCarouselMobile = (props) => {
   return (
     <div className="position-relative">
       <div className="position-absolute w-100 h-100 ">
         <StyledCarouselCaptionDiv className="carousel-caption pb-4">
-          <LocationHeader title={props.title} metadata={props.metadata} rating={props.rating} />
+          <LocationHeader title={props.title} rating={props.rating} className="mx-2"/>
         </StyledCarouselCaptionDiv>
       </div>
-      <LocationCarousel images={props.images} />
+      <CarouselWrapperMobile id="locationCarouselMobile" className="carousel slide" data-ride="carousel">
+        <ol className="carousel-indicators mb-1 mx-2 justify-content-start">
+          {
+            props.images.map((carouselEntry, i) => {
+              const className = i === 0 ? 'active' : '';
+
+              return (
+                <li data-target="#locationCarouselMobile" data-slide-to={i} className={className} key={carouselEntry.id} />
+              );
+            })
+          }
+        </ol>
+        <div className="carousel-inner" role="listbox">
+          {
+            props.images.map((images, i) =>
+              <CarouselEntryMobile {...images} index={i} key={images.id} />
+            )
+          }
+        </div>
+      </CarouselWrapperMobile>
     </div>
   );
 };
 
-LocationCarouselWithHeading.propTypes = {
+LocationCarouselMobile.propTypes = {
   title: PropTypes.string.isRequired,
-  metadata: PropTypes.arrayOf(PropTypes.string),
   images: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
@@ -78,7 +107,7 @@ LocationCarouselWithHeading.propTypes = {
 
 
 export {
-  LocationCarousel,
-  LocationCarouselWithHeading,
+  LocationCarouselDesktop,
+  LocationCarouselMobile,
 };
 

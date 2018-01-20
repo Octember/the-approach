@@ -13,40 +13,30 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectOfferDetailPage from './selectors';
+import {makeSelectOfferDetailPage, selectGuideDataForOfferDetail} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-
-// import ShowMore from 'react-show-more';
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
-
+import { loadOfferPage } from './actions';
+import { OFFER_DOMAIN } from './constants'
 
 import Header from 'components/Header'
-import Breadcrumbs from 'components/Breadcrumbs'
-// import LocationTitle from 'components/LocationTitle';
 import GuideHero from 'components/GuideHero';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 import PageSection from "../../components/PageSection";
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import GuideCard from 'components/GuideCard';
+import { selectImagesFromLocation } from "../LocationPage/selectors";
 
 export class OfferDetailPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  constructor(props) {
-    super(props);
-    this.state = {
-      startDate: null,
-      endDate: null,
-      focused: true,
-    };
+
+  componentDidMount() {
+    const offerId = this.props.match.params.offerId ? this.props.match.params.offerId : 1;
+
+    this.props.requestOfferPage(offerId);
   }
 
 
   render() {
-    const offer = {
-      price: '$1300',
-      duration: '4 day trip',
-    };
-
     return (
       <div>
         <Helmet>
@@ -54,60 +44,36 @@ export class OfferDetailPage extends React.Component { // eslint-disable-line re
           <meta name="description" content="Description of OfferDetailPage" />
         </Helmet>
 
-
         <div className="container">
+          <Header />
+
           <div className="row">
-            <div className="col" />
-            <div className="col-md-8 px-0">
-              <div className="container">
-                <Header />
-                <Breadcrumbs
-                  breadcrumbData={[
-                    { link: 'google.com', text: 'Mt. Rainier National park' },
-                    { link: 'google.com', text: 'chicken butt' },
-                  ]}
-                />
-                {/*<LocationTitle className="mt-0 mb-2" title="Eamon-Winthrop Glacier" rating={5.0} />*/}
-              </div>
+            <div className="col-lg-7 px-0">
+
+            <GuideHero />
+
+            <PageSection>
               <BorderBottomDiv>
-                <GuideHero />
+                <ScheduleTripBox guide={this.props.guide} />
               </BorderBottomDiv>
+            </PageSection>
+
+            <PageSection title="Itinerary">
+              <BorderBottomDiv className="pb-2">
+                {/*<ShowMore>*/}
+                  3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                {/*</ShowMore>*/}
+              </BorderBottomDiv>
+            </PageSection>
+
+            <PageSection title="Guides">
+              <GuideCard />
+              <GuideCard />
+              <GuideCard />
+
+            </PageSection>
             </div>
-            <div className="col" />
           </div>
-
-          <PageSection>
-            <BorderBottomDiv>
-              <ScheduleTripBox {...offer} />
-            </BorderBottomDiv>
-          </PageSection>
-
-          <PageSection title="Itinerary">
-            <BorderBottomDiv className="pb-2">
-              {/*<ShowMore>*/}
-                {/*3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.*/}
-              {/*</ShowMore>*/}
-            </BorderBottomDiv>
-          </PageSection>
-
-          <PageSection>
-            <DayPickerRangeController
-              startDate={this.state.startDate} // momentPropTypes.momentObj or null,
-              endDate={this.state.endDate} // momentPropTypes.momentObj or null,
-              onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
-              focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-              onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-              isDayHighlighted={moment => moment.day() == 4}
-            />
-          </PageSection>
-
-          <PageSection title="Guides">
-            <GuideCard />
-            <GuideCard />
-            <GuideCard />
-
-          </PageSection>
-
         </div>
       </div>
     );
@@ -115,23 +81,26 @@ export class OfferDetailPage extends React.Component { // eslint-disable-line re
 }
 
 OfferDetailPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  requestOfferPage: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  offerdetailpage: makeSelectOfferDetailPage(),
+  guide: selectGuideDataForOfferDetail(),
+
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    requestOfferPage: (offerId) => {
+      dispatch(loadOfferPage(offerId));
+    },
   };
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'offerDetailPage', reducer });
-const withSaga = injectSaga({ key: 'offerDetailPage', saga });
+const withReducer = injectReducer({ key: OFFER_DOMAIN, reducer });
+const withSaga = injectSaga({ key: OFFER_DOMAIN, saga });
 
 export default compose(
   withReducer,
