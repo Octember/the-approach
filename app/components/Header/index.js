@@ -15,7 +15,7 @@ function Header() {
       <NavModal />
       <nav className="navbar navbar-toggleable-xs navbar-light bg-white px-0 py-0 w-100">
         <StyledNavButton className="navbar-toggler" type="button" data-toggle="modal" data-target="#nav-modal"
-                         aria-controls="nav-modal" aria-expanded="false" aria-label="Toggle navigation">
+          aria-controls="nav-modal" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
         </StyledNavButton>
         <Link className="navbar-brand mr-auto ml-2 font-weight-bold" to="/">theApproach</Link>
