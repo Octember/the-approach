@@ -22,4 +22,9 @@ injectGlobal`
     min-height: 100%;
     min-width: 100%;
   }
+
+  /* Darken Bootstrap's modal backdrop (note: styling outside html and body here is not recommended by API creators) */
+  .modal-backdrop.show {
+    opacity: 0.85;
+  }
 `;
