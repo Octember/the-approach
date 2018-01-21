@@ -71,7 +71,7 @@ export class LocationListPage extends React.Component { // eslint-disable-line r
 
           <PageSection title="Mt. Rainier Classic Climbs">
             {
-              routeData.map((data, i) =>
+              locationData.map((data, i) =>
                 <RouteCardLarge {...data} index={i} key={i} />
               )
             }
