@@ -3,7 +3,7 @@
 
 // import LocationCarousel from '../index';
 
-describe('<LocationSubTitle />', () => {
+describe('<SubLocationCard />', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });

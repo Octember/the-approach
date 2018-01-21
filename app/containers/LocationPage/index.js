@@ -22,15 +22,14 @@ import RouteCardSmall from 'components/routecards/RouteCardSmall';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 import TripReportCard from 'components/TripReportCard';
-import LocationSubTitle from 'components/LocationSubTitle';
+import SubLocationCard from 'components/SubLocationCard';
 import LocationHeader from 'components/LocationHeader';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { selectImagesFromLocation, selectLocationData, selectSubLocationData, selectReviews } from './selectors';
+import { selectLocationPageId, selectImagesFromLocation, selectLocationData, selectSubLocationData, selectReviews } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { loadLocationPage } from './actions';
 import StyledSmall from 'components/shared/StyledSmall';
-import styled from 'styled-components';
 
 export class LocationPage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
 
@@ -38,6 +37,14 @@ export class LocationPage extends React.Component { // eslint-disable-line react
     const locationId = this.props.match.params.locationId ? this.props.match.params.locationId : 1;
 
     this.props.requestLocationPage(locationId);
+  }
+
+  componentDidUpdate() {
+    const newLocationId = this.props.match.params.locationId;
+
+    if (newLocationId != this.props.currentLocationId) {
+      this.props.requestLocationPage(newLocationId);
+    }
   }
 
   render() {
@@ -145,13 +152,10 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                 <PageSection title="Routes">
                   {
                     this.props.subLocations.map((data) => (
-                    <div className = "pb-3">
-                      <LocationSubTitle {...data} />
-                    </div>
+                      <SubLocationCard {...data} className="mb-3" key={data.location.id} />
                      ))
                   }
-                <BorderBottomDiv>
-                </BorderBottomDiv>
+                  <BorderBottomDiv />
                 </PageSection>
 
                 <PageSection>
@@ -206,9 +210,8 @@ LocationPage.propTypes = {
   requestLocationPage: PropTypes.func,
   images: PropTypes.array,
   subLocations: PropTypes.array,
-  reviews: PropTypes.array
+  reviews: PropTypes.array,
 };
-
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -219,6 +222,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
+  currentLocationId: selectLocationPageId(),
   images: selectImagesFromLocation(),
   location: selectLocationData(),
   subLocations: selectSubLocationData(),
