@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the locationPage state domain
  */
+
 const selectLocationPageDomain = (state) => state.get('locationPage');
 
 /**

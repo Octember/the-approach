@@ -42,7 +42,7 @@ export class LocationPage extends React.Component { // eslint-disable-line react
   componentDidUpdate() {
     const newLocationId = this.props.match.params.locationId;
 
-    if (newLocationId != this.props.currentLocationId) {
+    if (newLocationId !== this.props.currentLocationId) {
       this.props.requestLocationPage(newLocationId);
     }
   }
@@ -54,30 +54,6 @@ export class LocationPage extends React.Component { // eslint-disable-line react
       '0.5 mile approach',
     ];
 
-    const relatedRouteData = [
-      {
-        id: 32131231,
-        routeName: 'Route 1',
-        routeStats: {
-          grade: '5.9',
-          type: 'sport',
-          length: '100\'',
-          rating: 3.6,
-          countRatings: 11,
-        },
-      },
-      {
-        id: 131111,
-        routeName: 'Route 2',
-        routeStats: {
-          grade: '5.10a',
-          type: 'lead',
-          length: '75\'',
-          rating: 5.0,
-          countRatings: 14,
-        },
-      },
-    ];
     return (
       <div>
         <Helmet>
@@ -174,17 +150,6 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                   }
                 </PageSection>
 
-                {/*
-                <PageSection title="All Routes">
-                  {
-                    relatedRouteData.map((data, i) => (
-                      <BorderBottomDiv key={`item-${data.id}`}>
-                        <RouteCardSmall {...data} index={i} />
-                      </BorderBottomDiv>
-                    ))
-                  }
-                </PageSection>
-                */}
               </div>
             </div>
 
