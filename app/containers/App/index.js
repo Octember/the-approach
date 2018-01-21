@@ -23,26 +23,14 @@ import OfferDetailPage from 'containers/OfferDetailPage/Loadable';
 
 export default function App() {
   return (
-    <div>
-      {/*<div>*/}
-        {/*<ul>*/}
-          {/*<li><Link to="/route">Route</Link></li>*/}
-          {/*<li><Link to="/routelist">route list</Link></li>*/}
-          {/*<li><Link to="/offerlist">offer list </Link></li>*/}
-          {/*<li><Link to="/offer">offer </Link></li>*/}
-        {/*</ul>*/}
-
-        {/*<hr />*/}
-      {/*</div>*/}
-      <Switch>
-        <Route exact path="/" component={LocationPage} />
-        <Route exact path="/form" component={RouteReviewPage} />
-        <Route exact path="/location/:locationId" component={LocationPage} />
-        <Route exact path="/locationlist" component={LocationListPage} />
-        <Route exact path="/offerlist" component={OfferListPage} />
-        <Route exact path="/offer/:offerId" component={OfferDetailPage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path="/" component={LocationPage} />
+      <Route exact path="/form" component={RouteReviewPage} />
+      <Route exact path="/location/:locationId" component={LocationPage} />
+      <Route exact path="/locationlist" component={LocationListPage} />
+      <Route exact path="/offerlist" component={OfferListPage} />
+      <Route exact path="/offer/:offerId" component={OfferDetailPage} />
+      <Route component={NotFoundPage} />
+    </Switch>
   );
 }

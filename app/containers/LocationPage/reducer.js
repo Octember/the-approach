@@ -19,7 +19,8 @@ const initialState = fromJS({
 });
 
 function locationPageReducer(state = initialState, action) {
-  console.log(`Location reducer: ${action.type}`);
+  console.log(`Location reducer:`);
+  console.log(action);
   switch (action.type) {
     case LOAD_LOCATION_DATA:
       return state
