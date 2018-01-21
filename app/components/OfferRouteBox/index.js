@@ -34,7 +34,7 @@ function OfferRouteBox(props) {
     <TripBoxBorderDiv className={`d-flex flex-column px-4 py-2 ${props.className}`}>
       <div >
             <OfferRouteHeader>
-              <div className = "pt-2 mt-4">
+              <div className = "pt-1">
                 {'Crevasse Rescue Course'}
               </div>
             </OfferRouteHeader>

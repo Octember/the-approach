@@ -81,8 +81,8 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
             </PageSection>
 
             <PageSection title="Availability">
-              <BorderBottomDiv className = "pb-2">
-                <AvailabilityBox/>
+              <BorderBottomDiv className="pb-2">
+                <AvailabilityBox className="m-4"/>
               </BorderBottomDiv>
             </PageSection>
 
