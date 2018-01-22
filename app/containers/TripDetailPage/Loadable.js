@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for OfferDetailPage
+ * Asynchronously loads the component for TripDetailPage
  *
  */
 

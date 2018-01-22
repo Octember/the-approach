@@ -1,6 +1,6 @@
 /**
  *
- * OfferDetailPage
+ * TripDetailPage
  *
  */
 
@@ -13,11 +13,11 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import {makeSelectOfferDetailPage, selectGuideDataForOfferDetail} from './selectors';
+import {makeSelectTripDetailPage, selectGuideDataForOfferDetail} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { loadOfferPage } from './actions';
-import { OFFER_DOMAIN } from './constants'
+import { loadTripPage } from './actions';
+import { TRIP_DOMAIN } from './constants'
 
 import Header from 'components/Header'
 import GuideHero from 'components/GuideHero';
@@ -27,12 +27,12 @@ import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import GuideCard from 'components/GuideCard';
 import { selectImagesFromLocation } from "../LocationPage/selectors";
 
-export class OfferDetailPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class TripDetailPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   componentDidMount() {
-    const offerId = this.props.match.params.offerId ? this.props.match.params.offerId : 1;
+    const tripId = this.props.match.params.tripId ? this.props.match.params.tripId : 1;
 
-    this.props.requestOfferPage(offerId);
+    this.props.requestOfferPage(tripId);
   }
 
 
@@ -40,8 +40,8 @@ export class OfferDetailPage extends React.Component { // eslint-disable-line re
     return (
       <div>
         <Helmet>
-          <title>OfferDetailPage</title>
-          <meta name="description" content="Description of OfferDetailPage" />
+          <title>TripDetailPage</title>
+          <meta name="description" content="Description of TripDetailPage" />
         </Helmet>
 
         <div className="container">
@@ -80,7 +80,7 @@ export class OfferDetailPage extends React.Component { // eslint-disable-line re
   }
 }
 
-OfferDetailPage.propTypes = {
+TripDetailPage.propTypes = {
   requestOfferPage: PropTypes.func,
 };
 
@@ -91,19 +91,19 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    requestOfferPage: (offerId) => {
-      dispatch(loadOfferPage(offerId));
+    requestOfferPage: (tripId) => {
+      dispatch(loadTripPage(tripId));
     },
   };
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: OFFER_DOMAIN, reducer });
-const withSaga = injectSaga({ key: OFFER_DOMAIN, saga });
+const withReducer = injectReducer({ key: TRIP_DOMAIN, reducer });
+const withSaga = injectSaga({ key: TRIP_DOMAIN, saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(OfferDetailPage);
+)(TripDetailPage);

@@ -27,7 +27,7 @@ import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 
 export class OfferListPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const offerData = [
+    const tripData = [
       {
         price: '$1300',
         duration: '4 day trip',
@@ -67,7 +67,7 @@ export class OfferListPage extends React.Component { // eslint-disable-line reac
           </div>
 
           {
-            offerData.map((offer, i) => (
+            tripData.map((offer, i) => (
               <div key={i}>
                 <PageSection>
                   <BorderBottomDiv>
