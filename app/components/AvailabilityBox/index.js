@@ -30,7 +30,8 @@ const AvailiblityBox = (props) => {
     <div className={`d-flex flex-column {props.className}`}>
       <div className="d-flex flex-row justify-content-between">
         <div className="d-flex flex-column">
-          <button type="button" className="btn btn-primary btn-block py-2">1 spot left</button>
+          <button className="btn btn-default py-2">1 spot left</button>
+
           <AvailabilityHeader>
             <div className = "pl-2">
               {'July 22-23'}
