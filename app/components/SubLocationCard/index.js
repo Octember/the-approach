@@ -6,9 +6,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import GrayImageOverlay from 'components/shared/GrayImageOverlay';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+import GrayImageOverlay from 'components/shared/GrayImageOverlay';
+import Icon from 'components/shared/Icon';
 
 const LocationImage = styled.img`
   width: 100%;
@@ -24,12 +26,10 @@ const SubLocationMetadata = styled.ul `
   color: white;
 `;
 
-const SubLocationIcon = styled.img.attrs({
+// Extends Icon component's styles for use in this component
+const SubLocationIcon = styled(Icon).attrs({
   className: 'mx-2',
-})`
-  width: 16px;
-  height: 16px;
-`;
+})``;
 
 const CardBorderDiv = styled.div`
     box-shadow: 2px 6px 8px 2px rgba(0, 0, 0, 0.2);
@@ -48,15 +48,15 @@ const SubLocationCard = (props) => (
           <div>
             <SubLocationMetadata className="list-unstyled">
               <li>
-                <SubLocationIcon src="https://www.shareicon.net/data/128x128/2016/06/06/582476_location_16x16.png"/>
+                <SubLocationIcon symbol="map_pin" />
                 {props.location.regionName}
               </li>
               <li>
-                <SubLocationIcon src="https://www.shareicon.net/data/128x128/2016/06/06/582459_keychain_16x16.png"/>
+                <SubLocationIcon symbol="grade" />
                 {'Grade: A+'}
               </li>
               <li>
-                <SubLocationIcon src="https://www.shareicon.net/data/128x128/2016/06/06/582463_clock_16x16.png"/>
+                <SubLocationIcon symbol="clock" />
                 {'Duration: 4 hours 20 minutes'}
               </li>
             </SubLocationMetadata>
