@@ -15,6 +15,7 @@ const initialState = fromJS({
       image: {},
       guide: {},
     },
+    trip: {},
   },
 });
 
