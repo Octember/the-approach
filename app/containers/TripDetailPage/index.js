@@ -22,7 +22,7 @@ import { TRIP_DOMAIN } from './constants'
 import Header from 'components/Header'
 import GuideHero from 'components/GuideHero';
 import ScheduleTripBox from 'components/ScheduleTripBox';
-import OfferRouteBox from 'components/OfferRouteBox';
+import OfferScheduleBox from 'components/OfferScheduleBox';
 import PageSection from "../../components/PageSection";
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import GuideCard from 'components/GuideCard';
@@ -68,7 +68,7 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
 
             
             <BorderBottomDiv className="pb-2">
-              <OfferRouteBox className="m-2" />
+              <OfferScheduleBox className="m-2"/>
             </BorderBottomDiv>
             
 

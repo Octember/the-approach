@@ -15,17 +15,14 @@ import {} from 'react-intl';
 const AvailabilityHeader = styled.h2 `
   font-family: AvenirNext-Regular;
   font-style: normal;
-  font-size: 1em;
 `;
 
 const AvailabilityInfo = styled.ul `
   font-family: AvenirNext-Regular;
   font-style: normal;
-  font-size: 0.75em;
 `;
 
 const AvailiblityBox = (props) => {
-  console.log(props.image)
   return (
     <div className={`d-flex flex-column {props.className}`}>
       <div className="d-flex flex-row justify-content-between">
@@ -38,7 +35,7 @@ const AvailiblityBox = (props) => {
             </div>
           </AvailabilityHeader>
         </div>
-        <div className="d-flex flex-column">
+        <div className="d-flex">
           <button type="button" className="btn btn-primary btn-block py-2">Schedule</button>
         </div>
       </div>
@@ -46,7 +43,7 @@ const AvailiblityBox = (props) => {
 
       <div className="d-flex flex-row">
         <AvailabilityHeader>
-          <div className="pl-3">
+          <div className="ml-3">
             {'1395 per person'}
           </div>
         </AvailabilityHeader>
@@ -57,10 +54,6 @@ const AvailiblityBox = (props) => {
 
 AvailiblityBox.propTypes = {
   location: PropTypes.object,
-  image: PropTypes.shape({
-    id: PropTypes.number,
-    url: PropTypes.string,
-  }),
   className: PropTypes.string,
 };
 
