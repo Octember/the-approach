@@ -42,7 +42,7 @@ function Icon(props) {
 }
 
 Icon.propTypes = {
-  symbol: PropTypes.string,
+  symbol: PropTypes.string.isRequired,
   width: PropTypes.string,
   height: PropTypes.string,
 }
