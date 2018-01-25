@@ -43,7 +43,7 @@ function NavModal() {
   }
 
   return (
-    <div className="modal fade" id="nav-modal" role="dialog" aria-hidden="true">
+    <div className="modal fade" id="nav-modal" role="dialog" aria-hidden="true" onClick={hideNavModal}>
       <NavModalDialog role="document">
         <NavModalContent>
           <div className="modal-header" data-dismiss="modal">
@@ -52,7 +52,7 @@ function NavModal() {
             </button>
           </div>
           <div className="modal-body">
-            <ul className="nav flex-column text-center" onClick={hideNavModal}>
+            <ul className="nav flex-column text-center">
               <li className="nav-item">
                 <ModalLink className="nav-link active" to="/">Home</ModalLink>
               </li>
