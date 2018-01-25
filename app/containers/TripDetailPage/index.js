@@ -24,6 +24,7 @@ import GuideHero from 'components/GuideHero';
 import GuideDescriptionCard from 'components/GuideDescriptionCard';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 import { LocationCarouselDesktop, LocationCarouselMobile } from 'components/LocationCarousel';
+import LocationHeader from 'components/LocationHeader';
 import OfferScheduleBox from 'components/OfferScheduleBox';
 import PageSection from "../../components/PageSection";
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
@@ -65,6 +66,10 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
                 <LocationCarouselMobile title={'Crevasse Rescue Course'} metadata={metadata} images={this.props.locationData.images} rating={5} />
 
               </div>
+
+              <BorderBottomDiv className="d-none d-lg-block">
+                <LocationHeader className="" title={'Crevasse Rescue Course'} rating={5} metadata={metadata} />
+              </BorderBottomDiv>
 
               <PageSection title="Guides">
                 <BorderBottomDiv className="pb-2">

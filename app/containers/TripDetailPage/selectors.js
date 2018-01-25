@@ -42,10 +42,7 @@ const selectTripForOfferDetail = () => createSelector(
 
 const selectLocationDataForOfferDetail = () => createSelector(
   selectTripDetailPageDomain,
-  (offerPageState) => {
-   
-    return offerPageState.toJS().tripData.locationData;
-  }
+  (offerPageState) => offerPageState.toJS().tripData.locationData
   );
 
 /**
