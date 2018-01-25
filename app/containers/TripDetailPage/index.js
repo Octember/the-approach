@@ -62,6 +62,7 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
               <div className="d-lg-none">
                 {/* Mobile/tablet view */}
                 <LocationCarouselMobile title={'Crevasse Rescue Course'} metadata={metadata} images={this.props.locationData.images} rating={5} />
+
                 <BorderBottomDiv>
                   <ScheduleTripBox guide={this.props.guide} />
                 </BorderBottomDiv>
@@ -74,9 +75,7 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
               </PageSection>
 
             
-              <BorderBottomDiv className="pb-2">
-                <OfferScheduleBox className="m-2"/>
-              </BorderBottomDiv>
+              
             
 
               <PageSection title="Itinerary">
@@ -109,8 +108,9 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
                 images={this.props.locationData.images}
                 desktopView={true}
               />
-              <ScheduleTripBox guide={this.props.guide} />
-                
+              <BorderBottomDiv className="pb-2">
+                <OfferScheduleBox className="m-2"/>
+              </BorderBottomDiv> 
             </div>
 
           </div>
