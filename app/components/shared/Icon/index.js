@@ -10,6 +10,7 @@ Props:
 
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 // Image files must be statically loaded
 import map_pin from './../../../images/icon-map_pin-16x16.png';
@@ -38,6 +39,12 @@ function Icon(props) {
     <SpecifiedIcon className={props.className} symbol={props.symbol}
       width={props.width} height={props.height} />
   );
+}
+
+Icon.propTypes = {
+  symbol: PropTypes.string,
+  width: PropTypes.string,
+  height: PropTypes.string,
 }
 
 export default Icon;
