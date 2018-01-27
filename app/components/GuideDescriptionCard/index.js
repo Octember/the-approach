@@ -20,12 +20,13 @@ const GuideDescriptionCardImage = styled.img `
 
 
 function GuideDescriptionCard(props) {
+  console.log(props.guide);
   return (
     <div>
       <div className={`d-flex flex-row ${props.className}`}>
-        <GuideDescriptionCardImage src={props.image} />
+        <GuideDescriptionCardImage src={props.guide.image} />
         <div className="d-flex flex-column pl-2">
-          <div>{props.guideName}</div>
+          <div>{props.guide.guideName}</div>
           <div className="row mb-2">
             <Stars
               className="pl-3"
@@ -37,7 +38,7 @@ function GuideDescriptionCard(props) {
       </div>
       <div className="d-flex flex-row pl-3">
         <StyledSmall>
-          {props.aboutInfo}
+          {props.guide.description}
         </StyledSmall>
       </div>
     </div>
@@ -45,9 +46,11 @@ function GuideDescriptionCard(props) {
 }
 
 GuideDescriptionCard.propTypes = {
-  image: PropTypes.string,
-  guideName: PropTypes.string,
-  aboutInfo: PropTypes.string,
+  guide: PropTypes.shape({
+    image: PropTypes.string,
+    guideName: PropTypes.string,
+    location: PropTypes.string,
+  }).isRequired,
   className: PropTypes.string,
 };
 

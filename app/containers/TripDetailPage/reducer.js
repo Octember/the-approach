@@ -12,13 +12,18 @@ import {
 const initialState = fromJS({
   tripData: {
     guideData: {
-      image: {},
-      guide: {},
+      image: {
+        url: '',
+      },
+      guide: {
+        name: '',
+        location: '',
+      },
     },
     trip: {},
-    locationData:{
+    locationData: {
       images: [],
-  },
+    },
   },
 });
 
