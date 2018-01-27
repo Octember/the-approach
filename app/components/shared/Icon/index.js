@@ -22,29 +22,33 @@ const images = {
   map_pin: map_pin,
   grade: grade,
   clock: clock,
-}
+};
 
 // Styled-component for incorporating dynamic props given on Icon component
-const SpecifiedIcon = styled.img
-.attrs({
-  src: (props) => { return images[props.symbol] },
+const SpecifiedIcon = styled.img.attrs({
+  src: (props) => images[props.symbol],
 })
 `
-  width: ${(props) => { return props.width || '16px' }};
-  height: ${(props) => { return props.height || '16px' }};
+  width: ${(props) => props.width || '16px' };
+  height: ${(props) => props.height || '16px' };
 `;
 
 function Icon(props) {
   return (
-    <SpecifiedIcon className={props.className} symbol={props.symbol}
-      width={props.width} height={props.height} />
+    <SpecifiedIcon
+      className={props.className}
+      symbol={props.symbol}
+      width={props.width}
+      height={props.height}
+    />
   );
 }
 
 Icon.propTypes = {
+  className: PropTypes.string,
   symbol: PropTypes.string.isRequired,
   width: PropTypes.string,
   height: PropTypes.string,
-}
+};
 
 export default Icon;

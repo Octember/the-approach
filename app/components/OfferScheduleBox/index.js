@@ -1,66 +1,54 @@
 /**
-*
-* OfferRouteComponent
-*
-*/
+ *
+ * OfferScheduleBox
+ *
+ */
 
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import StyledSmall from 'components/shared/StyledSmall';
-import PageTitle from 'components/shared/PageTitle';
 import BorderOutlineDiv from 'components/shared/BorderOutlineDiv';
+import Icon from 'components/shared/Icon';
 
-import GuideCard from 'components/GuideCard';
+const StyledOfferScheduleIcon = styled(Icon).attrs({
+  className: 'm-2',
+})``;
 
-const OfferRouteHeader = styled.h2 `
-  font-family: AvenirNext-Regular;
-  font-style: normal;
-`;
-
-const OfferRouteInfo = styled.ul `
-  font-family: AvenirNext-Regular;
-  font-style: normal;
-`;
-
-function OfferRouteBox(props) {
-  return (
-    <BorderOutlineDiv className={`d-flex flex-column px-4 py-2 ${props.className}`}>
-      <div >
-            <OfferRouteHeader>
-              <div className = "pt-1">
-                {'Crevasse Rescue Course'}
-              </div>
-            </OfferRouteHeader>
+const OfferScheduleBox = (props) => (
+  <BorderOutlineDiv className={props.className}>
+    <div className="d-flex flex-column p-3">
+      <h2 className="mt-1 mb-0">
+        {'Crevasse Rescue Course'}
+      </h2>
+      <div className="ml-2">
+        <ul className="list-unstyled">
+          <li>
+            <StyledOfferScheduleIcon symbol="map_pin" />
+            {'Mt. Rainer'}
+          </li>
+          <li>
+            <StyledOfferScheduleIcon symbol="clock" />
+            {'Duration: 4 hours 20 minutes'}
+          </li>
+        </ul>
       </div>
-      <div className = "pl-4">
-            <OfferRouteInfo className="list-unstyled">
-                <li>
-                  <img src="https://www.shareicon.net/data/128x128/2016/06/06/582476_location_16x16.png" width = "12" height = "15.6"/>
-                  {'Mt. Rainer'}
-                </li>
-                <li>
-                  <img src="https://www.shareicon.net/data/128x128/2016/06/06/582463_clock_16x16.png" width = "12" height = "12"/>
-                  {'Duration: 4 hours 20 minutes'}
-                </li>
-            </OfferRouteInfo>
-      </div>
-      <button type="button" className="btn btn-primary btn-block py-2">Schedule</button>
-      
-    </BorderOutlineDiv>
-  );
-}
+      <button type="button" className="btn btn-primary btn-block rounded-0">Schedule</button>
+    </div>
 
-OfferRouteBox.propTypes = {
+  </BorderOutlineDiv>
+);
+
+
+OfferScheduleBox.propTypes = {
+  className: PropTypes.string,
   location: PropTypes.object,
-  
 };
 
-OfferRouteBox.defaultProps = {
+OfferScheduleBox.defaultProps = {
   offer: {
     url: '/offer/1',
   },
 };
 
-export default OfferRouteBox;
+export default OfferScheduleBox;
