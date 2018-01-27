@@ -8,6 +8,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Stars from 'components/Stars';
+import StyledSmall from 'components/Shared/StyledSmall';
 
 import {} from 'react-intl';
 import { Link } from 'react-router-dom';
@@ -35,9 +36,9 @@ function GuideDescriptionCard(props) {
         </div>
       </div>
       <div className="d-flex flex-row pl-3">
-          <small>
-            {props.aboutInfo}
-          </small>
+        <StyledSmall>
+          {props.aboutInfo}
+        </StyledSmall>
       </div>
     </div>
   );

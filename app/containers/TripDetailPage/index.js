@@ -68,12 +68,12 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
               </div>
 
               <BorderBottomDiv className="d-none d-lg-block">
-                <LocationHeader className="" title={'Crevasse Rescue Course'} rating={5} metadata={metadata} />
+                <LocationHeader title={'Crevasse Rescue Course'} rating={5} metadata={metadata} />
               </BorderBottomDiv>
 
               <PageSection title="Guides">
                 <BorderBottomDiv className="pb-2">
-                  <GuideDescriptionCard className="ml-3" guideName='RMI Expeditions'/>
+                  <GuideDescriptionCard className="ml-3" guideName={'RMI Expeditions'} />
                 </BorderBottomDiv>
               </PageSection>
 
@@ -87,11 +87,9 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
 
               <PageSection title="Itinerary">
                 <BorderBottomDiv className="pb-2">
-                  {/*<ShowMore>*/}
-                    <div className="ml-3">
-                      {this.props.trip.itinerary}
-                    </div>
-                  {/*</ShowMore>*/}
+                  <div className="ml-3">
+                    {this.props.trip.itinerary}
+                  </div>
                 </BorderBottomDiv>
               </PageSection>
 
@@ -117,7 +115,7 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
                 images={this.props.locationData.images}
                 desktopView={true}
               />
-              <OfferScheduleBox className="m-2"/>
+              <OfferScheduleBox className="m-2" />
             </div>
 
           </div>
