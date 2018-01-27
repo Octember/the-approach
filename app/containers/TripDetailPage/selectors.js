@@ -35,10 +35,14 @@ const selectOfferId = () => createSelector(
 const selectTripForOfferDetail = () => createSelector(
   selectTripDetailPageDomain,
   (offerPageState) => {
-    console.log(offerPageState.toJS())
-
+   
     return offerPageState.toJS().tripData.trip;
   }
+  );
+
+const selectLocationDataForOfferDetail = () => createSelector(
+  selectTripDetailPageDomain,
+  (offerPageState) => offerPageState.toJS().tripData.locationData
   );
 
 /**
@@ -56,4 +60,5 @@ export {
   selectOfferId,
   selectGuideDataForOfferDetail,
   selectTripForOfferDetail,
+  selectLocationDataForOfferDetail,
 };

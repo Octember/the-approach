@@ -16,6 +16,9 @@ const initialState = fromJS({
       guide: {},
     },
     trip: {},
+    locationData:{
+      images: [],
+  },
   },
 });
 
