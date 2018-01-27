@@ -20,7 +20,9 @@ const initialState = fromJS({
         location: '',
       },
     },
-    trip: {},
+    trip: {
+      heading: 'LOADING_HEADING', //todo
+    },
     locationData: {
       images: [],
     },
