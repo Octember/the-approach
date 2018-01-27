@@ -76,7 +76,7 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
 
                 <PageSection title="Guides">
                   <BorderBottomDiv className="pb-2">
-                    <GuideDescriptionCard className="ml-3" guideName={'RMI Expeditions'} />
+                    <GuideDescriptionCard className="ml-3" guide={this.props.guide} />
                   </BorderBottomDiv>
                 </PageSection>
 
@@ -106,13 +106,6 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
                     <AvailabilityBox />
                   </BorderBottomDiv>
                 </PageSection>
-
-                <PageSection title="Guides">
-                  <GuideCard />
-                  <GuideCard />
-                  <GuideCard />
-
-                </PageSection>
               </div>
             </div>
 
@@ -136,7 +129,7 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
 
 TripDetailPage.propTypes = {
   requestOfferPage: PropTypes.func,
-
+  guide: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -22,6 +22,7 @@ const selectGuideDataForOfferDetail = () => createSelector(
       image: guideData.image.url,
       guideName: guideData.guide.name,
       location: guideData.guide.location,
+      description: guideData.guide.aboutInfo
     };
   }
 );
@@ -34,16 +35,13 @@ const selectOfferId = () => createSelector(
 
 const selectTripForOfferDetail = () => createSelector(
   selectTripDetailPageDomain,
-  (offerPageState) => {
-   
-    return offerPageState.toJS().tripData.trip;
-  }
-  );
+  (offerPageState) => offerPageState.toJS().tripData.trip
+);
 
 const selectLocationDataForOfferDetail = () => createSelector(
   selectTripDetailPageDomain,
   (offerPageState) => offerPageState.toJS().tripData.locationData
-  );
+);
 
 /**
  * Default selector used by TripDetailPage
