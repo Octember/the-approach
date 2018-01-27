@@ -29,8 +29,8 @@ const SpecifiedIcon = styled.img.attrs({
   src: (props) => images[props.symbol],
 })
 `
-  width: ${(props) => { return props.width || '16px' }};
-  height: ${(props) => { return props.height || '16px' }};
+  width: ${(props) => props.width || '16px' };
+  height: ${(props) => props.height || '16px' };
 `;
 
 function Icon(props) {
@@ -49,6 +49,6 @@ Icon.propTypes = {
   symbol: PropTypes.string.isRequired,
   width: PropTypes.string,
   height: PropTypes.string,
-}
+};
 
 export default Icon;

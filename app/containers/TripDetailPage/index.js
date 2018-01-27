@@ -68,43 +68,52 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
               </div>
 
               <BorderBottomDiv className="d-none d-lg-block">
+                {/* Desktop only */}
                 <LocationHeader title={'Crevasse Rescue Course'} rating={5} metadata={metadata} />
               </BorderBottomDiv>
 
-              <PageSection title="Guides">
-                <BorderBottomDiv className="pb-2">
-                  <GuideDescriptionCard className="ml-3" guideName={'RMI Expeditions'} />
-                </BorderBottomDiv>
-              </PageSection>
+              <div className="px-2">
 
-              <PageSection title="Description">
-                <BorderBottomDiv className="pb-2">
-                  <div className="ml-3">
-                    {this.props.trip.heading}
-                  </div>
-                </BorderBottomDiv>
-              </PageSection>
+                <PageSection title="Guides">
+                  <BorderBottomDiv className="pb-2">
+                    <GuideDescriptionCard className="ml-3" guideName={'RMI Expeditions'} />
+                  </BorderBottomDiv>
+                </PageSection>
 
-              <PageSection title="Itinerary">
-                <BorderBottomDiv className="pb-2">
-                  <div className="ml-3">
-                    {this.props.trip.itinerary}
-                  </div>
-                </BorderBottomDiv>
-              </PageSection>
+                <PageSection title="Description">
+                  <BorderBottomDiv className="pb-2">
+                    <div className="ml-3">
+                      {this.props.trip.heading}
+                    </div>
+                  </BorderBottomDiv>
+                </PageSection>
 
-              <PageSection title="Availability">
-                <BorderBottomDiv className="pb-2">
-                  <AvailabilityBox className="m-4"/>
-                </BorderBottomDiv>
-              </PageSection>
+                <div className="d-lg-none">
+                  {/* Mobile/tablet view */}
+                  <OfferScheduleBox className="m-2" />
+                </div>
 
-              <PageSection title="Guides">
-                <GuideCard />
-                <GuideCard />
-                <GuideCard />
+                <PageSection title="Itinerary">
+                  <BorderBottomDiv className="pb-2">
+                    <div className="ml-3">
+                      {this.props.trip.itinerary}
+                    </div>
+                  </BorderBottomDiv>
+                </PageSection>
 
-              </PageSection>
+                <PageSection title="Availability">
+                  <BorderBottomDiv className="pb-2">
+                    <AvailabilityBox />
+                  </BorderBottomDiv>
+                </PageSection>
+
+                <PageSection title="Guides">
+                  <GuideCard />
+                  <GuideCard />
+                  <GuideCard />
+
+                </PageSection>
+              </div>
             </div>
 
             <div className="col-lg-5 d-none d-lg-block">
