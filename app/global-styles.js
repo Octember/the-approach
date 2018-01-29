@@ -25,6 +25,7 @@ injectGlobal`
 
   /* Darken Bootstrap's modal backdrop (note: styling outside html and body here is not recommended by API creators) */
   .modal-backdrop.show {
-    opacity: 0.85;
+    opacity: 0.95;
+    background-color: #0a101a;
   }
 `;
