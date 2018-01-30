@@ -1,12 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
 import NavModal from 'components/NavModal';
 import SignInModal from 'components/SignInModal';
+import BorderBottomDiv from 'components/shared/BorderBottomDiv';
+
+const StyledHeader = styled.div.attrs({
+  className: 'row',
+})`
+  height: 40px; /* Height is fixed (for now) to match current NavBar */
+`
 
 /* .pos-f-t wasn't defined anywhere and had no effect, so added styles according to Bootstrap documentation's definition.
   This fixes the header to the top of the screen, even when scrolling. */
-const NavBar = styled.div.attrs({
+const NavBar = styled(BorderBottomDiv).attrs({
   className: 'navbar navbar-toggleable-xs navbar-light bg-white p-0 w-100',
 })`
   position: fixed;
@@ -40,7 +48,7 @@ const StyledSignInButton = styled.button.attrs({
 
 function Header() {
   return (
-    <div className="row">
+    <StyledHeader>
       <NavBar>
         <StyledNavButton><span className="navbar-toggler-icon" /></StyledNavButton>
         <Link className="navbar-brand mr-auto ml-2 font-weight-bold" to="/">theApproach</Link>
@@ -48,7 +56,7 @@ function Header() {
       </NavBar>
       <SignInModal />
       <NavModal />
-    </div>
+    </StyledHeader>
   );
 }
 
