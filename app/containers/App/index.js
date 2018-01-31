@@ -14,7 +14,7 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 
-import RouteReviewPage from 'containers/RouteReviewPage/Loadable';
+import WriteReviewPage from 'containers/WriteReviewPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import LocationPage from 'containers/LocationPage/Loadable';
 import LocationListPage from 'containers/LocationListPage/Loadable';
@@ -26,7 +26,7 @@ export default function App() {
   return (
     <Switch>
       <Route exact path="/" component={LocationPage} />
-      <Route exact path="/form" component={RouteReviewPage} />
+      <Route exact path="/form" component={WriteReviewPage} />
       <Route exact path="/location/:locationId" component={LocationPage} />
       <Route exact path="/locationlist" component={LocationListPage} />
       <Route exact path="/guide/:guideId" component={GuideProfilePage} />
