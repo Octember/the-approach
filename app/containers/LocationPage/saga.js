@@ -6,9 +6,6 @@ import { locationDataLoaded, locationDataLoadingError } from './actions';
 import request from 'utils/request';
 import { selectLocationPageId } from 'containers/LocationPage/selectors';
 
-/**
- * Github repos request/response handler
- */
 export function* loadLocationData() {
 
   // Select username from store
