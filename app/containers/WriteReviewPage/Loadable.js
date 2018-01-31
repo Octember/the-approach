@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for RouteReviewPage
+ * Asynchronously loads the component for WriteReviewPage
  *
  */
 

@@ -1,6 +1,6 @@
 /*
  *
- * RouteReviewPage reducer
+ * WriteReviewPage reducer
  *
  */
 
@@ -11,7 +11,7 @@ import {
 
 const initialState = fromJS({});
 
-function routeReviewPageReducer(state = initialState, action) {
+function writeReviewPageReducer(state = initialState, action) {
   switch (action.type) {
     case DEFAULT_ACTION:
       return state;
@@ -20,4 +20,4 @@ function routeReviewPageReducer(state = initialState, action) {
   }
 }
 
-export default routeReviewPageReducer;
+export default writeReviewPageReducer;

@@ -1,6 +1,6 @@
 /*
  *
- * RouteReviewPage actions
+ * WriteReviewPage actions
  *
  */
 

@@ -1,6 +1,6 @@
 /**
  *
- * RouteReviewPage
+ * WriteReviewPage
  *
  */
 
@@ -12,7 +12,7 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectRouteReviewPage from './selectors';
+import makeSelectWriteReviewPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -21,7 +21,7 @@ import PageSection from 'components/PageSection';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import Stars from 'components/Stars';
 
-export class RouteReviewPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class WriteReviewPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     // this is just for the blue button, will have to change for upload or submitting
     const offer = {
@@ -91,12 +91,12 @@ export class RouteReviewPage extends React.PureComponent { // eslint-disable-lin
   }
 }
 
-RouteReviewPage.propTypes = {
+WriteReviewPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  routereviewpage: makeSelectRouteReviewPage(),
+  WriteReviewPage: makeSelectWriteReviewPage(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -107,11 +107,11 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'routeReviewPage', reducer });
-const withSaga = injectSaga({ key: 'routeReviewPage', saga });
+const withReducer = injectReducer({ key: 'WriteReviewPage', reducer });
+const withSaga = injectSaga({ key: 'WriteReviewPage', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(RouteReviewPage);
+)(WriteReviewPage);
