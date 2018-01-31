@@ -8,8 +8,8 @@ import { locationListLoaded, locationListLoadingError } from './actions';
 
 export function* loadLocationList() {
 
-  const requestURL = 'http://localhost:8888/location';
-  // const requestURL = 'http://approach-server-1687250913.us-east-2.elb.amazonaws.com/location';
+  // const requestURL = 'http://localhost:8888/location';
+  const requestURL = 'http://approach-server-1687250913.us-east-2.elb.amazonaws.com/location';
 
   try {
     // Call our request helper (see 'utils/request')
