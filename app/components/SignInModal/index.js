@@ -58,17 +58,6 @@ const SocialSignInButton = styled(StyledButton).attrs({
 })``;
 
 class SignInModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: ''};
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
   render() {
     return (
       <div className="modal fade" id="signin-modal" role="dialog" aria-hidden="true">
