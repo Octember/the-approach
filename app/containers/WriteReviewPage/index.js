@@ -32,12 +32,6 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
     this.props.requestLocationList();
   }
 
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
-    console.log(selectedOption)
-    console.log(`Selected: ${selectedOption.label}`);
-  };
-
   render() {
 
     const locationOptions = this.props.locationList.map((location) => ({
@@ -45,6 +39,11 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
       label: location.title,
     }));
 
+    const selectedLocation =  this.props.locationList.find((location) => location.id === this.props.selectedLocationId);
+
+    const selectedLocationHeader = selectedLocation ? (<h2>
+      {selectedLocation.title}
+    </h2>) : '';
 
     return (
       <div>
@@ -54,27 +53,29 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
         {/*</Helmet>*/}
 
         <div className="container">
+          <Header />
 
           <div className="row">
             <div className="col-lg-7 px-0">
-
-              <Header/>
               <PageSection title="Write a Trip Report">
                 <BorderBottomDiv className="pb-2"/>
               </PageSection>
 
-              {/*<h1> {this.props.locationList} </h1>*/}
               <form>
 
-                {/*Location section, need to downsize & add new container w/ locations*/}
                 <PageSection title="Location">
                   <BorderBottomDiv className="pb-2">
-                    <Select
-                      name="form-field-name"
-                      value={this.props.selectedLocationId}
-                      onChange={this.props.handleSelectedLocationChange}
-                      options={locationOptions}
-                    />
+                    {selectedLocationHeader}
+                    {/* Kinda hacky & will likely change, hide the Select if we have a selected location */}
+                    {selectedLocation ?
+                      '' :
+                      <Select
+                        name="form-field-name"
+                        value={this.props.selectedLocationId}
+                        onChange={this.props.handleSelectedLocationChange}
+                        options={locationOptions}
+                      />
+                    }
                   </BorderBottomDiv>
                 </PageSection>
 

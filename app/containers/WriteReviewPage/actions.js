@@ -24,7 +24,7 @@ export function locationListLoaded(locations) {
 
 export const selectedLocationChange = (selectedOption) => ({
   type: SELECTED_LOCATION_CHANGE_ACTION,
-  locationId: selectedOption.value,
+  locationId: selectedOption ? selectedOption.value : null,
 });
 
 export function locationListLoadingError(error) {
