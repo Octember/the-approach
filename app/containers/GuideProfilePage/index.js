@@ -11,15 +11,29 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import Header from 'components/Header';
-
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectGuideProfilePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export class GuideProfilePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+import Header from 'components/Header';
+import ProfileHeader from 'components/ProfileHeader';
+import GuideHero from 'components/GuideHero';
+
+const sampleProfile = {
+  name: 'RMI Expeditions',
+  url: 'http://travelchair.com/images/blockexpeditions.png',
+  location: 'Winthrop, WA',
+  stats: {
+    followers: 5,
+    photos: 8,
+    adventures: 2,
+    tripReports: 1,
+  }
+}
+
+export class GuideProfilePage extends React.Component {
   render() {
     return (
       <div>
@@ -36,7 +50,8 @@ export class GuideProfilePage extends React.Component { // eslint-disable-line r
 
               <div className="d-lg-none">
                 {/* Mobile/tablet view */}
-                mobile header
+                {/* Currently using dummy profile */}
+                <ProfileHeader guide {...sampleProfile} />
               </div>
 
               <div className="d-none d-lg-block">
@@ -64,7 +79,7 @@ GuideProfilePage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  guideprofilepage: makeSelectGuideProfilePage(),
+  guideProfilePage: makeSelectGuideProfilePage(),
 });
 
 function mapDispatchToProps(dispatch) {
