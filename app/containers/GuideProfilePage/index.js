@@ -19,7 +19,6 @@ import saga from './saga';
 
 import Header from 'components/Header';
 import ProfileHeader from 'components/ProfileHeader';
-import GuideHero from 'components/GuideHero';
 
 const sampleProfile = {
   name: 'RMI Expeditions',
