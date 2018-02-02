@@ -10,21 +10,18 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import 'react-select/dist/react-select.css';
-import { locationList, selectedLocationChange } from "./actions";
-
-
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-import { selectLocationList, selectSelectedLocationId } from './selectors';
-import reducer from './reducer';
-import saga from './saga';
-
 import Select from 'react-select';
-import Header from 'components/Header'
+import Header from 'components/Header';
 import PageSection from 'components/PageSection';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import Stars from 'components/Stars';
+import injectReducer from 'utils/injectReducer';
+import injectSaga from 'utils/injectSaga';
 
+import { locationList, selectedLocationChange } from './actions';
+import { selectLocationList, selectSelectedLocationId } from './selectors';
+import reducer from './reducer';
+import saga from './saga';
 
 export class WriteReviewPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -33,17 +30,19 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
   }
 
   render() {
-
     const locationOptions = this.props.locationList.map((location) => ({
       value: location.id,
       label: location.title,
     }));
 
-    const selectedLocation =  this.props.locationList.find((location) => location.id === this.props.selectedLocationId);
+    const selectedLocation = this.props.locationList.find((location) => location.id === this.props.selectedLocationId);
+    // console.log(selectedLocation);
 
-    const selectedLocationHeader = selectedLocation ? (<h2>
-      {selectedLocation.title}
-    </h2>) : '';
+    const selectedLocationHeader = selectedLocation ? (
+      <div>
+        <small>{selectedLocation.regionName}</small>
+        <h2>{selectedLocation.title}</h2>
+      </div>) : '';
 
     return (
       <div>
@@ -58,7 +57,7 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
           <div className="row">
             <div className="col-lg-7 px-0">
               <PageSection title="Write a Trip Report">
-                <BorderBottomDiv className="pb-2"/>
+                <BorderBottomDiv className="pb-2" />
               </PageSection>
 
               <form>
@@ -79,24 +78,24 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                   </BorderBottomDiv>
                 </PageSection>
 
-                {/*Rating */}
+                {/* Rating */}
                 <PageSection title="Rating">
-                  <Stars className="d-inline-block pl-2" value={0.0} editable={true}/>
-                  <BorderBottomDiv className="pb-2"/>
+                  <Stars className="d-inline-block pl-2" value={0.0} editable={true} />
+                  <BorderBottomDiv className="pb-2" />
                 </PageSection>
 
-                {/*Report */}
+                {/* Report */}
                 <PageSection title="Report">
                   <input type="text" className="form-control" placeholder="Write youre experience here" aria-describedby="basic-addon2"/>
-                  <BorderBottomDiv className="pb-2"/>
+                  <BorderBottomDiv className="pb-2" />
                 </PageSection>
 
-                {/*Beta*/}
+                {/* Beta */}
                 <PageSection title="Beta">
-                  <BorderBottomDiv className="pb-2"/>
+                  <BorderBottomDiv className="pb-2" />
                 </PageSection>
 
-                {/*Add Photo/Video */}
+                {/* Add Photo/Video */}
                 <PageSection title="Add Photo/Video">
                   <BorderBottomDiv className="pb-2">
                   </BorderBottomDiv>
@@ -114,7 +113,9 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 
 WriteReviewPage.propTypes = {
   requestLocationList: PropTypes.func,
+  handleSelectedLocationChange: PropTypes.func,
   selectedLocationId: PropTypes.number,
+  locationList: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
