@@ -20,7 +20,6 @@ const GuideDescriptionCardImage = styled.img `
 
 
 function GuideDescriptionCard(props) {
-  console.log(props.guide);
   return (
     <div>
       <div className={`d-flex flex-row ${props.className}`}>

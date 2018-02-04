@@ -10,27 +10,24 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import {makeSelectTripDetailPage, selectGuideDataForOfferDetail,selectTripForOfferDetail, selectLocationDataForOfferDetail} from './selectors';
+
+import Header from 'components/Header'
+import GuideDescriptionCard from 'components/GuideDescriptionCard';
+import { LocationCarouselDesktop, LocationCarouselMobile } from 'components/LocationCarousel';
+import LocationHeader from 'components/LocationHeader';
+import OfferScheduleBox from 'components/OfferScheduleBox';
+import PageSection from 'components/PageSection';
+import BorderBottomDiv from 'components/shared/BorderBottomDiv';
+import AvailabilityBox from 'components/AvailabilityBox';
+import TripReportCard from 'components/TripReportCard';
+
+import { selectGuideDataForOfferDetail, selectLocationDataForTripPage, selectTripForTripPage, selectReviews } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { loadTripPage } from './actions';
 import { TRIP_DOMAIN } from './constants'
-
-import Header from 'components/Header'
-import GuideHero from 'components/GuideHero';
-import GuideDescriptionCard from 'components/GuideDescriptionCard';
-import ScheduleTripBox from 'components/ScheduleTripBox';
-import { LocationCarouselDesktop, LocationCarouselMobile } from 'components/LocationCarousel';
-import LocationHeader from 'components/LocationHeader';
-import OfferScheduleBox from 'components/OfferScheduleBox';
-import PageSection from "../../components/PageSection";
-import BorderBottomDiv from 'components/shared/BorderBottomDiv';
-import GuideCard from 'components/GuideCard';
-import AvailabilityBox from 'components/AvailabilityBox';
-import { selectImagesFromLocation } from "../LocationPage/selectors";
 
 export class TripDetailPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -39,7 +36,6 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
 
     this.props.requestOfferPage(tripId);
   }
-
 
   render() {
     const metadata = [
@@ -111,6 +107,18 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
                     <AvailabilityBox />
                   </BorderBottomDiv>
                 </PageSection>
+
+                <PageSection title="Trip Reports">
+                  <BorderBottomDiv className="pb-2">
+                    {
+                      this.props.reviews.map((data) => (
+                        <BorderBottomDiv key={`item-${data.review.id}`}>
+                          <TripReportCard {...data} />
+                        </BorderBottomDiv>
+                      ))
+                    }
+                  </BorderBottomDiv>
+                </PageSection>
               </div>
             </div>
 
@@ -120,7 +128,7 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
                 title={'Crevasse Rescue Course'}
                 metadata={metadata}
                 images={this.props.locationData.images}
-                desktopView={true}
+                desktopView
               />
               <OfferScheduleBox className="m-2" />
             </div>
@@ -135,21 +143,19 @@ export class TripDetailPage extends React.Component { // eslint-disable-line rea
 TripDetailPage.propTypes = {
   requestOfferPage: PropTypes.func,
   guide: PropTypes.object,
+  reviews: PropTypes.arrayOf(PropTypes.object),
 };
 
 const mapStateToProps = createStructuredSelector({
   guide: selectGuideDataForOfferDetail(),
-  trip: selectTripForOfferDetail(),
-  locationData: selectLocationDataForOfferDetail(),
+  trip: selectTripForTripPage(),
+  locationData: selectLocationDataForTripPage(),
+  reviews: selectReviews()
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    requestOfferPage: (tripId) => {
-      dispatch(loadTripPage(tripId));
-    },
-  };
-}
+const mapDispatchToProps = (dispatch) => ({
+  requestOfferPage: (tripId) => dispatch(loadTripPage(tripId)),
+});
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 

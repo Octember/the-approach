@@ -14,12 +14,6 @@ const selectGuidePageId = () => createSelector(
   (state) => state.toJS().guideId
 );
 
-const selectGuideAPIData = () => createSelector(
-  selectGuideProfilePageDomain,
-  (state) => state.get('guideData')
-);
-
-
 const selectGuideData = () => createSelector(
   selectGuideProfilePageDomain,
   (state) => {
@@ -37,16 +31,10 @@ const selectGuideData = () => createSelector(
   }
 );
 
-/**
+/*
  * Default selector used by GuideProfilePage
  */
 
-const makeSelectGuideProfilePage = () => createSelector(
-  selectGuideProfilePageDomain,
-  (substate) => substate.toJS()
-);
-
-export default makeSelectGuideProfilePage;
 export {
   selectGuidePageId,
   selectGuideData,

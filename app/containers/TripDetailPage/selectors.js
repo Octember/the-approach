@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { TRIP_DOMAIN, TRIP_API_DATA_DOMAIN } from './constants';
+import { TRIP_DOMAIN } from './constants';
 
 /**
  * Direct selector to the offerDetailPage state domain
@@ -27,36 +27,35 @@ const selectGuideDataForOfferDetail = () => createSelector(
   }
 );
 
-
 const selectOfferId = () => createSelector(
   selectTripDetailPageDomain,
   (offerState) => offerState.toJS().tripId
 );
 
-const selectTripForOfferDetail = () => createSelector(
+const selectTripForTripPage = () => createSelector(
   selectTripDetailPageDomain,
   (offerPageState) => offerPageState.toJS().tripData.trip
 );
 
-const selectLocationDataForOfferDetail = () => createSelector(
+const selectLocationDataForTripPage = () => createSelector(
   selectTripDetailPageDomain,
   (offerPageState) => offerPageState.toJS().tripData.locationData
+);
+
+const selectReviews = () => createSelector(
+  selectTripDetailPageDomain,
+  (locationData) => locationData.toJS().tripData.reviews
 );
 
 /**
  * Default selector used by TripDetailPage
  */
 
-const makeSelectTripDetailPage = () => createSelector(
-  selectTripDetailPageDomain,
-  (substate) => substate.toJS()
-);
-
-export default makeSelectTripDetailPage;
 export {
   selectTripDetailPageDomain,
   selectOfferId,
   selectGuideDataForOfferDetail,
-  selectTripForOfferDetail,
-  selectLocationDataForOfferDetail,
+  selectTripForTripPage,
+  selectLocationDataForTripPage,
+  selectReviews,
 };
