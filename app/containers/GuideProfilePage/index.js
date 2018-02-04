@@ -15,11 +15,19 @@ import Header from 'components/Header';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectGuideProfilePage from './selectors';
+import { selectGuideData } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { requestGuideProfile } from './actions';
 
 export class GuideProfilePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  componentDidMount() {
+    const guideId = this.props.match.params.guideId ? this.props.match.params.guideId : 1;
+
+    this.props.requestGuideProfilePage(guideId);
+  }
+
   render() {
     return (
       <div>
@@ -45,7 +53,7 @@ export class GuideProfilePage extends React.Component { // eslint-disable-line r
               </div>
 
               <div className="px-2">
-                Content here
+                NAME: {this.props.guideData.name}
               </div>
             </div>
 
@@ -60,16 +68,19 @@ export class GuideProfilePage extends React.Component { // eslint-disable-line r
 }
 
 GuideProfilePage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  requestGuideProfilePage: PropTypes.func,
+  guideData: PropTypes.shape({
+    name: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = createStructuredSelector({
-  guideprofilepage: makeSelectGuideProfilePage(),
+  guideData: selectGuideData(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    requestGuideProfilePage: (guideId) => dispatch(requestGuideProfile(guideId)),
   };
 }
 

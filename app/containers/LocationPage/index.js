@@ -76,7 +76,7 @@ export class LocationPage extends React.Component { // eslint-disable-line react
 
               <div className="d-none d-lg-block">
                 {/* Desktop view */}
-                <Breadcrumbs className=""
+                <Breadcrumbs
                   breadcrumbData={[
                     { link: 'google.com', text: 'Mt. Rainier National park' },
                     { link: 'google.com', text: 'chicken butt' },
@@ -159,7 +159,7 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                 title={this.props.location.title}
                 metadata={metadata}
                 images={this.props.images}
-                desktopView={true}
+                desktopView
               />
 
               <ScheduleTripBox className="m-2" />
@@ -180,9 +180,7 @@ LocationPage.propTypes = {
 
 function mapDispatchToProps(dispatch) {
   return {
-    requestLocationPage: (locationId) => {
-      dispatch(loadLocationPage(locationId));
-    },
+    requestLocationPage: (locationId) => dispatch(loadLocationPage(locationId)),
   };
 }
 
