@@ -11,14 +11,27 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import Header from 'components/Header';
-
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import { selectGuideData } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { requestGuideProfile } from './actions';
+
+import Header from 'components/Header';
+import ProfileHeader from 'components/ProfileHeader';
+
+const sampleProfile = {
+  name: 'RMI Expeditions',
+  url: 'http://travelchair.com/images/blockexpeditions.png',
+  location: 'Winthrop, WA',
+  stats: [
+    { label: 'Followers', count: 4 },
+    { label: 'Photos', count: 8 },
+    { label: 'Adventures', count: 2 },
+    { label: 'Trip Reports', count: 7 },
+  ],
+}
 
 export class GuideProfilePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -44,12 +57,13 @@ export class GuideProfilePage extends React.Component { // eslint-disable-line r
 
               <div className="d-lg-none">
                 {/* Mobile/tablet view */}
-                mobile header
+                {/* Currently using dummy profile */}
+                <ProfileHeader guide {...sampleProfile} />
               </div>
 
               <div className="d-none d-lg-block">
                 {/* Desktop view */}
-                desktop header
+                <ProfileHeader guide {...sampleProfile} />
               </div>
 
               <div className="px-2">
