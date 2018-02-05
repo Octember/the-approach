@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import PageSection from 'components/PageSection';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 
-// Easily keeps image/logo within good size range.
+// Easily keeps image/logo within good size range (on mobile at least).
 const ProfileImg = styled.img`
   min-height: 75px;
   min-width: 75px;
@@ -29,17 +29,12 @@ const ProfileHeader = (props) => (
     <BorderBottomDiv>
       <ul className="list-inline row m-2 justify-content-around">
         {
-          Object.keys(props.stats).map((stat, i, arr) => {
+          props.stats.map((stat, i) => {
             return (
               <li className="list-inline-item" key={i}>
-                <p className="h3 text-info">{props.stats[stat]}</p>
+                <p className="h3 text-info">{stat.count}</p>
                 <p className="small text-muted mb-0">
-                  {/* Capitalize stat name and add space before camelcase or snakecase character (or number) */}
-                  { stat.slice(0, 1).toUpperCase() + stat.slice(1)
-                    .replace(/(_[a-z])|[_]?([A-Z0-9])/g, (match, p1, p2) => {
-                      return ' ' + (p1 ? p1.slice(1).toUpperCase() : p2 );
-                    })
-                  }
+                  {stat.label}
                 </p>
               </li>
             )
@@ -52,19 +47,22 @@ const ProfileHeader = (props) => (
 
 ProfileHeader.propTypes = {
   name: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired, // To clarify: profile-image url (not website)
   location: PropTypes.string,   // For guide (and maybe user?)
   summary: PropTypes.string,    // For users?
-  stats: PropTypes.objectOf(PropTypes.number).isRequired,
+  stats: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    count: PropTypes.number,
+  })).isRequired,
 };
 
 ProfileHeader.defaultProps = {
-  stats: {
-    followers: 0,
-    photos: 0,
-    adventures: 0,
-    tripReports: 0,
-  },
+  stats: [
+    { label: 'Followers', count: 0 },
+    { label: 'Photos', count: 0 },
+    { label: 'Adventures', count: 0 },
+    { label: 'Trip Reports', count: 0 },
+  ],
 };
 
 export default ProfileHeader;

@@ -24,12 +24,12 @@ const sampleProfile = {
   name: 'RMI Expeditions',
   url: 'http://travelchair.com/images/blockexpeditions.png',
   location: 'Winthrop, WA',
-  stats: {
-    followers: 5,
-    photos: 8,
-    adventures: 2,
-    tripReports: 1,
-  }
+  stats: [
+    { label: 'Followers', count: 4 },
+    { label: 'Photos', count: 8 },
+    { label: 'Adventures', count: 2 },
+    { label: 'Trip Reports', count: 7 },
+  ],
 }
 
 export class GuideProfilePage extends React.Component {
@@ -55,7 +55,7 @@ export class GuideProfilePage extends React.Component {
 
               <div className="d-none d-lg-block">
                 {/* Desktop view */}
-                desktop header
+                <ProfileHeader guide {...sampleProfile} />
               </div>
 
               <div className="px-2">
