@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import 'react-select/dist/react-select.css';
 import Select from 'react-select';
 import Header from 'components/Header';
 import PageSection from 'components/PageSection';
@@ -18,6 +17,8 @@ import Stars from 'components/Stars';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
+import 'react-select/dist/react-select.css';
+
 import { locationList, selectedLocationChange } from './actions';
 import { selectLocationList, selectSelectedLocationId } from './selectors';
 import reducer from './reducer';
@@ -25,8 +26,25 @@ import saga from './saga';
 
 export class WriteReviewPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   componentDidMount() {
     this.props.requestLocationList();
+  }
+
+  handleSubmit(event) {
+    const form = event.target
+    console.log(form.checkValidity());
+
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    form.classList.add('was-validated');
   }
 
   render() {
@@ -60,33 +78,32 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                 <BorderBottomDiv className="pb-2" />
               </PageSection>
 
-              <form>
+              <form className="needs-validation" onSubmit={this.handleSubmit} noValidate>
 
-                <PageSection title="Location">
-                  <BorderBottomDiv className="pb-2">
-                    {selectedLocationHeader}
-                    {/* Kinda hacky & will likely change, hide the Select if we have a selected location */}
-                    {selectedLocation ?
-                      '' :
-                      <Select
-                        name="form-field-name"
-                        value={this.props.selectedLocationId}
-                        onChange={this.props.handleSelectedLocationChange}
-                        options={locationOptions}
-                      />
-                    }
-                  </BorderBottomDiv>
-                </PageSection>
+                <BorderBottomDiv className="pb-2">
+                  <label htmlFor="locationSelection"><h4 className="font-weight-bold px-2">Location</h4></label>
+                  {selectedLocationHeader}
+
+                  {/* TODO: How to validate react-select stuff??? */}
+                  <Select
+                    name="form-field-name"
+                    id="locationSelection"
+                    value={this.props.selectedLocationId}
+                    onChange={this.props.handleSelectedLocationChange}
+                    options={locationOptions}
+                  />
+
+                </BorderBottomDiv>
 
                 {/* Rating */}
                 <PageSection title="Rating">
-                  <Stars className="d-inline-block pl-2" value={0.0} editable={true} />
+                  <Stars className="d-inline-block pl-2" value={0.0} editable />
                   <BorderBottomDiv className="pb-2" />
                 </PageSection>
 
                 {/* Report */}
                 <PageSection title="Report">
-                  <input type="text" className="form-control" placeholder="Write youre experience here" aria-describedby="basic-addon2"/>
+                  <input type="text" className="form-control" placeholder="Write your experience here" required />
                   <BorderBottomDiv className="pb-2" />
                 </PageSection>
 
@@ -101,7 +118,7 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                   </BorderBottomDiv>
                 </PageSection>
 
-                <button type="button" className="btn btn-primary btn-block">Submit</button>
+                <button type="submit" className="btn btn-primary btn-block" >Submit</button>
               </form>
             </div>
           </div>
@@ -126,7 +143,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     requestLocationList: () => dispatch(locationList()),
-    handleSelectedLocationChange: (selectedOption) => dispatch(selectedLocationChange(selectedOption))
+    handleSelectedLocationChange: (selectedOption) => dispatch(selectedLocationChange(selectedOption)),
   };
 }
 

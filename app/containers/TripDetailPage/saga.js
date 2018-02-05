@@ -17,8 +17,8 @@ export function* loadOfferData() {
   try {
     // Call our request helper (see 'utils/request')
     const data = yield call(request, requestURL);
-    console.log("Saga response:");
-    console.log(data);
+    // console.log("Saga response:");
+    // console.log(data);
     yield put(tripDataLoaded(data, tripId));
   } catch (err) {
     yield put(tripDataLoadingError(err));
