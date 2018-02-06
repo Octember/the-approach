@@ -5,7 +5,9 @@
  */
 
 import {
-  LOAD_GUIDE_PAGE_DATA, LOAD_GUIDE_PAGE_DATA_SUCCESS, LOAD_GUIDE_PAGE_DATA_ERROR
+  LOAD_GUIDE_PAGE_DATA,
+  LOAD_GUIDE_PAGE_DATA_SUCCESS,
+  LOAD_GUIDE_PAGE_DATA_ERROR,
 } from './constants';
 
 export const requestGuideProfile = (guideId) => ({
