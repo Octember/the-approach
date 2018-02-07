@@ -1,4 +1,7 @@
 import { createSelector } from 'reselect';
+import {
+  STATE_LOADING,
+} from './constants';
 
 /**
  * Direct selector to the guideProfilePage state domain
@@ -36,9 +39,16 @@ const selectGuideData = () => createSelector(
       };
     } else {
       return {
-        name: 'LOADING',
+        isLoading: true,
       };
     }
+  }
+);
+
+const selectIsLoading = () => createSelector(
+  selectGuideProfilePageDomain,
+  (state) => {
+    return state.get(STATE_LOADING);
   }
 );
 
@@ -49,4 +59,5 @@ const selectGuideData = () => createSelector(
 export {
   selectGuidePageId,
   selectGuideData,
+  selectIsLoading,
 };

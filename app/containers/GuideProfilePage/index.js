@@ -13,7 +13,7 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { selectGuideData } from './selectors';
+import { selectGuideData, selectIsLoading } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { requestGuideProfile } from './actions';
@@ -46,7 +46,7 @@ export class GuideProfilePage extends React.Component { // eslint-disable-line r
               <div className="d-lg-none">
                 {/* Mobile/tablet view */}
                 {
-                  this.props.guideData.name !== 'LOADING' &&
+                  this.props.isLoading === false &&
                   <ProfileHeader guide {...this.props.guideData}/>
                 }
               </div>
@@ -54,7 +54,7 @@ export class GuideProfilePage extends React.Component { // eslint-disable-line r
               <div className="d-none d-lg-block">
                 {/* Desktop view */}
                 {
-                  this.props.guideData.name !== 'LOADING' &&
+                  this.props.isLoading === false &&
                   <ProfileHeader guide {...this.props.guideData}/>
                 }
               </div>
@@ -88,10 +88,12 @@ GuideProfilePage.propTypes = {
       count: PropTypes.number,
     })),
   }),
+  isLoading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   guideData: selectGuideData(),
+  isLoading: selectIsLoading(),
 });
 
 function mapDispatchToProps(dispatch) {
