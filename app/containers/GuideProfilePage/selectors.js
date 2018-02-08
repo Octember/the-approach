@@ -38,18 +38,14 @@ const selectGuideData = () => createSelector(
         ],
       };
     } else {
-      return {
-        isLoading: true,
-      };
+      return {};
     }
   }
 );
 
 const selectIsLoading = () => createSelector(
   selectGuideProfilePageDomain,
-  (state) => {
-    return state.get(STATE_LOADING);
-  }
+  (state) => state.get(STATE_LOADING)
 );
 
 /*
