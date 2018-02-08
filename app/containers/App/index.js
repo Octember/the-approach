@@ -30,7 +30,7 @@ export default function App() {
       <Route exact path="/location/:locationId" component={LocationPage} />
       <Route exact path="/locationlist" component={LocationListPage} />
       <Route exact path="/guide/:guideId" component={GuideProfilePage} />
-      {/*<Route exact path="/offerlist" component={OfferListPage} />*/}
+      <Route exact path="/offerlist" component={OfferListPage} />
       <Route exact path="/trip/:tripId" component={TripDetailPage} />
       <Route component={NotFoundPage} />
     </Switch>

@@ -57,13 +57,13 @@ function NavModal() {
                 <ModalLink className="nav-link active" to="/">Home</ModalLink>
               </li>
               <li className="nav-item">
-                <ModalLink className="nav-link active" to="locationlist">Location List</ModalLink>
+                <ModalLink className="nav-link active" to="/locationlist">Location List</ModalLink>
               </li>
               <li className="nav-item">
-                <ModalLink className="nav-link active" to="offerlist">Offer List</ModalLink>
+                <ModalLink className="nav-link active" to="/offerlist">Offer List</ModalLink>
               </li>
               <li className="nav-item">
-                <ModalLink className="nav-link active" to="form">Submit Review</ModalLink>
+                <ModalLink className="nav-link active" to="/form">Submit Review</ModalLink>
               </li>
             </ul>
           </div>
