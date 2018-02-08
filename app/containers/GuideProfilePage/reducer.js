@@ -6,7 +6,10 @@
 
 import { fromJS } from 'immutable';
 import {
-  LOAD_GUIDE_PAGE_DATA, LOAD_GUIDE_PAGE_DATA_SUCCESS, LOAD_GUIDE_PAGE_DATA_ERROR, STATE_LOADING,
+  LOAD_GUIDE_PAGE_DATA,
+  LOAD_GUIDE_PAGE_DATA_SUCCESS,
+  LOAD_GUIDE_PAGE_DATA_ERROR,
+  STATE_LOADING,
 } from './constants';
 
 const initialState = fromJS({

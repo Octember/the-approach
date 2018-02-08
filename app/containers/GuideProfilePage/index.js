@@ -13,25 +13,13 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { selectGuideData } from './selectors';
+import { selectGuideData, selectIsLoading } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { requestGuideProfile } from './actions';
 
 import Header from 'components/Header';
 import ProfileHeader from 'components/ProfileHeader';
-
-const sampleProfile = {
-  name: 'RMI Expeditions',
-  url: 'http://travelchair.com/images/blockexpeditions.png',
-  location: 'Winthrop, WA',
-  stats: [
-    { label: 'Followers', count: 4 },
-    { label: 'Photos', count: 8 },
-    { label: 'Adventures', count: 2 },
-    { label: 'Trip Reports', count: 7 },
-  ],
-}
 
 export class GuideProfilePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -57,17 +45,22 @@ export class GuideProfilePage extends React.Component { // eslint-disable-line r
 
               <div className="d-lg-none">
                 {/* Mobile/tablet view */}
-                {/* Currently using dummy profile */}
-                <ProfileHeader guide {...sampleProfile} />
+                {
+                  this.props.isLoading === false &&
+                  <ProfileHeader guide {...this.props.guideData}/>
+                }
               </div>
 
               <div className="d-none d-lg-block">
                 {/* Desktop view */}
-                <ProfileHeader guide {...sampleProfile} />
+                {
+                  this.props.isLoading === false &&
+                  <ProfileHeader guide {...this.props.guideData}/>
+                }
               </div>
 
               <div className="px-2">
-                NAME: {this.props.guideData.name}
+                {this.props.guideData.aboutInfo}
               </div>
             </div>
 
@@ -85,11 +78,22 @@ GuideProfilePage.propTypes = {
   requestGuideProfilePage: PropTypes.func,
   guideData: PropTypes.shape({
     name: PropTypes.string,
+    location: PropTypes.string,
+    aboutInfo: PropTypes.string,
+    url: PropTypes.string,  // URL for logo image
+    photos: PropTypes.array,  // Guide's array of pictures
+    adventures: PropTypes.array,  // Guide's array of available planned trips (labelled "Adventures" on page)
+    stats: PropTypes.arrayOf(PropTypes.shape({
+      label: PropTypes.string,
+      count: PropTypes.number,
+    })),
   }),
+  isLoading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   guideData: selectGuideData(),
+  isLoading: selectIsLoading(),
 });
 
 function mapDispatchToProps(dispatch) {
