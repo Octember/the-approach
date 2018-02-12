@@ -38,8 +38,7 @@ export default class Auth {
     this.lock.on('authorization_error', (err) => {
       console.log(err);
       alert(`Error: ${err.error}. Check the console for further details.`);
-      history.replace('/home');
-      // history.goBack();
+      history.goBack();
     });
   }
 
@@ -51,7 +50,7 @@ export default class Auth {
       localStorage.setItem('id_token', authResult.idToken);
       localStorage.setItem('expires_at', expiresAt);
       // navigate to the home route
-      history.replace('/home');
+      history.goBack();
     }
   }
 
@@ -60,8 +59,8 @@ export default class Auth {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
-    // navigate to the home route
-    history.replace('/home');
+    // Reload current page
+    history.go(history.location);
   }
 
   isAuthenticated() {
