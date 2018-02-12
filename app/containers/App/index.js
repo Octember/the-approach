@@ -19,7 +19,6 @@ import WriteReviewPage from 'containers/WriteReviewPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import LocationPage from 'containers/LocationPage/Loadable';
 import LocationListPage from 'containers/LocationListPage/Loadable';
-import OfferListPage from 'containers/OfferListPage/Loadable';
 import TripDetailPage from 'containers/TripDetailPage/Loadable';
 import GuideProfilePage from 'containers/GuideProfilePage/Loadable';
 
@@ -34,8 +33,6 @@ export default function App() {
       <Route exact path="/trip/:tripId" component={TripDetailPage} />
       <Route exact path="/callback" component={AuthCallback} />
       <Route component={NotFoundPage} />
-
-      AuthCallback
     </Switch>
   );
 }

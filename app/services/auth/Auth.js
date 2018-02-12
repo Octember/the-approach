@@ -31,9 +31,7 @@ export default class Auth {
 
   handleAuthentication() {
     // Add a callback for Lock's `authenticated` event
-    this.lock.on('authenticated', this.setSession.bind(this)
-      // history.goBack();
-    );
+    this.lock.on('authenticated', this.setSession.bind(this));
     // Add a callback for Lock's `authorization_error` event
     this.lock.on('authorization_error', (err) => {
       console.log(err);
@@ -49,7 +47,7 @@ export default class Auth {
       localStorage.setItem('access_token', authResult.accessToken);
       localStorage.setItem('id_token', authResult.idToken);
       localStorage.setItem('expires_at', expiresAt);
-      // navigate to the home route
+      // Go back to wherever we came from
       history.goBack();
     }
   }
