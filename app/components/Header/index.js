@@ -62,7 +62,6 @@ class Header extends React.PureComponent {
         <NavBar>
           <StyledNavButton><span className="navbar-toggler-icon"/></StyledNavButton>
           <Link className="navbar-brand mr-auto ml-2 font-weight-bold" to="/">theApproach</Link>
-          <StyledSignInButton>Sign In (doesn't work)</StyledSignInButton>
           {
             !this.auth.isAuthenticated() && (
               <StyledSignInButton
@@ -74,11 +73,11 @@ class Header extends React.PureComponent {
           }
           {
             this.auth.isAuthenticated() && (
-              <StyledSignInButton
+              <button
                 onClick={this.auth.logout}
               >
                 Log Out
-              </StyledSignInButton>
+              </button>
             )
           }
         </NavBar>

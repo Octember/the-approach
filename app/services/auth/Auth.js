@@ -1,38 +1,56 @@
-import Auth0Lock from 'auth0-lock';
+import auth0 from 'auth0-js';
 import { AUTH_CONFIG } from './auth0-config';
 import history from './history';
 
 export default class Auth {
   constructor() {
-    this.lock = new Auth0Lock(AUTH_CONFIG.clientId, AUTH_CONFIG.domain, {
-      autoclose: true,
-      auth: {
-        redirectUrl: AUTH_CONFIG.callbackUrl,
-        responseType: 'token id_token',
-        audience: `https://${AUTH_CONFIG.domain}/userinfo`,
-        params: {
-          scope: 'openid',
-        },
-      },
-      languageDictionary: {
-        title: 'The Approach',
-      },
+    this.webAuth = new auth0.WebAuth({
+      domain: AUTH_CONFIG.domain,
+      clientID: AUTH_CONFIG.clientId,
+      redirectUri: AUTH_CONFIG.callbackUrl,
+      responseType: 'token id_token',
+      audience: `https://${AUTH_CONFIG.domain}/userinfo`,
     });
   }
 
-  login = () => {
-    this.lock.show();
+  passwordLogin = (user, pass) => {
+    this.webAuth.redirect.loginWithCredentials({
+      connection: 'Username-Password-Authentication',
+      username: user,
+      password: pass,
+      scope: 'openid',
+    }, (err, authResult) => {
+      // Auth tokens in the result or an error
+      console.log("Auth finished");
+      console.log(err);
+      console.log(authResult);
+    });
+  };
+
+  loginGoogle = () => {
+    this.webAuth.authorize({
+      connection: 'google-oauth2',
+    });
   };
 
   handleAuthentication = () => {
     // Add a callback for Lock's `authenticated` event
-    this.lock.on('authenticated', this.setSession.bind(this));
-    // Add a callback for Lock's `authorization_error` event
-    this.lock.on('authorization_error', (err) => {
-      console.log(err);
-      alert(`Error: ${err.error}. Check the console for further details.`);
-      history.goBack();
-    });
+    // this.lock.on('authenticated', this.setSession.bind(this));
+    // // Add a callback for Lock's `authorization_error` event
+    // this.lock.on('authorization_error', (err) => {
+    //   console.log(err);
+    //   alert(`Error: ${err.error}. Check the console for further details.`);
+    //   history.goBack();
+    // });
+    this.webAuth.parseHash({ hash: window.location.hash }, this.handleAuthenticationResult);
+  };
+
+  handleAuthenticationResult = (err, authResult) => {
+    if (err) {
+      return console.log(err);
+    }
+
+    return this.setSession(authResult);
   };
 
   setSession(authResult) {
