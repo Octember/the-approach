@@ -14,11 +14,11 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 
+import AuthCallback from 'components/AuthCallback';
 import WriteReviewPage from 'containers/WriteReviewPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import LocationPage from 'containers/LocationPage/Loadable';
 import LocationListPage from 'containers/LocationListPage/Loadable';
-import OfferListPage from 'containers/OfferListPage/Loadable';
 import TripDetailPage from 'containers/TripDetailPage/Loadable';
 import GuideProfilePage from 'containers/GuideProfilePage/Loadable';
 
@@ -30,8 +30,8 @@ export default function App() {
       <Route exact path="/location/:locationId" component={LocationPage} />
       <Route exact path="/locationlist" component={LocationListPage} />
       <Route exact path="/guide/:guideId" component={GuideProfilePage} />
-      {/*<Route exact path="/offerlist" component={OfferListPage} />*/}
       <Route exact path="/trip/:tripId" component={TripDetailPage} />
+      <Route exact path="/callback" component={AuthCallback} />
       <Route component={NotFoundPage} />
     </Switch>
   );
