@@ -90,7 +90,12 @@ class SignInModal extends React.Component {
                   {/*The below buttons are obviously placeholders. They match the Zeplin layout.
                     Their size and content may need to be changed, as the flexibility to adjust such
                     buttons is very limited by FB's and Twitter's APIs (but there could be a workaround).*/}
-                  <SocialSignInButton className="float-left">FB</SocialSignInButton>
+                  <SocialSignInButton
+                    className="float-left"
+                    onClick={this.auth.loginFacebook}
+                  >
+                    Facebook
+                  </SocialSignInButton>
                   <SocialSignInButton
                     className="float-right bg-info"
                     onClick={this.auth.loginGoogle}

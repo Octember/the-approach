@@ -27,6 +27,12 @@ export default class Auth {
     });
   };
 
+  loginFacebook = () => {
+    this.webAuth.authorize({
+      connection: 'facebook',
+    });
+  };
+
   loginGoogle = () => {
     this.webAuth.authorize({
       connection: 'google-oauth2',
@@ -47,10 +53,12 @@ export default class Auth {
 
   handleAuthenticationResult = (err, authResult) => {
     if (err) {
-      return console.log(err);
+      console.log(err);
+      // TODO: Redirect back somewhere correct if we came from an SSO and failed somehow
+      // Facebook in particular
+    } else {
+      this.setSession(authResult);
     }
-
-    return this.setSession(authResult);
   };
 
   setSession(authResult) {
