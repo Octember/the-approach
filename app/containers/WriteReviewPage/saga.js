@@ -1,24 +1,45 @@
-
-import {
-  LOCATION_LIST_ACTION, STATE_LOCATIONS_LOADING
-} from './constants';
 import { call, put, select, takeLatest } from "redux-saga/effects";
 import request from 'utils/request';
-import { locationListLoaded, locationListLoadingError } from './actions';
+
+import {
+  LOCATION_LIST_ACTION,
+  STATE_LOCATIONS_LOADING,
+  GUIDE_LIST_ACTION,
+  STATE_GUIDES_LOADING,
+} from './constants';
+
+import {
+  locationListLoaded,
+  locationListLoadingError,
+  guideListLoaded,
+  guideListLoadingError,
+} from './actions';
 
 export function* loadLocationList() {
 
-  // const requestURL = 'http://localhost:8888/location';
   const requestURL = 'http://approach-server-1687250913.us-east-2.elb.amazonaws.com/location';
 
   try {
     // Call our request helper (see 'utils/request')
     const data = yield call(request, requestURL);
-    // console.log("Saga response:");
-    // console.log(data);
+
     yield put(locationListLoaded(data));
   } catch (err) {
     yield put(locationListLoadingError(err));
+  }
+}
+
+export function* loadGuideList() {
+
+  const requestURL = 'http://approach-server-1687250913.us-east-2.elb.amazonaws.com/guide/';
+
+  try {
+    // Call our request helper (see 'utils/request')
+    const data = yield call(request, requestURL);
+
+    yield put(guideListLoaded(data));
+  } catch (err) {
+    yield put(guideListLoadingError(err));
   }
 }
 
@@ -31,4 +52,5 @@ export default function* saga() {
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
   yield takeLatest(LOCATION_LIST_ACTION, loadLocationList);
+  yield takeLatest(GUIDE_LIST_ACTION, loadGuideList);
 }

@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect';
 import {
-  STATE_LOCATION_DROPDOWN_LIST, STATE_SELECTED_LOCATION_ID,
+  STATE_LOCATION_DROPDOWN_LIST,
+  STATE_GUIDE_DROPDOWN_LIST,
+  STATE_SELECTED_LOCATION_ID,
 } from './constants';
 
 /**
@@ -13,11 +15,12 @@ const selectWriteReviewPageDomain = (state) => state.get('WriteReviewPage');
  */
 const selectLocationList = () => createSelector(
   selectWriteReviewPageDomain,
-  (domain) => {
-    const x = domain.get(STATE_LOCATION_DROPDOWN_LIST).toJS();
-    // console.log(x)
-    return x;
-  }
+  (domain) => domain.get(STATE_LOCATION_DROPDOWN_LIST).toJS()
+);
+
+const selectGuideList = () => createSelector(
+  selectWriteReviewPageDomain,
+  (domain) => domain.get(STATE_GUIDE_DROPDOWN_LIST).toJS()
 );
 
 const selectSelectedLocationId = () => createSelector(
@@ -25,13 +28,13 @@ const selectSelectedLocationId = () => createSelector(
   (domain) => domain.get(STATE_SELECTED_LOCATION_ID)
 );
 
-
 /**
  * Default selector used by WriteReviewPage
  */
 
 export {
   selectLocationList,
+  selectGuideList,
   selectSelectedLocationId,
   selectWriteReviewPageDomain,
 };

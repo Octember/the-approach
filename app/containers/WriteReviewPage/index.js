@@ -9,31 +9,67 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import Select from 'react-select';
-import Header from 'components/Header';
-import PageSection from 'components/PageSection';
-import BorderBottomDiv from 'components/shared/BorderBottomDiv';
-import Stars from 'components/Stars';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
-import 'react-select/dist/react-select.css';
-
-import { locationList, selectedLocationChange } from './actions';
-import { selectLocationList, selectSelectedLocationId } from './selectors';
+import { locationList, guideList, selectedLocationChange } from './actions';
+import { selectLocationList, selectGuideList, selectSelectedLocationId } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+
+import Helmet from 'react-helmet'
+
+import Header from 'components/Header';
+import PageSection from 'components/PageSection';
+import BorderBottomDiv from 'components/shared/BorderBottomDiv';
+import Select from 'components/Select';
+import Stars from 'components/Stars';
+import GuideReviewForm from 'components/GuideReviewForm';
 
 export class WriteReviewPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   constructor(props) {
     super(props);
-
+    this.handleDetailsChange = this.handleDetailsChange.bind(this);
+    this.handleConfirmGuided = this.handleConfirmGuided.bind(this);
+    this.handleSelectGuideId = this.handleSelectGuideId.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    // State should contain form data for easy validation and submit.
+    this.state = {
+      // Should figure out a way to pass selectedId props based on a review page we're on
+      selectedLocationId: props.selectedLocationId ? props.selectedLocationId : null,
+      tripRating: 0,
+      details: '',
+      selectedGuideId: props.selectedGuideId ? props.selectedGuideId : null,
+      guideRating: 0,
+    }
   }
 
   componentDidMount() {
+    // API call
     this.props.requestLocationList();
+  }
+
+  handleDetailsChange(e) {
+    this.setState({ details: e.target.value });
+  }
+
+  // This function is passed to GuideReviewForm component
+  handleConfirmGuided() {
+    // API call
+    this.props.requestGuideList();
+  }
+
+  // This function is passed to GuideReviewForm component
+  handleSelectGuideId(guide) {
+    if(guide) {
+    console.log(guide);
+      this.setState({ selectedGuideId: guide.value});
+    }
+    else {
+      this.setState({ selectedGuideId: null });
+    }
   }
 
   handleSubmit(event) {
@@ -53,8 +89,12 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
       label: location.title,
     }));
 
+    const guideOptions = this.props.guideList.map((guide) => ({
+      value: guide.guide.id,
+      label: guide.guide.name,
+    }));
+
     const selectedLocation = this.props.locationList.find((location) => location.id === this.props.selectedLocationId);
-    // console.log(selectedLocation);
 
     const selectedLocationHeader = selectedLocation ? (
       <div>
@@ -64,10 +104,12 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 
     return (
       <div>
-        {/*<Helmet>*/}
-        {/*<title>LocationPage</title>*/}
-        {/*<meta name="description" content="Description of LocationPage"/>*/}
-        {/*</Helmet>*/}
+        {
+          <Helmet>
+          <title>Trip Report</title>
+          <meta name="description" content="Trip Report form"/>
+          </Helmet>
+        }
 
         <div className="container">
           <Header />
@@ -84,7 +126,12 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                   <label htmlFor="locationSelection"><h4 className="font-weight-bold px-2">Location</h4></label>
                   {selectedLocationHeader}
 
-                  {/* TODO: How to validate react-select stuff??? */}
+                  {/*
+                    TODO: How to validate react-select stuff???
+                    NOTE(AK): I would suggest keeping user-selected values (e.g., selectedLocationId) in the component's state.
+                      Since this is a form component, it should be OK to store user-input data in its state,
+                      and that will probably make it easier to validate on submit (and even before submitting).
+                  */}
                   <Select
                     name="form-field-name"
                     id="locationSelection"
@@ -97,20 +144,31 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 
                 {/* Rating */}
                 <PageSection title="Rating">
-                  <Stars className="d-inline-block pl-2" value={0.0} editable />
-                  <BorderBottomDiv className="pb-2" />
+                  <Stars className="d-inline-block pl-2" value={0.0} size={50} editable />
+                  <BorderBottomDiv className="pb-0" />
                 </PageSection>
 
                 {/* Report */}
                 <PageSection title="Report">
-                  <input type="text" className="form-control" placeholder="Write your experience here" required />
+                  <input type="text" className="form-control"
+                  placeholder="Write your experience here"
+                  value={this.state.details}
+                  onChange={this.handleDetailsChange}
+                  required
+                />
                   <BorderBottomDiv className="pb-2" />
                 </PageSection>
 
-                {/* Beta */}
-                <PageSection title="Beta">
-                  <BorderBottomDiv className="pb-2" />
-                </PageSection>
+                {/* Guide Review
+                  Depending on type of review page, we can pass certain props (like if we already know the guide)
+                */}
+                <GuideReviewForm
+                  isGuided={!!this.state.selectedGuideId || !!guideOptions.length}
+                  getGuideList={this.handleConfirmGuided}
+                  guideOptions={guideOptions}
+                  handleSelectGuide={this.handleSelectGuideId}
+                  selectedGuideId={this.state.selectedGuideId}
+                />
 
                 {/* Add Photo/Video */}
                 <PageSection title="Add Photo/Video">
@@ -118,7 +176,7 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                   </BorderBottomDiv>
                 </PageSection>
 
-                <button type="submit" className="btn btn-primary btn-block" >Submit</button>
+                <button type="submit" className="btn btn-lg btn-primary btn-block" >Submit</button>
               </form>
             </div>
           </div>
@@ -129,20 +187,27 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 }
 
 WriteReviewPage.propTypes = {
-  requestLocationList: PropTypes.func,
-  handleSelectedLocationChange: PropTypes.func,
-  selectedLocationId: PropTypes.number,
+  // Props from mapStateToProps
   locationList: PropTypes.array,
+  selectedLocationId: PropTypes.number,
+  guideList: PropTypes.array,
+
+  // Functions from mapDispatchToProps
+  requestLocationList: PropTypes.func,
+  requestGuideList: PropTypes.func,
+  handleSelectedLocationChange: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   locationList: selectLocationList(),
   selectedLocationId: selectSelectedLocationId(),
+  guideList: selectGuideList(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     requestLocationList: () => dispatch(locationList()),
+    requestGuideList: () => dispatch(guideList()),
     handleSelectedLocationChange: (selectedOption) => dispatch(selectedLocationChange(selectedOption)),
   };
 }
