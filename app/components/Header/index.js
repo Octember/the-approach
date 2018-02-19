@@ -6,6 +6,8 @@ import NavModal from 'components/NavModal';
 import SignInModal from 'components/SignInModal';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 
+import Auth from 'services/auth/Auth';
+
 const StyledHeader = styled.div.attrs({
   className: 'row',
 })`
@@ -46,18 +48,44 @@ const StyledSignInButton = styled.button.attrs({
   'data-target': '#signin-modal',
 })``;
 
-function Header() {
-  return (
-    <StyledHeader>
-      <NavBar>
-        <StyledNavButton><span className="navbar-toggler-icon" /></StyledNavButton>
-        <Link className="navbar-brand mr-auto ml-2 font-weight-bold" to="/">theApproach</Link>
-        <StyledSignInButton>Sign In</StyledSignInButton>
-      </NavBar>
-      <SignInModal />
-      <NavModal />
-    </StyledHeader>
-  );
+class Header extends React.PureComponent {
+
+  constructor(props) {
+    super(props);
+
+    this.auth = new Auth();
+  }
+
+  render() {
+    return (
+      <StyledHeader>
+        <NavBar>
+          <StyledNavButton><span className="navbar-toggler-icon"/></StyledNavButton>
+          <Link className="navbar-brand mr-auto ml-2 font-weight-bold" to="/">theApproach</Link>
+          {
+            !this.auth.isAuthenticated() && (
+              <StyledSignInButton
+                onClick={this.auth.login}
+              >
+                Log In
+              </StyledSignInButton>
+            )
+          }
+          {
+            this.auth.isAuthenticated() && (
+              <button
+                onClick={this.auth.logout}
+              >
+                Log Out
+              </button>
+            )
+          }
+        </NavBar>
+        <SignInModal />
+        <NavModal />
+      </StyledHeader>
+    );
+  }
 }
 
 Header.propTypes = {};
