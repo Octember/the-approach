@@ -36,10 +36,19 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
     this.state = {
       // Should figure out a way to pass selectedId props based on a review page we're on
       selectedLocationId: props.selectedLocationId ? props.selectedLocationId : null,
-      tripRating: 0,
+      tripRating: null,
       details: '',
       selectedGuideId: props.selectedGuideId ? props.selectedGuideId : null,
-      guideRating: 0,
+      guideRating: null,
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.selectedLocationId !== this.state.selectedLocationId) {
+      this.setState({
+        selectedLocationId: nextProps.selectedLocationId,
+        tripRating: null, // Clear rating when selection changes (unsure what behavior we want right now)
+      });
     }
   }
 
@@ -50,6 +59,13 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 
   handleDetailsChange = (e) => { this.setState({ details: e.target.value }); };
 
+  // This function is passed to the Stars component along with a target prop (string) specifying the key to update.
+  assignRating = (ratingTarget, ratingValue) => {
+    this.setState({
+      [ratingTarget]: ratingValue,
+    });
+  }
+
   // This function is passed to GuideReviewCard component
   handleConfirmGuided = () => {
     // API call
@@ -59,10 +75,16 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
   // This function is passed to GuideReviewCard component
   handleSelectGuideId = (guide) => {
     if(guide) {
-      this.setState({ selectedGuideId: guide.value});
+      this.setState({
+        selectedGuideId: guide.value,
+        guideRating: null,  // Clear rating when selection changes (to match behavior for location selection)
+      });
     }
     else {
-      this.setState({ selectedGuideId: null });
+      this.setState({
+        selectedGuideId: null,
+        guideRating: null,
+      });
     }
   }
 
@@ -138,7 +160,14 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 
                 {/* Rating */}
                 <PageSection title="Rating">
-                  <Stars className="d-inline-block pl-2" value={0.0} size={50} editable />
+                  <Stars
+                    className="pl-2"
+                    value={this.state.tripRating !== null ? this.state.tripRating : 0}
+                    size={50}
+                    editable={!!this.props.selectedLocationId}
+                    handleRatingChange={this.assignRating}
+                    target="tripRating"
+                  />
                   <BorderBottomDiv className="pb-0" />
                 </PageSection>
 
@@ -162,6 +191,9 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                   guideOptions={guideOptions}
                   handleSelectGuide={this.handleSelectGuideId}
                   selectedGuideId={this.state.selectedGuideId}
+                  guideRatingValue={this.state.guideRating !== null ? this.state.guideRating : 0}
+                  ratingHandler={this.assignRating}
+                  ratingTarget="guideRating"
                 />
 
                 {/* Add Photo/Video */}

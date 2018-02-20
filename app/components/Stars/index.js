@@ -17,15 +17,19 @@ const EditDisabledOverlay = styled(ReactStars)`
 `
 
 function Stars(props) {
+  // Remove Bootstrap display classes ("d-*") so there aren't conflicts with setting the overlay's display
+  const classesWithoutDisplay = props.className ? props.className.replace(/\bd-\S+\s?/g, '').trim() : "";
+
   return (
     <div className="position-relative">
       <ReactStars
         count={5}
         value={props.value}
         size={props.size}
-        edit={true}
+        edit={props.handleRatingChange ? true : false}
         className={props.className}
         color1="lightgray"
+        onChange={ props.handleRatingChange ? (value) => props.handleRatingChange(props.target, value) : undefined}
       >
       </ReactStars>
       {/* Had to create a controllable overlay, because ReactStars doesn't update its state
@@ -35,7 +39,10 @@ function Stars(props) {
         value={0}
         size={props.size}
         edit={false}
-        className={"position-absolute " + (props.editable ? "d-none" : "d-block")}
+
+        className={
+          ( (props.editable || !props.handleRatingChange) ? "d-none " : "d-block " ) + "position-absolute " + classesWithoutDisplay
+        }
         color1={"#F9F9F9" /* Same color as Select component's bg when disabled */}
       />
     </div>
@@ -46,11 +53,13 @@ Stars.propTypes = {
   value: PropTypes.number.isRequired,
   editable: PropTypes.bool,
   className: PropTypes.string,
+  handleRatingChange: PropTypes.func,
+  target: PropTypes.string,
 };
 
 Stars.defaultProps = {
   size: 20,
-  editable: true,
+  editable: false,
 }
 
 export default Stars;

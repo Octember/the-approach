@@ -35,7 +35,6 @@ class GuideReviewForm extends React.Component {
   componentWillUpdate(nextProps) {
     // Do another API call if, somehow, the options array's length changes
     if(this.props.guideOptions.length && nextProps.guideOptions.length !== this.props.guideOptions.length) {
-      console.log('componentWillUpdate newAPIcall:', nextProps.guideOptions);
       this.props.getGuideList();  // lifting up state: API call is handled by WriteReviewPage container
     }
   }
@@ -86,10 +85,12 @@ class GuideReviewForm extends React.Component {
           <label className={"d-flex align-self-center mb-0 " + (!!this.props.selectedGuideId ? "" : "text-secondary")}>
             Rate your guide:
           </label>
-          <Stars className="d-flex"
+          <Stars
             size={35}
             editable={Boolean(this.props.selectedGuideId)}
-            value={0.0}
+            value={this.props.guideRatingValue}
+            handleRatingChange={this.props.ratingHandler}
+            target={this.props.ratingTarget}
           />
         </div>
         <BorderBottomDiv className="pb-2" />
@@ -105,6 +106,8 @@ GuideReviewForm.propTypes = {
     { value: PropTypes.number, label: PropTypes.string }
   )),
   handleSelectGuide: PropTypes.func.isRequired,
+  ratingHandler: PropTypes.func.isRequired,
+  ratingTarget: PropTypes.string.isRequired,
 };
 
 GuideReviewForm.defaultProps = {
