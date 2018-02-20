@@ -12,13 +12,13 @@ import styled from 'styled-components';
 import ReactSelect from 'react-select';
 import 'react-select/dist/react-select.css';
 
-const EditDisabledOverlay = styled(ReactSelect)`
+const StyledSelect = styled(ReactSelect)`
   z-index: 2;
 `
 
 function Select(props) {
   return (
-      <EditDisabledOverlay {...props} />
+      <StyledSelect {...props} />
   );
 }
 

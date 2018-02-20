@@ -52,7 +52,7 @@ class GuideReviewForm extends React.Component {
     if(!isGuided) {
       this.props.handleSelectGuide(null);
     }
-    else if(isGuided && !this.props.guideOptions.length) {
+    else if(!this.props.guideOptions.length) {
       // Do API call if "yes" is selected and options array is currently empty
       this.props.getGuideList();
     }
@@ -62,12 +62,12 @@ class GuideReviewForm extends React.Component {
     return (
       <PageSection title="Was the trip guided?">
         {/* Yes/No buttons */}
-        <div className="btn-group-lg btn-group-toggle d-flex mx-3" data-toggle="buttons" onClick={this.handleButtonClick}>
-          <label className="btn btn-block mr-3 btn-success">
+        <div className="btn-group-md btn-group-toggle d-flex mx-3" data-toggle="buttons" onClick={this.handleButtonClick}>
+          <label className="btn btn-block mr-3 btn-outline-primary">
             <input type="radio" value="guided" autoComplete="off"/>
             Yes
           </label>
-          <label className="btn btn-block mt-0 btn-danger">
+          <label className="btn btn-block mt-0 btn-outline-secondary">
             <input type="radio" value="notGuided" autoComplete="off"/>
             No
           </label>
@@ -88,7 +88,7 @@ class GuideReviewForm extends React.Component {
           </label>
           <Stars className="d-flex"
             size={35}
-            editable={!!this.props.selectedGuideId}
+            editable={Boolean(this.props.selectedGuideId)}
             value={0.0}
           />
         </div>

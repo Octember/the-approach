@@ -24,15 +24,12 @@ import PageSection from 'components/PageSection';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import Select from 'components/Select';
 import Stars from 'components/Stars';
-import GuideReviewForm from 'components/GuideReviewForm';
+import GuideReviewCard from './GuideReviewCard';
 
 export class WriteReviewPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   constructor(props) {
     super(props);
-    this.handleDetailsChange = this.handleDetailsChange.bind(this);
-    this.handleConfirmGuided = this.handleConfirmGuided.bind(this);
-    this.handleSelectGuideId = this.handleSelectGuideId.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     // State should contain form data for easy validation and submit.
@@ -51,20 +48,17 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
     this.props.requestLocationList();
   }
 
-  handleDetailsChange(e) {
-    this.setState({ details: e.target.value });
-  }
+  handleDetailsChange = (e) => { this.setState({ details: e.target.value }); };
 
-  // This function is passed to GuideReviewForm component
-  handleConfirmGuided() {
+  // This function is passed to GuideReviewCard component
+  handleConfirmGuided = () => {
     // API call
     this.props.requestGuideList();
   }
 
-  // This function is passed to GuideReviewForm component
-  handleSelectGuideId(guide) {
+  // This function is passed to GuideReviewCard component
+  handleSelectGuideId = (guide) => {
     if(guide) {
-    console.log(guide);
       this.setState({ selectedGuideId: guide.value});
     }
     else {
@@ -162,8 +156,8 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                 {/* Guide Review
                   Depending on type of review page, we can pass certain props (like if we already know the guide)
                 */}
-                <GuideReviewForm
-                  isGuided={!!this.state.selectedGuideId || !!guideOptions.length}
+                <GuideReviewCard
+                  isGuided={Boolean(this.state.selectedGuideId || guideOptions.length)}
                   getGuideList={this.handleConfirmGuided}
                   guideOptions={guideOptions}
                   handleSelectGuide={this.handleSelectGuideId}
