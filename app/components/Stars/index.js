@@ -29,7 +29,7 @@ function Stars(props) {
         edit={props.handleRatingChange ? true : false}
         className={props.className}
         color1="lightgray"
-        onChange={ props.handleRatingChange ? (value) => props.handleRatingChange(props.target, value) : undefined}
+        onChange={ props.handleRatingChange ? (value) => props.handleRatingChange(value) : undefined}
       >
       </ReactStars>
       {/* Had to create a controllable overlay, because ReactStars doesn't update its state
@@ -54,7 +54,6 @@ Stars.propTypes = {
   editable: PropTypes.bool,
   className: PropTypes.string,
   handleRatingChange: PropTypes.func,
-  target: PropTypes.string,
 };
 
 Stars.defaultProps = {

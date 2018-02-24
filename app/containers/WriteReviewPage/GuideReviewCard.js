@@ -7,52 +7,42 @@ import PageSection from 'components/PageSection';
 import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import Stars from 'components/Stars';
 
-class GuideReviewForm extends React.Component {
+class GuideReviewCard extends React.Component {
   constructor(props) {
     super(props);
-    this.handleButtonClick = this.handleButtonClick.bind(this);
-    this.state = {
-      isGuided: props.isGuided,
-    };
   }
 
   componentWillMount() {
-    if(this.props.isGuided) {
-      this.props.getGuideList();  // lifting up state: API call is handled by WriteReviewPage container
+    // Grab guide list immediately (API call) if somehow we know it's guided but there's no guide selected.
+    if(this.props.isGuided && (this.props.selectedGuideId !== null)) {
+      this.props.getGuideList();
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    // Update if...
-    const doUpdate = ((nextState.isGuided !== this.state.isGuided) //...switching between yes/no options (affects disabled status for Select component)
-      || (nextProps.guideOptions.length !== this.props.guideOptions.length) //...or guide list is updated (affects Select component's options)
-      || (nextProps.selectedGuideId !== this.props.selectedGuideId) //...or a guide is selected (affects Select component and disabled status for Stars component)
-    );
-
-    return doUpdate;
-  }
-
-  componentWillUpdate(nextProps) {
+  componentWillReceiveProps(nextProps) {
     // Do another API call if, somehow, the options array's length changes
-    if(this.props.guideOptions.length && nextProps.guideOptions.length !== this.props.guideOptions.length) {
-      this.props.getGuideList();  // lifting up state: API call is handled by WriteReviewPage container
+    if(this.props.guideOptions.length && (nextProps.guideOptions.length !== this.props.guideOptions.length)) {
+      this.props.getGuideList();
+    }
+
+    // Reset rating if guide status changes
+    if((nextProps.selectedGuideId !== this.props.selectedGuideId) || (nextProps.isGuided !== this.props.isGuided)) {
+      this.props.ratingHandler(null);
     }
   }
 
-  handleButtonClick(e) {
+  handleButtonClick = (e) => {
     // There are edge cases where clicking on the edge of a button can give undefined value
-    const isGuided = e.target.firstChild.value ? e.target.firstChild.value === "guided" : this.state.isGuided;
+    const isGuided = e.target.firstChild.value ? e.target.firstChild.value === "guided" : this.props.isGuided;
 
-    this.setState({
-      isGuided: isGuided,
-    });
+    this.props.handleIsGuided(isGuided);  // Action function passed from WriteReviewPage container
 
-    // If "No" is selected, clear the Select component (this disables the rating as well)
+    // If "No" is selected, clear the Select component (this disables and resets the rating as well)
     if(!isGuided) {
       this.props.handleSelectGuide(null);
     }
     else if(!this.props.guideOptions.length) {
-      // Do API call if "yes" is selected and options array is currently empty
+      // Do API call if "Yes" is selected and options array is currently empty
       this.props.getGuideList();
     }
   }
@@ -63,7 +53,7 @@ class GuideReviewForm extends React.Component {
         {/* Yes/No buttons */}
         <div className="btn-group-md btn-group-toggle d-flex mx-3" data-toggle="buttons" onClick={this.handleButtonClick}>
           <label className="btn btn-block mr-3 btn-outline-primary">
-            <input type="radio" value="guided" autoComplete="off"/>
+            <input type="radio" value="guided" autoComplete="off" />
             Yes
           </label>
           <label className="btn btn-block mt-0 btn-outline-secondary">
@@ -73,8 +63,8 @@ class GuideReviewForm extends React.Component {
         </div>
         {/* Guide-list dropdown menu */}
         <Select className="my-2"
-          disabled={!this.state.isGuided}
-          required={this.state.isGuided}
+          disabled={!this.props.isGuided}
+          required={this.props.isGuided}
           value={this.props.selectedGuideId}
           onChange={this.props.handleSelectGuide}
           options={this.props.guideOptions}
@@ -82,7 +72,7 @@ class GuideReviewForm extends React.Component {
         />
         {/* Rate using Stars component */}
         <div className="d-flex flex-row justify-content-around">
-          <label className={"d-flex align-self-center mb-0 " + (!!this.props.selectedGuideId ? "" : "text-secondary")}>
+          <label className={"d-flex align-self-center mb-0 " + (this.props.selectedGuideId !== null ? "" : "text-secondary")}>
             Rate your guide:
           </label>
           <Stars
@@ -90,7 +80,6 @@ class GuideReviewForm extends React.Component {
             editable={Boolean(this.props.selectedGuideId)}
             value={this.props.guideRatingValue}
             handleRatingChange={this.props.ratingHandler}
-            target={this.props.ratingTarget}
           />
         </div>
         <BorderBottomDiv className="pb-2" />
@@ -99,21 +88,25 @@ class GuideReviewForm extends React.Component {
   }
 }
 
-GuideReviewForm.propTypes = {
+GuideReviewCard.propTypes = {
   isGuided: PropTypes.bool,
   selectedGuideId: PropTypes.number,
   guideOptions: PropTypes.arrayOf(PropTypes.shape(
     { value: PropTypes.number, label: PropTypes.string }
   )),
+
+  getGuideList: PropTypes.func.isRequired,  // Selector from parent container that does API call
+
+  // Handlers
+  handleIsGuided: PropTypes.func.isRequired,
   handleSelectGuide: PropTypes.func.isRequired,
   ratingHandler: PropTypes.func.isRequired,
-  ratingTarget: PropTypes.string.isRequired,
 };
 
-GuideReviewForm.defaultProps = {
+GuideReviewCard.defaultProps = {
   isGuided: false,
   selectedGuideId: null,
   guideOptions: [],
 };
 
-export default GuideReviewForm;
+export default GuideReviewCard;

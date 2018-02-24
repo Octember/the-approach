@@ -12,8 +12,8 @@ import { compose } from 'redux';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
-import { locationList, guideList, selectedLocationChange } from './actions';
-import { selectLocationList, selectGuideList, selectSelectedLocationId } from './selectors';
+import * as actions from './actions';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -30,65 +30,22 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
-    // State should contain form data for easy validation and submit.
-    this.state = {
-      // Should figure out a way to pass selectedId props based on a review page we're on
-      selectedLocationId: props.selectedLocationId ? props.selectedLocationId : null,
-      tripRating: null,
-      details: '',
-      selectedGuideId: props.selectedGuideId ? props.selectedGuideId : null,
-      guideRating: null,
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.selectedLocationId !== this.state.selectedLocationId) {
-      this.setState({
-        selectedLocationId: nextProps.selectedLocationId,
-        tripRating: null, // Clear rating when selection changes (unsure what behavior we want right now)
-      });
-    }
   }
 
   componentDidMount() {
-    // API call
     this.props.requestLocationList();
   }
 
-  handleDetailsChange = (e) => { this.setState({ details: e.target.value }); };
-
-  // This function is passed to the Stars component along with a target prop (string) specifying the key to update.
-  assignRating = (ratingTarget, ratingValue) => {
-    this.setState({
-      [ratingTarget]: ratingValue,
-    });
-  }
-
-  // This function is passed to GuideReviewCard component
-  handleConfirmGuided = () => {
-    // API call
-    this.props.requestGuideList();
-  }
-
-  // This function is passed to GuideReviewCard component
-  handleSelectGuideId = (guide) => {
-    if(guide) {
-      this.setState({
-        selectedGuideId: guide.value,
-        guideRating: null,  // Clear rating when selection changes (to match behavior for location selection)
-      });
-    }
-    else {
-      this.setState({
-        selectedGuideId: null,
-        guideRating: null,
-      });
+  componentWillReceiveProps(nextProps) {
+    // Reset trip rating if selected location changes
+    if(nextProps.selectedLocationId !== this.props.selectedLocationId) {
+      this.props.handleTripRatingChange(null);
     }
   }
 
-  handleSubmit(event) {
+  /***** Custom Methods *****/
+
+  handleSubmit = (event) => {
     const form = event.target
     console.log(form.checkValidity());
 
@@ -98,6 +55,7 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
     }
     form.classList.add('was-validated');
   }
+  /***** End Custom Methods *****/
 
   render() {
     const locationOptions = this.props.locationList.map((location) => ({
@@ -144,9 +102,6 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 
                   {/*
                     TODO: How to validate react-select stuff???
-                    NOTE(AK): I would suggest keeping user-selected values (e.g., selectedLocationId) in the component's state.
-                      Since this is a form component, it should be OK to store user-input data in its state,
-                      and that will probably make it easier to validate on submit (and even before submitting).
                   */}
                   <Select
                     name="form-field-name"
@@ -162,11 +117,10 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                 <PageSection title="Rating">
                   <Stars
                     className="pl-2"
-                    value={this.state.tripRating !== null ? this.state.tripRating : 0}
+                    value={this.props.tripRating !== null ? this.props.tripRating : 0}
                     size={50}
-                    editable={!!this.props.selectedLocationId}
-                    handleRatingChange={this.assignRating}
-                    target="tripRating"
+                    editable={Boolean(this.props.selectedLocationId)}
+                    handleRatingChange={this.props.handleTripRatingChange}
                   />
                   <BorderBottomDiv className="pb-0" />
                 </PageSection>
@@ -175,8 +129,8 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                 <PageSection title="Report">
                   <input type="text" className="form-control"
                   placeholder="Write your experience here"
-                  value={this.state.details}
-                  onChange={this.handleDetailsChange}
+                  value={this.props.tripReportDetails}
+                  onChange={this.props.handleDetailsChange}
                   required
                 />
                   <BorderBottomDiv className="pb-2" />
@@ -186,14 +140,15 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                   Depending on type of review page, we can pass certain props (like if we already know the guide)
                 */}
                 <GuideReviewCard
-                  isGuided={Boolean(this.state.selectedGuideId || guideOptions.length)}
-                  getGuideList={this.handleConfirmGuided}
+                  isGuided={this.props.isGuided}
                   guideOptions={guideOptions}
-                  handleSelectGuide={this.handleSelectGuideId}
-                  selectedGuideId={this.state.selectedGuideId}
-                  guideRatingValue={this.state.guideRating !== null ? this.state.guideRating : 0}
-                  ratingHandler={this.assignRating}
-                  ratingTarget="guideRating"
+                  selectedGuideId={this.props.selectedGuideId}
+                  guideRatingValue={this.props.guideRating !== null ? this.props.guideRating : 0}
+                  // Handlers
+                  handleIsGuided={this.props.toggleIsGuided}
+                  getGuideList={this.props.requestGuideList}
+                  handleSelectGuide={this.props.handleSelectedGuideChange}
+                  ratingHandler={this.props.handleGuideRatingChange}
                 />
 
                 {/* Add Photo/Video */}
@@ -216,25 +171,56 @@ WriteReviewPage.propTypes = {
   // Props from mapStateToProps
   locationList: PropTypes.array,
   selectedLocationId: PropTypes.number,
-  guideList: PropTypes.array,
 
-  // Functions from mapDispatchToProps
+  tripRating: PropTypes.number,
+  tripReportDetails: PropTypes.string,
+
+  isGuided: PropTypes.bool,
+  guideList: PropTypes.array,
+  selectedGuideId: PropTypes.number,
+  guideRating: PropTypes.number,
+
+  // Methods from mapDispatchToProps
   requestLocationList: PropTypes.func,
-  requestGuideList: PropTypes.func,
   handleSelectedLocationChange: PropTypes.func,
+
+  toggleIsGuided: PropTypes.func,
+  requestGuideList: PropTypes.func,
+  handleSelectedGuideChange: PropTypes.func,
+
+  handleTripRatingChange: PropTypes.func,
+
+  handleDetailsChange: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  locationList: selectLocationList(),
-  selectedLocationId: selectSelectedLocationId(),
-  guideList: selectGuideList(),
+  locationList: selectors.selectLocationList(),
+  selectedLocationId: selectors.selectSelectedLocationId(),
+
+  isGuided: selectors.selectIsGuided(),
+  guideList: selectors.selectGuideList(),
+  selectedGuideId: selectors.selectSelectedGuideId(),
+
+  tripRating: selectors.selectTripRating(),
+  guideRating: selectors.selectGuideRating(),
+
+  tripReportDetails: selectors.selectTripReportDetails(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    requestLocationList: () => dispatch(locationList()),
-    requestGuideList: () => dispatch(guideList()),
-    handleSelectedLocationChange: (selectedOption) => dispatch(selectedLocationChange(selectedOption)),
+    // Location
+    requestLocationList: () => dispatch(actions.locationList()),
+    handleSelectedLocationChange: (selectedOption) => dispatch(actions.selectedLocationChange(selectedOption)),
+    // Guide
+    toggleIsGuided: (toggleValue) => dispatch(actions.isGuidedToggleChange(toggleValue)),
+    requestGuideList: () => dispatch(actions.guideList()),
+    handleSelectedGuideChange: (selectedOption) => dispatch(actions.selectedGuideChange(selectedOption)),
+    // Ratings
+    handleTripRatingChange: (tripRating) => dispatch(actions.selectTripRatingChange(tripRating)),
+    handleGuideRatingChange: (guideRating) => dispatch(actions.selectGuideRatingChange(guideRating)),
+    // Other
+    handleDetailsChange: (textChangeEvent) => dispatch(actions.updateTripReportDetailsOnChange(textChangeEvent)),
   };
 }
 

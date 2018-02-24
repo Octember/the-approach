@@ -1,40 +1,73 @@
+/*
+ *
+ * WriteReviewPage selectors
+ *
+ */
+
 import { createSelector } from 'reselect';
 import {
   STATE_LOCATION_DROPDOWN_LIST,
-  STATE_GUIDE_DROPDOWN_LIST,
   STATE_SELECTED_LOCATION_ID,
+
+  STATE_IS_GUIDED,
+  STATE_GUIDE_DROPDOWN_LIST,
+  STATE_SELECTED_GUIDE_ID,
+
+  STATE_TRIP_RATING,
+  STATE_GUIDE_RATING,
+
+  STATE_TRIP_REPORT_DETAILS,
 } from './constants';
 
 /**
  * Direct selector to the WriteReviewPage state domain
  */
-const selectWriteReviewPageDomain = (state) => state.get('WriteReviewPage');
+export const selectWriteReviewPageDomain = (state) => state.get('WriteReviewPage');
 
 /**
  * Other specific selectors
  */
-const selectLocationList = () => createSelector(
+
+// Location selectors
+export const selectLocationList = () => createSelector(
   selectWriteReviewPageDomain,
   (domain) => domain.get(STATE_LOCATION_DROPDOWN_LIST).toJS()
 );
 
-const selectGuideList = () => createSelector(
-  selectWriteReviewPageDomain,
-  (domain) => domain.get(STATE_GUIDE_DROPDOWN_LIST).toJS()
-);
-
-const selectSelectedLocationId = () => createSelector(
+export const selectSelectedLocationId = () => createSelector(
   selectWriteReviewPageDomain,
   (domain) => domain.get(STATE_SELECTED_LOCATION_ID)
 );
 
-/**
- * Default selector used by WriteReviewPage
- */
-
-export {
-  selectLocationList,
-  selectGuideList,
-  selectSelectedLocationId,
+// Guide selectors
+export const selectIsGuided = () => createSelector(
   selectWriteReviewPageDomain,
-};
+  (domain) => domain.get(STATE_IS_GUIDED)
+);
+
+export const selectGuideList = () => createSelector(
+  selectWriteReviewPageDomain,
+  (domain) => domain.get(STATE_GUIDE_DROPDOWN_LIST).toJS()
+);
+
+export const selectSelectedGuideId = () => createSelector(
+  selectWriteReviewPageDomain,
+  (domain) => domain.get(STATE_SELECTED_GUIDE_ID)
+);
+
+// Ratings selectors
+export const selectTripRating = () => createSelector(
+  selectWriteReviewPageDomain,
+  (domain) => domain.get(STATE_TRIP_RATING)
+);
+
+export const selectGuideRating = () => createSelector(
+  selectWriteReviewPageDomain,
+  (domain) => domain.get(STATE_GUIDE_RATING)
+);
+
+// Other selectors
+export const selectTripReportDetails = () => createSelector(
+  selectWriteReviewPageDomain,
+  (domain) => domain.get(STATE_TRIP_REPORT_DETAILS)
+);
