@@ -41,7 +41,7 @@ class GuideReviewCard extends React.Component {
     if(!isGuided) {
       this.props.handleSelectGuide(null);
     }
-    else if(!this.props.guideOptions.length === 0) {
+    else if(this.props.guideOptions.length === 0) {
       // Do API call if "Yes" is selected and options array is currently empty
       this.props.getGuideList();
     }
