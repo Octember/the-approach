@@ -9,34 +9,43 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import Select from 'react-select';
-import Header from 'components/Header';
-import PageSection from 'components/PageSection';
-import BorderBottomDiv from 'components/shared/BorderBottomDiv';
-import Stars from 'components/Stars';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 
-import 'react-select/dist/react-select.css';
-
-import { locationList, selectedLocationChange } from './actions';
-import { selectLocationList, selectSelectedLocationId } from './selectors';
+import * as actions from './actions';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+
+import Helmet from 'react-helmet'
+
+import Header from 'components/Header';
+import PageSection from 'components/PageSection';
+import BorderBottomDiv from 'components/shared/BorderBottomDiv';
+import Select from 'components/Select';
+import Stars from 'components/Stars';
+import GuideReviewCard from './GuideReviewCard';
 
 export class WriteReviewPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   constructor(props) {
     super(props);
-
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     this.props.requestLocationList();
   }
 
-  handleSubmit(event) {
+  componentWillReceiveProps(nextProps) {
+    // Reset trip rating if selected location changes
+    if(nextProps.selectedLocationId !== this.props.selectedLocationId) {
+      this.props.handleTripRatingChange(null);
+    }
+  }
+
+  /***** Custom Methods *****/
+
+  handleSubmit = (event) => {
     const form = event.target
     console.log(form.checkValidity());
 
@@ -46,6 +55,7 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
     }
     form.classList.add('was-validated');
   }
+  /***** End Custom Methods *****/
 
   render() {
     const locationOptions = this.props.locationList.map((location) => ({
@@ -53,8 +63,12 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
       label: location.title,
     }));
 
+    const guideOptions = this.props.guideList.map((guide) => ({
+      value: guide.guide.id,
+      label: guide.guide.name,
+    }));
+
     const selectedLocation = this.props.locationList.find((location) => location.id === this.props.selectedLocationId);
-    // console.log(selectedLocation);
 
     const selectedLocationHeader = selectedLocation ? (
       <div>
@@ -64,10 +78,12 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 
     return (
       <div>
-        {/*<Helmet>*/}
-        {/*<title>LocationPage</title>*/}
-        {/*<meta name="description" content="Description of LocationPage"/>*/}
-        {/*</Helmet>*/}
+        {
+          <Helmet>
+          <title>Trip Report</title>
+          <meta name="description" content="Trip Report form"/>
+          </Helmet>
+        }
 
         <div className="container">
           <Header />
@@ -84,7 +100,9 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                   <label htmlFor="locationSelection"><h4 className="font-weight-bold px-2">Location</h4></label>
                   {selectedLocationHeader}
 
-                  {/* TODO: How to validate react-select stuff??? */}
+                  {/*
+                    TODO: How to validate react-select stuff???
+                  */}
                   <Select
                     name="form-field-name"
                     id="locationSelection"
@@ -97,20 +115,41 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 
                 {/* Rating */}
                 <PageSection title="Rating">
-                  <Stars className="d-inline-block pl-2" value={0.0} editable />
-                  <BorderBottomDiv className="pb-2" />
+                  <Stars
+                    className="pl-2"
+                    value={this.props.tripRating !== null ? this.props.tripRating : 0}
+                    size={50}
+                    editable={Boolean(this.props.selectedLocationId)}
+                    handleRatingChange={this.props.handleTripRatingChange}
+                  />
+                  <BorderBottomDiv className="pb-0" />
                 </PageSection>
 
                 {/* Report */}
                 <PageSection title="Report">
-                  <input type="text" className="form-control" placeholder="Write your experience here" required />
+                  <input type="text" className="form-control"
+                  placeholder="Write your experience here"
+                  value={this.props.tripReportDetails}
+                  onChange={this.props.handleDetailsChange}
+                  required
+                />
                   <BorderBottomDiv className="pb-2" />
                 </PageSection>
 
-                {/* Beta */}
-                <PageSection title="Beta">
-                  <BorderBottomDiv className="pb-2" />
-                </PageSection>
+                {/* Guide Review
+                  Depending on type of review page, we can pass certain props (like if we already know the guide)
+                */}
+                <GuideReviewCard
+                  isGuided={this.props.isGuided}
+                  guideOptions={guideOptions}
+                  selectedGuideId={this.props.selectedGuideId}
+                  guideRatingValue={this.props.guideRating !== null ? this.props.guideRating : 0}
+                  // Handlers
+                  handleIsGuided={this.props.toggleIsGuided}
+                  getGuideList={this.props.requestGuideList}
+                  handleSelectGuide={this.props.handleSelectedGuideChange}
+                  ratingHandler={this.props.handleGuideRatingChange}
+                />
 
                 {/* Add Photo/Video */}
                 <PageSection title="Add Photo/Video">
@@ -118,7 +157,7 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                   </BorderBottomDiv>
                 </PageSection>
 
-                <button type="submit" className="btn btn-primary btn-block" >Submit</button>
+                <button type="submit" className="btn btn-lg btn-primary btn-block" >Submit</button>
               </form>
             </div>
           </div>
@@ -129,21 +168,59 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 }
 
 WriteReviewPage.propTypes = {
+  // Props from mapStateToProps
+  locationList: PropTypes.array,
+  selectedLocationId: PropTypes.number,
+
+  tripRating: PropTypes.number,
+  tripReportDetails: PropTypes.string,
+
+  isGuided: PropTypes.bool,
+  guideList: PropTypes.array,
+  selectedGuideId: PropTypes.number,
+  guideRating: PropTypes.number,
+
+  // Methods from mapDispatchToProps
   requestLocationList: PropTypes.func,
   handleSelectedLocationChange: PropTypes.func,
-  selectedLocationId: PropTypes.number,
-  locationList: PropTypes.array,
+
+  toggleIsGuided: PropTypes.func,
+  requestGuideList: PropTypes.func,
+  handleSelectedGuideChange: PropTypes.func,
+
+  handleTripRatingChange: PropTypes.func,
+
+  handleDetailsChange: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  locationList: selectLocationList(),
-  selectedLocationId: selectSelectedLocationId(),
+  locationList: selectors.selectLocationList(),
+  selectedLocationId: selectors.selectSelectedLocationId(),
+
+  isGuided: selectors.selectIsGuided(),
+  guideList: selectors.selectGuideList(),
+  selectedGuideId: selectors.selectSelectedGuideId(),
+
+  tripRating: selectors.selectTripRating(),
+  guideRating: selectors.selectGuideRating(),
+
+  tripReportDetails: selectors.selectTripReportDetails(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    requestLocationList: () => dispatch(locationList()),
-    handleSelectedLocationChange: (selectedOption) => dispatch(selectedLocationChange(selectedOption)),
+    // Location
+    requestLocationList: () => dispatch(actions.locationList()),
+    handleSelectedLocationChange: (selectedOption) => dispatch(actions.selectedLocationChange(selectedOption)),
+    // Guide
+    toggleIsGuided: (toggleValue) => dispatch(actions.isGuidedToggleChange(toggleValue)),
+    requestGuideList: () => dispatch(actions.guideList()),
+    handleSelectedGuideChange: (selectedOption) => dispatch(actions.selectedGuideChange(selectedOption)),
+    // Ratings
+    handleTripRatingChange: (tripRating) => dispatch(actions.selectTripRatingChange(tripRating)),
+    handleGuideRatingChange: (guideRating) => dispatch(actions.selectGuideRatingChange(guideRating)),
+    // Other
+    handleDetailsChange: (textChangeEvent) => dispatch(actions.updateTripReportDetailsOnChange(textChangeEvent)),
   };
 }
 
