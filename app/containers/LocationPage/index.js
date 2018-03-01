@@ -7,28 +7,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Link } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { Link } from 'react-router-dom';
+import saga from './saga';
+import reducer from './reducer';
+import * as selectors from './selectors';
+import { loadLocationPage } from './actions';
 
 import Header from 'components/Header';
 import { LocationCarouselDesktop, LocationCarouselMobile } from 'components/LocationCarousel';
 import PageSection from 'components/PageSection';
 import RouteCardSmall from 'components/routecards/RouteCardSmall';
-import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import ScheduleTripBox from 'components/ScheduleTripBox';
 import TripReportCard from 'components/TripReportCard';
 import SubLocationCard from 'components/SubLocationCard';
 import LocationHeader from 'components/LocationHeader';
 import Breadcrumbs from 'components/Breadcrumbs';
-import { selectLocationPageId, selectImagesFromLocation, selectLocationData, selectSubLocationData, selectReviews } from './selectors';
-import reducer from './reducer';
-import saga from './saga';
-import { loadLocationPage } from './actions';
+import GearListCard from 'components/GearListCard';
+import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import StyledSmall from 'components/shared/StyledSmall';
 
 export class LocationPage extends React.Component { // eslint-disable-line react/prefer-stateless-functions
@@ -82,7 +83,7 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                     { link: 'google.com', text: 'chicken butt' },
                   ]}
                 />
-                <LocationHeader className="" title={this.props.location.title} metadata={metadata} />
+                <LocationHeader title={this.props.location.title} metadata={metadata} />
               </div>
 
               <div className="px-2">
@@ -120,16 +121,22 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                 </PageSection>
 
                 <PageSection title="Gear List">
-                  <BorderBottomDiv>
-                    Bring climbing shoes or something
-                  </BorderBottomDiv>
+                  <GearListCard gearListObj={
+                    {
+                      //Static object because no API yet
+                      id: 5,
+                      name: 'Glacier Climbing Kit',
+                      imageUrl: 'https://images.pexels.com/photos/219837/pexels-photo-219837.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb',
+                    }
+                  } />
+                  <BorderBottomDiv />
                 </PageSection>
 
                 <PageSection title="Routes">
                   {
                     this.props.subLocations.map((data) => (
-                      <SubLocationCard {...data} className="mb-3" key={data.location.id} />
-                     ))
+                      <SubLocationCard {...data} key={data.location.id} />
+                    ))
                   }
                   <BorderBottomDiv />
                 </PageSection>
@@ -185,13 +192,12 @@ function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentLocationId: selectLocationPageId(),
-  images: selectImagesFromLocation(),
-  location: selectLocationData(),
-  subLocations: selectSubLocationData(),
-  reviews: selectReviews(),
+  currentLocationId: selectors.selectLocationPageId(),
+  images: selectors.selectImagesFromLocation(),
+  location: selectors.selectLocationData(),
+  subLocations: selectors.selectSubLocationData(),
+  reviews: selectors.selectReviews(),
 });
-
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: 'locationPage', reducer });

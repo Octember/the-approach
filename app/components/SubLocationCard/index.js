@@ -12,18 +12,26 @@ import styled from 'styled-components';
 import GrayImageOverlay from 'components/shared/GrayImageOverlay';
 import Icon from 'components/shared/Icon';
 
-const LocationImage = styled.img`
-  width: 100%;
-  height: 128px;
-  object-fit: fill;
-`;
+const StyledCard = styled.div.attrs({
+  className: (props) => 'card border-0 mb-3 ' + (props.className || ' '),
+})`
+  background-color: deepskyblue;
 
-const SubTitleHeader = styled.h2 `
-  color: white;
-`;
+  ${
+    (props) => {
+      if(props.image.url) {  // Maybe we could check that image URL is good / image is successfully loaded?
+        return 'background-image: url(' + props.image.url + ');'
+          + 'background-size: cover;';
+      }
+      else {
+        // Final fall-back: bluish gradient background
+        return 'background-image: linear-gradient(-165deg, white, deepskyblue, darkblue);';
+      }
+    }
+  }
 
-const SubLocationMetadata = styled.ul `
-  color: white;
+  box-shadow: 2px 6px 8px 2px rgba(0, 0, 0, 0.2);
+  & > a { color: white; }
 `;
 
 // Extends Icon component's styles for use in this component
@@ -31,22 +39,18 @@ const SubLocationIcon = styled(Icon).attrs({
   className: 'mx-2',
 })``;
 
-const CardBorderDiv = styled.div`
-    box-shadow: 2px 6px 8px 2px rgba(0, 0, 0, 0.2);
-`;
-
 const SubLocationCard = (props) => (
-  <div className={props.className}> {/* Wrapper class to apply className from props */}
+  <StyledCard className={props.className} image={props.image}>
     <Link to={`/location/${props.location.id}`}>
-      <CardBorderDiv className="position-relative">
-        <GrayImageOverlay className="position-absolute px-2 w-100 h-100 ">
+        <GrayImageOverlay />
+        <div className="position-relative p-1">
           <div>
-            <SubTitleHeader className="mt-4 mb-0">
+            <h3 className="pl-2">
               {props.location.title}
-            </SubTitleHeader>
+            </h3>
           </div>
           <div>
-            <SubLocationMetadata className="list-unstyled">
+            <ul className="list-group list-unstyled">
               <li>
                 <SubLocationIcon symbol="map_pin" />
                 {props.location.regionName}
@@ -59,17 +63,11 @@ const SubLocationCard = (props) => (
                 <SubLocationIcon symbol="clock" />
                 {'Duration: 4 hours 20 minutes'}
               </li>
-            </SubLocationMetadata>
+            </ul>
           </div>
-        </GrayImageOverlay>
-
-        <LocationImage
-          className="img-fluid"
-          src={props.image.url}
-        />
-      </CardBorderDiv>
+        </div>
     </Link>
-  </div>
+  </StyledCard>
 );
 
 SubLocationCard.propTypes = {
@@ -81,6 +79,4 @@ SubLocationCard.propTypes = {
   }).isRequired,
 };
 
-
 export default SubLocationCard;
-
