@@ -26,7 +26,7 @@ export const STATE_GUIDE_RATING = 'app/WriteReviewPage/STATE_GUIDE_RATING';
 
 // User-input string
 export const STATE_TRIP_REPORT_DETAILS = 'app/WriteReviewPage/STATE_TRIP_REPORT_DETAILS';
-
+export const STATE_CUSTOM_VALIDATION_FAILED = 'app/WriteReviewPage/STATE_CUSTOM_VALIDATION_FAILED';
 
 /***** ACTIONS *****/
 
@@ -50,4 +50,9 @@ export const SELECT_GUIDE_RATING_ACTION = 'app/WriteReviewPage/SELECT_GUIDE_RATI
 // Text input
 export const UPDATE_TRIP_REPORT_DETAILS_ACTION = 'app/WriteReviewPage/UPDATE_TRIP_REPORT_DETAILS_ACTION';
 
+export const CUSTOM_VALIDATION_FAILED_ACTION = 'app/WriteReviewPage/CUSTOM_VALIDATION_FAILED_ACTION';
+
 export const DEFAULT_ACTION = 'app/WriteReviewPage/DEFAULT_ACTION';
+
+export const CUSTOM_VALIDATION_STYLE = { border: '1px solid #dc3545' }; // TODO- get this color from bootstrap somehow
+

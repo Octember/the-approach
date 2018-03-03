@@ -19,7 +19,8 @@ import {
   SELECT_TRIP_RATING_ACTION,
   SELECT_GUIDE_RATING_ACTION,
 
-  UPDATE_TRIP_REPORT_DETAILS_ACTION
+  UPDATE_TRIP_REPORT_DETAILS_ACTION,
+  CUSTOM_VALIDATION_FAILED_ACTION
 } from './constants';
 
 // Location actions
@@ -78,7 +79,11 @@ export const selectGuideRatingChange = (guideRatingValue) => ({
   guideRating: guideRatingValue,
 });
 
-//Other actions
+// Other actions
+export const customValidationFailed = () => ({
+  type: CUSTOM_VALIDATION_FAILED_ACTION,
+});
+
 export const updateTripReportDetailsOnChange = (textChangeEvent) => ({
   type: UPDATE_TRIP_REPORT_DETAILS_ACTION,
   tripDetails: textChangeEvent.target.value,

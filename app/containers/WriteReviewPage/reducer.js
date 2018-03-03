@@ -30,6 +30,9 @@ import {
 
   UPDATE_TRIP_REPORT_DETAILS_ACTION,
   STATE_TRIP_REPORT_DETAILS,
+
+  CUSTOM_VALIDATION_FAILED_ACTION,
+  STATE_CUSTOM_VALIDATION_FAILED
 } from './constants';
 
 const initialState = fromJS({
@@ -38,6 +41,7 @@ const initialState = fromJS({
   [STATE_TRIP_RATING]: null,
   [STATE_GUIDE_RATING]: null,
   [STATE_TRIP_REPORT_DETAILS]: '',
+  [STATE_CUSTOM_VALIDATION_FAILED]: false,
 });
 
 function writeReviewPageReducer(state = initialState, action) {
@@ -81,6 +85,9 @@ function writeReviewPageReducer(state = initialState, action) {
     case UPDATE_TRIP_REPORT_DETAILS_ACTION:
       return state
         .set(STATE_TRIP_REPORT_DETAILS, action.tripDetails);
+    case CUSTOM_VALIDATION_FAILED_ACTION:
+      return state
+        .set(STATE_CUSTOM_VALIDATION_FAILED, true);
     default:
       return state;
   }
