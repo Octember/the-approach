@@ -48,23 +48,9 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 
   /***** Custom Methods *****/
 
-    // Custom validation rules, not handled by form classes
+  // Custom validation rules, not handled by form classes
   formSubmissionIsValid = () => {
-    // stubbing this for now, but this is where we validate our selects
-    return this.props.selectedLocationId && this.props.selectedGuideId;
-  };
-
-  applyCustomFormValidationStyles = () => {
-    console.log('custom frontend validation error');
-    this.props.handleCustomValidationFailed();
-
-    if (!this.props.selectedLocationId) {
-      // todo - red border the location select
-    }
-
-    if (!this.props.selectedGuideId) {
-      // todo - red border the guide select
-    }
+    return this.props.selectedLocationId && !(this.props.isGuided && !this.props.selectedGuideId);
   };
 
   validateForm = (form) => {
@@ -84,7 +70,8 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
       }
       if (!this.formSubmissionIsValid()) {
         // apply custom validation styles
-        this.applyCustomFormValidationStyles();
+        console.log('custom frontend validation error');
+        this.props.handleCustomValidationFailed();
         valid = false;
       }
     }
