@@ -55,6 +55,13 @@ export class LocationPage extends React.Component { // eslint-disable-line react
       '0.5 mile approach',
     ];
 
+    const gearListObj = {
+      //Static object because no API yet
+      id: 5,
+      name: 'Glacier Climbing Kit',
+      image: { url: 'https://images.pexels.com/photos/219837/pexels-photo-219837.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb' },
+    }
+
     return (
       <div>
         <Helmet>
@@ -121,14 +128,11 @@ export class LocationPage extends React.Component { // eslint-disable-line react
                 </PageSection>
 
                 <PageSection title="Gear List">
-                  <GearListCard gearListObj={
-                    {
-                      //Static object because no API yet
-                      id: 5,
-                      name: 'Glacier Climbing Kit',
-                      imageUrl: 'https://images.pexels.com/photos/219837/pexels-photo-219837.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb',
-                    }
-                  } />
+                  <GearListCard
+                    id={gearListObj.id}
+                    name={gearListObj.name}
+                    image={gearListObj.image}
+                  />
                   <BorderBottomDiv />
                 </PageSection>
 
