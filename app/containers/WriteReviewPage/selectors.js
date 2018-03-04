@@ -17,6 +17,7 @@ import {
   STATE_GUIDE_RATING,
 
   STATE_TRIP_REPORT_DETAILS,
+  STATE_CUSTOM_VALIDATION_FAILED,
 } from './constants';
 
 /**
@@ -70,4 +71,9 @@ export const selectGuideRating = () => createSelector(
 export const selectTripReportDetails = () => createSelector(
   selectWriteReviewPageDomain,
   (domain) => domain.get(STATE_TRIP_REPORT_DETAILS)
+);
+
+export const selectCustomValidationFailed = () => createSelector(
+  selectWriteReviewPageDomain,
+  (domain) => domain.get(STATE_CUSTOM_VALIDATION_FAILED)
 );
