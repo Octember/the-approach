@@ -8,8 +8,11 @@ export default class Auth {
       domain: AUTH_CONFIG.domain,
       clientID: AUTH_CONFIG.clientId,
       redirectUri: AUTH_CONFIG.callbackUrl,
-      responseType: 'token id_token',
-      audience: `https://${AUTH_CONFIG.domain}/userinfo`,
+      responseType: 'token id_token', // token is the access-token passed to the API, id_token is a JWT with user info
+      audience: 'approach-server', // The ID of the API in auth0
+      scope: 'openid profile write:review', // The list of "scopes" we're requesting permission for.
+      // As new permissions come up we need to add them here, likely conditionally
+      // nonce: '' We can use nonce to prevent attacks here
     });
   }
 
