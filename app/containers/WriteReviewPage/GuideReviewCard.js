@@ -56,13 +56,13 @@ class GuideReviewCard extends React.Component {
           </label>
         </div>
         {/* Guide-list dropdown menu */}
-        <Select className="my-2"
+        <Select
+          className={this.props.selectClassName}
           disabled={!this.props.isGuided}
           required={this.props.isGuided}
           value={this.props.selectedGuideId}
           onChange={this.props.handleSelectGuide}
           options={this.props.guideOptions}
-          style={this.props.selectStyle}
           clearable
         />
         {/* Rate using Stars component */}
@@ -96,7 +96,7 @@ GuideReviewCard.propTypes = {
   handleIsGuided: PropTypes.func.isRequired,
   handleSelectGuide: PropTypes.func.isRequired,
   ratingHandler: PropTypes.func.isRequired,
-  selectStyle: PropTypes.object.isRequired,
+  selectClassName: PropTypes.string.isRequired,
 };
 
 GuideReviewCard.defaultProps = {

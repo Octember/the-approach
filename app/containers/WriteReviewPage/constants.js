@@ -54,5 +54,5 @@ export const CUSTOM_VALIDATION_FAILED_ACTION = 'app/WriteReviewPage/CUSTOM_VALID
 
 export const DEFAULT_ACTION = 'app/WriteReviewPage/DEFAULT_ACTION';
 
-export const CUSTOM_VALIDATION_STYLE = { border: '1px solid #dc3545' }; // TODO- get this color from bootstrap somehow
+export const CUSTOM_VALIDATION_CLASS = 'border border-danger rounded';
 
