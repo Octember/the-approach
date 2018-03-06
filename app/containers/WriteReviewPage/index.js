@@ -113,13 +113,13 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
         <h2>{selectedLocation.title}</h2>
       </div>) : '';
 
-    const locationSelectStyles = (this.props.customValidationFailed && !this.props.selectedLocationId) ?
-      constants.CUSTOM_VALIDATION_STYLE :
-      {};
+    const locationSelectClassName = (this.props.customValidationFailed && !this.props.selectedLocationId) ?
+      constants.CUSTOM_VALIDATION_CLASS :
+      '';
 
-    const guideSelectStyles = (this.props.customValidationFailed && this.props.isGuided && !this.props.selectedGuideId) ?
-      constants.CUSTOM_VALIDATION_STYLE :
-      {};
+    const guideSelectClassName = 'my-2 ' + ((this.props.customValidationFailed && this.props.isGuided && !this.props.selectedGuideId) ?
+      constants.CUSTOM_VALIDATION_CLASS :
+      '');
 
     return (
       <div>
@@ -150,7 +150,7 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                     value={this.props.selectedLocationId}
                     onChange={this.props.handleSelectedLocationChange}
                     options={locationOptions}
-                    style={locationSelectStyles}
+                    className={locationSelectClassName}
                   />
 
                 </BorderBottomDiv>
@@ -193,7 +193,7 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                   getGuideList={this.props.requestGuideList}
                   handleSelectGuide={this.props.handleSelectedGuideChange}
                   ratingHandler={this.props.handleGuideRatingChange}
-                  selectStyle={guideSelectStyles}
+                  selectClassName={guideSelectClassName}
                 />
 
                 {/* Add Photo/Video */}
