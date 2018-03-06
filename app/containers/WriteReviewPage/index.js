@@ -14,6 +14,7 @@ import injectSaga from 'utils/injectSaga';
 
 import * as actions from './actions';
 import * as selectors from './selectors';
+import * as constants from './constants';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -25,11 +26,13 @@ import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import Select from 'components/Select';
 import Stars from 'components/Stars';
 import GuideReviewCard from './GuideReviewCard';
+import Auth from 'services/auth/Auth';
 
 export class WriteReviewPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   constructor(props) {
     super(props);
+    this.auth = new Auth();
   }
 
   componentDidMount() {
@@ -38,23 +41,57 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 
   componentWillReceiveProps(nextProps) {
     // Reset trip rating if selected location changes
-    if(nextProps.selectedLocationId !== this.props.selectedLocationId) {
+    if (nextProps.selectedLocationId !== this.props.selectedLocationId) {
       this.props.handleTripRatingChange(null);
     }
   }
 
   /***** Custom Methods *****/
 
-  handleSubmit = (event) => {
-    const form = event.target
-    console.log(form.checkValidity());
+  // Custom validation rules, not handled by form classes
+  formSubmissionIsValid = () => {
+    return this.props.selectedLocationId && !(this.props.isGuided && !this.props.selectedGuideId);
+  };
 
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+  validateForm = (form) => {
+    let valid = true
+
+    if (!this.auth.isAuthenticated()) {
+      // if not authenticated, show the signin modal
+      // TODO - this should be redux-driven. Migrate sign in modal to a container, with show and hide actions
+      $('#signin-modal').modal('show');
+      valid = false;
+    } else {
+      // form validation
+      if (form.checkValidity() === false) {
+        console.log('HTML validation error');
+        form.classList.add('was-validated');
+        valid = false;
+      }
+      if (!this.formSubmissionIsValid()) {
+        // apply custom validation styles
+        console.log('custom frontend validation error');
+        this.props.handleCustomValidationFailed();
+        valid = false;
+      }
     }
-    form.classList.add('was-validated');
-  }
+    return valid;
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const valid = this.validateForm(event.target);
+
+    if (valid) {
+      console.log('form submission block');
+      // submit =>
+      //    onSuccess => redirect somewhere, show some message
+      //    onFailure => if validation error, reflect it to user
+    }
+  };
+
   /***** End Custom Methods *****/
 
   render() {
@@ -76,12 +113,20 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
         <h2>{selectedLocation.title}</h2>
       </div>) : '';
 
+    const locationSelectStyles = (this.props.customValidationFailed && !this.props.selectedLocationId) ?
+      constants.CUSTOM_VALIDATION_STYLE :
+      {};
+
+    const guideSelectStyles = (this.props.customValidationFailed && this.props.isGuided && !this.props.selectedGuideId) ?
+      constants.CUSTOM_VALIDATION_STYLE :
+      {};
+
     return (
       <div>
         {
           <Helmet>
-          <title>Trip Report</title>
-          <meta name="description" content="Trip Report form"/>
+            <title>Trip Report</title>
+            <meta name="description" content="Trip Report form" />
           </Helmet>
         }
 
@@ -99,16 +144,13 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                 <BorderBottomDiv className="pb-2">
                   <label htmlFor="locationSelection"><h4 className="font-weight-bold px-2">Location</h4></label>
                   {selectedLocationHeader}
-
-                  {/*
-                    TODO: How to validate react-select stuff???
-                  */}
                   <Select
                     name="form-field-name"
                     id="locationSelection"
                     value={this.props.selectedLocationId}
                     onChange={this.props.handleSelectedLocationChange}
                     options={locationOptions}
+                    style={locationSelectStyles}
                   />
 
                 </BorderBottomDiv>
@@ -127,12 +169,14 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
 
                 {/* Report */}
                 <PageSection title="Report">
-                  <input type="text" className="form-control"
-                  placeholder="Write your experience here"
-                  value={this.props.tripReportDetails}
-                  onChange={this.props.handleDetailsChange}
-                  required
-                />
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Write your experience here"
+                    value={this.props.tripReportDetails}
+                    onChange={this.props.handleDetailsChange}
+                    required
+                  />
                   <BorderBottomDiv className="pb-2" />
                 </PageSection>
 
@@ -149,6 +193,7 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                   getGuideList={this.props.requestGuideList}
                   handleSelectGuide={this.props.handleSelectedGuideChange}
                   ratingHandler={this.props.handleGuideRatingChange}
+                  selectStyle={guideSelectStyles}
                 />
 
                 {/* Add Photo/Video */}
@@ -182,15 +227,17 @@ WriteReviewPage.propTypes = {
 
   // Methods from mapDispatchToProps
   requestLocationList: PropTypes.func,
-  handleSelectedLocationChange: PropTypes.func,
-
   toggleIsGuided: PropTypes.func,
   requestGuideList: PropTypes.func,
+
+  handleSelectedLocationChange: PropTypes.func,
+  handleGuideRatingChange: PropTypes.func,
   handleSelectedGuideChange: PropTypes.func,
-
   handleTripRatingChange: PropTypes.func,
-
   handleDetailsChange: PropTypes.func,
+
+  handleCustomValidationFailed: PropTypes.func,
+  customValidationFailed: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -205,6 +252,7 @@ const mapStateToProps = createStructuredSelector({
   guideRating: selectors.selectGuideRating(),
 
   tripReportDetails: selectors.selectTripReportDetails(),
+  customValidationFailed: selectors.selectCustomValidationFailed(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -221,6 +269,7 @@ function mapDispatchToProps(dispatch) {
     handleGuideRatingChange: (guideRating) => dispatch(actions.selectGuideRatingChange(guideRating)),
     // Other
     handleDetailsChange: (textChangeEvent) => dispatch(actions.updateTripReportDetailsOnChange(textChangeEvent)),
+    handleCustomValidationFailed: () => dispatch(actions.customValidationFailed()),
   };
 }
 

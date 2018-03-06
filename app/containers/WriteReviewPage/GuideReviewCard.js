@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import Select from 'components/Select';
 
 import PageSection from 'components/PageSection';
@@ -8,13 +7,9 @@ import BorderBottomDiv from 'components/shared/BorderBottomDiv';
 import Stars from 'components/Stars';
 
 class GuideReviewCard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentWillMount() {
     // Grab guide list immediately (API call) if somehow we know it's guided but there's no guide selected.
-    if(this.props.isGuided && (this.props.selectedGuideId !== null)) {
+    if (this.props.isGuided && (this.props.selectedGuideId !== null)) {
       this.props.getGuideList();
     }
   }
@@ -26,7 +21,7 @@ class GuideReviewCard extends React.Component {
     }
 
     // Reset rating if guide status changes
-    if((nextProps.selectedGuideId !== this.props.selectedGuideId) || (nextProps.isGuided !== this.props.isGuided)) {
+    if ((nextProps.selectedGuideId !== this.props.selectedGuideId) || (nextProps.isGuided !== this.props.isGuided)) {
       this.props.ratingHandler(null);
     }
   }
@@ -38,14 +33,13 @@ class GuideReviewCard extends React.Component {
     this.props.handleIsGuided(isGuided);  // Action function passed from WriteReviewPage container
 
     // If "No" is selected, clear the Select component (this disables and resets the rating as well)
-    if(!isGuided) {
+    if (!isGuided) {
       this.props.handleSelectGuide(null);
-    }
-    else if(this.props.guideOptions.length === 0) {
+    } else if (this.props.guideOptions.length === 0) {
       // Do API call if "Yes" is selected and options array is currently empty
       this.props.getGuideList();
     }
-  }
+  };
 
   render() {
     return (
@@ -68,7 +62,8 @@ class GuideReviewCard extends React.Component {
           value={this.props.selectedGuideId}
           onChange={this.props.handleSelectGuide}
           options={this.props.guideOptions}
-          clearable={true}
+          style={this.props.selectStyle}
+          clearable
         />
         {/* Rate using Stars component */}
         <div className="d-flex flex-row justify-content-around">
@@ -101,6 +96,7 @@ GuideReviewCard.propTypes = {
   handleIsGuided: PropTypes.func.isRequired,
   handleSelectGuide: PropTypes.func.isRequired,
   ratingHandler: PropTypes.func.isRequired,
+  selectStyle: PropTypes.object.isRequired,
 };
 
 GuideReviewCard.defaultProps = {
