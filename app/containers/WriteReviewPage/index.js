@@ -59,8 +59,8 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
     if (!this.auth.isAuthenticated()) {
       // if not authenticated, show the signin modal
       // TODO - this should be redux-driven. Migrate sign in modal to a container, with show and hide actions
-      // $('#signin-modal').modal('show');
-      // valid = false;
+      $('#signin-modal').modal('show');
+      valid = false;
     } else {
       // form validation
       if (form.checkValidity() === false) {

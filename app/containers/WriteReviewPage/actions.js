@@ -97,6 +97,10 @@ export const submitReview = () => ({
   type: REVIEW_SUBMIT_REQUEST,
 });
 
+export const reviewSubmissionSuccess = () => ({
+
+})
+
 export const reviewSubmissionError = (error) => {
   return {
     type: REVIEW_SUBMISSION_FAILURE,

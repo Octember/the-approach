@@ -60,7 +60,7 @@ export function* submitReview() {
   } catch (err) {
     console.log(`Review submit error: ${err}`);
 
-    yield put(reviewSubmissionError(err));
+    yield put(reviewSubmissionError, err);
   }
 }
 
