@@ -1,7 +1,11 @@
 
 import request from 'utils/request';
 
-export default function postRequest(endpoint, data) {
+
+export const BASE_URL = 'http://approach-server-1687250913.us-east-2.elb.amazonaws.com';
+const makeUrl = (route) => `${BASE_URL}${route}`;
+
+export function postRequest(endpoint, data) {
   const accessToken = localStorage.getItem('access_token') || null;
   const config = {
     headers: {
@@ -12,5 +16,9 @@ export default function postRequest(endpoint, data) {
     body: JSON.stringify(data),
   };
 
-  return request(endpoint, config);
+  return request(makeUrl(endpoint), config);
+}
+
+export function getRequest(endpoint) {
+  return request(makeUrl(endpoint));
 }
