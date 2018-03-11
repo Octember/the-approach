@@ -3,6 +3,8 @@ import { AUTH_CONFIG } from './auth0-config';
 import history from './history';
 
 export default class Auth {
+  tokenRenewalTimeout;
+
   constructor() {
     this.webAuth = new auth0.WebAuth({
       domain: AUTH_CONFIG.domain,
@@ -14,6 +16,8 @@ export default class Auth {
       // As new permissions come up we need to add them here, likely conditionally
       // nonce: '' We can use nonce to prevent attacks here
     });
+
+    this.scheduleTokenRenewal();
   }
 
   passwordLogin = (user, pass) => {
@@ -71,6 +75,12 @@ export default class Auth {
       localStorage.setItem('access_token', authResult.accessToken);
       localStorage.setItem('id_token', authResult.idToken);
       localStorage.setItem('expires_at', expiresAt);
+      const scopes = authResult.scope || this.requestedScopes || '';
+      localStorage.setItem('scopes', JSON.stringify(scopes));
+
+      // schedule a token renewal
+      this.scheduleTokenRenewal();
+
       // Go back to wherever we came from
       history.goBack();
     }
@@ -81,6 +91,9 @@ export default class Auth {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+
+    clearTimeout(this.tokenRenewalTimeout);
+
     // Reload current page
     history.go(history.location);
   };
@@ -91,4 +104,30 @@ export default class Auth {
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
   };
+
+  userHasScope = (scope) => {
+    const grantedScopes = JSON.parse(localStorage.getItem('scopes')).split(' ');
+    return grantedScopes.includes(scope);
+  }
+
+  renewToken = () => {
+    console.log("Renewing token...")
+    this.auth0.checkSession({}, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        this.setSession(result);
+      }
+    });
+  }
+
+  scheduleTokenRenewal = () => {
+    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    const delay = expiresAt - Date.now();
+    if (delay > 0) {
+      this.tokenRenewalTimeout = setTimeout(() => {
+        this.renewToken();
+      }, delay);
+    }
+  }
 }
