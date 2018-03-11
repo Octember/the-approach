@@ -20,7 +20,10 @@ import {
   SELECT_GUIDE_RATING_ACTION,
 
   UPDATE_TRIP_REPORT_DETAILS_ACTION,
-  CUSTOM_VALIDATION_FAILED_ACTION
+  CUSTOM_VALIDATION_FAILED_ACTION,
+
+  REVIEW_SUBMISSION_FAILURE,
+  REVIEW_SUBMIT_REQUEST,
 } from './constants';
 
 // Location actions
@@ -87,4 +90,17 @@ export const customValidationFailed = () => ({
 export const updateTripReportDetailsOnChange = (textChangeEvent) => ({
   type: UPDATE_TRIP_REPORT_DETAILS_ACTION,
   tripDetails: textChangeEvent.target.value,
-})
+});
+
+// Review submit
+export const submitReview = () => ({
+  type: REVIEW_SUBMIT_REQUEST,
+});
+
+export const reviewSubmissionError = (error) => {
+  return {
+    type: REVIEW_SUBMISSION_FAILURE,
+    errorMessage: error.message,
+  };
+};
+

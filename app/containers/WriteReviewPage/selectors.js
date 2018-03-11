@@ -18,6 +18,8 @@ import {
 
   STATE_TRIP_REPORT_DETAILS,
   STATE_CUSTOM_VALIDATION_FAILED,
+
+  STATE_REVIEW_API_ERROR_MESSAGE,
 } from './constants';
 
 /**
@@ -66,6 +68,25 @@ export const selectGuideRating = () => createSelector(
   selectWriteReviewPageDomain,
   (domain) => domain.get(STATE_GUIDE_RATING)
 );
+
+// Review submission
+export const selectReviewData = () => createSelector(
+  [selectTripReportDetails()],
+  (details) => {
+    const x = 1;
+    return {
+      details: details,
+    }
+  }
+);
+
+export const selectReviewApiErrorMessage = () => createSelector(
+  selectWriteReviewPageDomain,
+  (domain) => domain.get(STATE_REVIEW_API_ERROR_MESSAGE)
+);
+
+// export const
+
 
 // Other selectors
 export const selectTripReportDetails = () => createSelector(

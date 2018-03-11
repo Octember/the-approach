@@ -54,13 +54,13 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
   };
 
   validateForm = (form) => {
-    let valid = true
+    let valid = true;
 
     if (!this.auth.isAuthenticated()) {
       // if not authenticated, show the signin modal
       // TODO - this should be redux-driven. Migrate sign in modal to a container, with show and hide actions
-      $('#signin-modal').modal('show');
-      valid = false;
+      // $('#signin-modal').modal('show');
+      // valid = false;
     } else {
       // form validation
       if (form.checkValidity() === false) {
@@ -85,10 +85,8 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
     const valid = this.validateForm(event.target);
 
     if (valid) {
-      console.log('form submission block');
-      // submit =>
-      //    onSuccess => redirect somewhere, show some message
-      //    onFailure => if validation error, reflect it to user
+      console.log('submitted review');
+      this.props.submitReview();
     }
   };
 
@@ -120,6 +118,10 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
     const guideSelectClassName = 'my-2 ' + ((this.props.customValidationFailed && this.props.isGuided && !this.props.selectedGuideId) ?
       constants.CUSTOM_VALIDATION_CLASS :
       '');
+
+    const apiValidationErrorMessage = this.props.reviewApiErrors ?
+      (<div className="alert alert-danger">{this.props.reviewApiErrors}</div>) :
+      '';
 
     return (
       <div>
@@ -202,6 +204,8 @@ export class WriteReviewPage extends React.PureComponent { // eslint-disable-lin
                   </BorderBottomDiv>
                 </PageSection>
 
+                {apiValidationErrorMessage}
+
                 <button type="submit" className="btn btn-lg btn-primary btn-block" >Submit</button>
               </form>
             </div>
@@ -238,6 +242,9 @@ WriteReviewPage.propTypes = {
 
   handleCustomValidationFailed: PropTypes.func,
   customValidationFailed: PropTypes.bool,
+
+  submitReview: PropTypes.func,
+  reviewApiErrors: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -253,6 +260,8 @@ const mapStateToProps = createStructuredSelector({
 
   tripReportDetails: selectors.selectTripReportDetails(),
   customValidationFailed: selectors.selectCustomValidationFailed(),
+
+  reviewApiErrors: selectors.selectReviewApiErrorMessage(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -267,6 +276,8 @@ function mapDispatchToProps(dispatch) {
     // Ratings
     handleTripRatingChange: (tripRating) => dispatch(actions.selectTripRatingChange(tripRating)),
     handleGuideRatingChange: (guideRating) => dispatch(actions.selectGuideRatingChange(guideRating)),
+    // Review submission
+    submitReview: () => dispatch(actions.submitReview()),
     // Other
     handleDetailsChange: (textChangeEvent) => dispatch(actions.updateTripReportDetailsOnChange(textChangeEvent)),
     handleCustomValidationFailed: () => dispatch(actions.customValidationFailed()),
