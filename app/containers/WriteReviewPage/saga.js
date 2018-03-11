@@ -47,7 +47,7 @@ export function* loadGuideList() {
 
 export function* submitReview() {
   // const url = 'http://approach-server-1687250913.us-east-2.elb.amazonaws.com/review';
-  const url = 'http://localhost:8888/api/v1/review';
+  const url = 'http://approach-server-1687250913.us-east-2.elb.amazonaws.com/api/v1/review';
 
   const reviewData = yield select(selectReviewData());
 
