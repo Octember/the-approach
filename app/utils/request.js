@@ -22,13 +22,14 @@ function parseJSON(response) {
  * @return {object|undefined} Returns either the response, or throws an error
  */
 function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
+  if (response.ok) {
+    return Promise.resolve(response);
   }
 
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
+  return response.json().then((json) => {
+    const error = new Error(json.errors || response.statusText);
+    return Promise.reject(Object.assign(error, { response }));
+  });
 }
 
 /**

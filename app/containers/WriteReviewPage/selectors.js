@@ -4,7 +4,7 @@
  *
  */
 
-import { createSelector } from 'reselect';
+import { createSelector, createStructuredSelector } from 'reselect';
 import {
   STATE_LOCATION_DROPDOWN_LIST,
   STATE_SELECTED_LOCATION_ID,
@@ -18,6 +18,8 @@ import {
 
   STATE_TRIP_REPORT_DETAILS,
   STATE_CUSTOM_VALIDATION_FAILED,
+
+  STATE_REVIEW_API_ERROR_MESSAGE,
 } from './constants';
 
 /**
@@ -65,6 +67,29 @@ export const selectTripRating = () => createSelector(
 export const selectGuideRating = () => createSelector(
   selectWriteReviewPageDomain,
   (domain) => domain.get(STATE_GUIDE_RATING)
+);
+
+// Review submission
+export const selectReviewData = () => createStructuredSelector({
+  details: selectTripReportDetails(),
+  rating: selectTripRating(),
+  title: selectReviewTitle(),
+  userId: selectUserId(),
+});
+
+export const selectReviewApiErrorMessage = () => createSelector(
+  selectWriteReviewPageDomain,
+  (domain) => domain.get(STATE_REVIEW_API_ERROR_MESSAGE)
+);
+
+export const selectUserId = () => createSelector(
+  selectWriteReviewPageDomain,
+  (domain) => 1// TODO: domain.get(STATE_USER_ID)
+);
+
+export const selectReviewTitle = () => createSelector(
+  selectWriteReviewPageDomain,
+  (domain) => 'Mocked data - review title'// TODO: domain.get(STATE_USER_ID)
 );
 
 // Other selectors

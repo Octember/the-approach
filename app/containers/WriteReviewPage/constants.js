@@ -28,6 +28,8 @@ export const STATE_GUIDE_RATING = 'app/WriteReviewPage/STATE_GUIDE_RATING';
 export const STATE_TRIP_REPORT_DETAILS = 'app/WriteReviewPage/STATE_TRIP_REPORT_DETAILS';
 export const STATE_CUSTOM_VALIDATION_FAILED = 'app/WriteReviewPage/STATE_CUSTOM_VALIDATION_FAILED';
 
+export const STATE_REVIEW_API_ERROR_MESSAGE = 'app/WriteReviewPage/STATE_REVIEW_API_ERROR_MESSAGE';
+
 /***** ACTIONS *****/
 
 // Locations
@@ -46,6 +48,11 @@ export const SELECTED_GUIDE_CHANGE_ACTION = 'app/WriteReviewPage/SELECTED_GUIDE_
 // Ratings
 export const SELECT_TRIP_RATING_ACTION = 'app/WriteReviewPage/SELECT_TRIP_RATING_ACTION';
 export const SELECT_GUIDE_RATING_ACTION = 'app/WriteReviewPage/SELECT_GUIDE_RATING_ACTION';
+
+// Review submission
+export const REVIEW_SUBMIT_REQUEST = 'app/WriteReviewPage/REVIEW_SUBMIT_REQUEST';
+export const REVIEW_SUBMISSION_SUCCESS = 'app/WriteReviewPage/REVIEW_SUBMISSION_SUCCESS';
+export const REVIEW_SUBMISSION_FAILURE = 'app/WriteReviewPage/REVIEW_SUBMISSION_FAILURE';
 
 // Text input
 export const UPDATE_TRIP_REPORT_DETAILS_ACTION = 'app/WriteReviewPage/UPDATE_TRIP_REPORT_DETAILS_ACTION';
