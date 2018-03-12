@@ -1,6 +1,5 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import postRequest from 'utils/apiclient';
-import request from 'utils/request';
+import { getRequest, postRequest } from 'utils/apiclient';
 
 import {
   LOCATION_LIST_ACTION,
@@ -20,11 +19,11 @@ import {
 import { selectReviewData } from './selectors';
 
 export function* loadLocationList() {
-  const requestURL = 'http://approach-server-1687250913.us-east-2.elb.amazonaws.com/location';
+  const route = '/location';
 
   try {
     // Call our request helper (see 'utils/request')
-    const data = yield call(request, requestURL);
+    const data = yield call(getRequest, route);
 
     yield put(locationListLoaded(data));
   } catch (err) {
@@ -33,11 +32,11 @@ export function* loadLocationList() {
 }
 
 export function* loadGuideList() {
-  const requestURL = 'http://approach-server-1687250913.us-east-2.elb.amazonaws.com/guide';
+  const route = '/guide';
 
   try {
     // Call our request helper (see 'utils/request')
-    const data = yield call(request, requestURL);
+    const data = yield call(getRequest, route);
 
     yield put(guideListLoaded(data));
   } catch (err) {
@@ -46,13 +45,12 @@ export function* loadGuideList() {
 }
 
 export function* submitReview() {
-  // const url = 'http://approach-server-1687250913.us-east-2.elb.amazonaws.com/review';
-  const url = 'http://approach-server-1687250913.us-east-2.elb.amazonaws.com/api/v1/review';
+  const route = '/api/v1/review';
 
   const reviewData = yield select(selectReviewData());
 
   try {
-    const response = yield call(postRequest, url, reviewData);
+    const response = yield call(postRequest, route, reviewData);
 
     console.log(`Post review response: ${response}`);
 

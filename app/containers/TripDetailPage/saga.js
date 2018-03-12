@@ -3,20 +3,17 @@ import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { selectOfferId } from './selectors';
 import { tripDataLoaded, tripDataLoadingError } from './actions';
 import { LOAD_TRIP_DATA } from "./constants";
-import request from 'utils/request';
+import { getRequest } from 'utils/apiclient';
 
 export function* loadOfferData() {
   // Select username from store
   const tripId = yield select(selectOfferId());
 
-  const requestURL = `http://approach-server-1687250913.us-east-2.elb.amazonaws.com/trip_page/${tripId}`;
-  //approach-server-1687250913.us-east-2.elb.amazonaws.com/
-
-  console.log(`url: ${requestURL}`);
+  const requestURL = `/trip_page/${tripId}`;
 
   try {
     // Call our request helper (see 'utils/request')
-    const data = yield call(request, requestURL);
+    const data = yield call(getRequest, requestURL);
     // console.log("Saga response:");
     // console.log(data);
     yield put(tripDataLoaded(data, tripId));

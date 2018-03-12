@@ -1,18 +1,17 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects';
-import request from 'utils/request';
 import { guidePageLoadingError, guidePageLoaded } from './actions';
 import { selectGuidePageId } from './selectors';
 import { LOAD_GUIDE_PAGE_DATA } from './constants';
+import { getRequest } from 'utils/apiclient';
 
 export function* loadGuideProfile() {
   const guideId = yield select(selectGuidePageId());
 
-  // const requestURL = 'http://localhost:8888/location';
-  const requestURL = `http://approach-server-1687250913.us-east-2.elb.amazonaws.com/guide_page/${guideId}`;
+  const requestURL = `/guide_page/${guideId}`;
 
   try {
     // Call our request helper (see 'utils/request')
-    const data = yield call(request, requestURL);
+    const data = yield call(getRequest, requestURL);
     // console.log("Saga response:");
     // console.log(data);
     yield put(guidePageLoaded(data));
