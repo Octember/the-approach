@@ -1,6 +1,6 @@
 import request from 'utils/request';
 
-export const BASE_URL = 'https://api.findtheapproach.com';
+export const BASE_URL = 'http://approach-server-1687250913.us-east-2.elb.amazonaws.com';
 const makeUrl = (route) => `${BASE_URL}${route}`;
 
 export function postRequest(endpoint, data) {
